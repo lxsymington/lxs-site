@@ -1,21 +1,18 @@
 import React from "react"
-import { Link } from "gatsby"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import { Layout, SEO } from "../components"
 
 const IndexPage: React.FC = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to &ldquo;Using TypeScript&rdquo;</Link>
+    <h1>Hi,</h1>
+    <p>I am Luke. I am a Front-end Engineer and this is my personal site.</p>
+    <p>
+      There&apos;s not much to see here at the moment, but I intend for that to
+      change. I, like a vast number of people, have recently had a little more
+      time on my hands and thought after 5 years working with web technologies
+      it really is about time that I have a live website of my own&hellip;
+    </p>
   </Layout>
 )
 

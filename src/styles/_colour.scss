@@ -1,0 +1,59 @@
+$colours: (
+  "base": (
+    "black": (
+      0,
+      0,
+      0,
+    ),
+    "grey_1": (
+      0,
+      0,
+      20,
+    ),
+    "grey_2": (
+      0,
+      0,
+      30,
+    ),
+    "grey_3": (
+      0,
+      0,
+      40,
+    ),
+    "white": (
+      0,
+      0,
+      100,
+    ),
+  ),
+);
+
+@function colour($group, $variant, $alpha: null) {
+  @if not map_has_key($colours, $group) {
+    @error "colour group (`#{$group}`) not found in colours (`#{$colours}`)";
+  }
+
+  $colour-group: map_get($colours, $group);
+
+  @if not map_has_key($colour-group, $variant) {
+    @error "variant (`#{$variant}`) not found in colour group (`#{$colour-group}`)";
+  }
+
+  $colour: map_get($colour-group, $variant);
+
+  @if ($alpha != null) {
+    @if ($alpha < 0 or $alpha > 100) {
+      @error "alpha value out of bounds; percent value expected, value was `#{$alpha}`";
+    }
+
+    @if ($alpha % 5 != 0) {
+      @warn "please try and keep alpha values to 5% steps for consistency, value was `#{$alpha}`";
+    }
+  }
+
+  $values: append($colour, if($alpha != null, $alpha, 100), $separator: space);
+
+  @return unquote(
+    "hsla(#{nth($values, 1)}deg #{nth($values, 2)}% #{nth($values, 3)}% / #{nth($values, 4)}%)"
+  );
+}

@@ -89,6 +89,6 @@ function SEO({ description, lang, meta, title }: SEOProps): ReactElement {
   )
 }
 
-export default SEO
+export { SEO }
 
 SEO.defaultProps = defaultProps

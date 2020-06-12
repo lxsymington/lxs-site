@@ -1,0 +1,30 @@
+$fonts: (
+  weights: (
+    "Regular": 400,
+    "Medium": 500,
+    "Bold": 700,
+    "ExtraBold": 800,
+  ),
+  styles: (
+    "normal",
+    "italic",
+  ),
+  formats: (
+    "woff",
+    "woff2",
+  ),
+);
+
+@each $format in map-get($fonts, formats) {
+  @each $style in map-get($fonts, styles) {
+    @each $name, $value in map-get($fonts, weights) {
+      $suffix: $name + ($style == "normal" ? "": "-#{$style}");
+      @font-face {
+        font-family: "Font Name";
+        src: url("../fonts/#{format}/JetBrainsMono-#{$suffix}.#{$format}");
+        font-style: $style;
+        font-weight: $value;
+      }
+    }
+  }
+}

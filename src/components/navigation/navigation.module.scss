@@ -1,0 +1,127 @@
+@import "../../styles/toolkit";
+
+.root {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1 1 auto;
+  position: relative;
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.open {
+  transform: none;
+}
+
+.toggle {
+  align-self: center;
+  appearance: none;
+  background-color: white;
+  border: 0;
+  display: block;
+  filter: drop-shadow(
+    5px 0 5px #{colour($group: "base", $variant: "grey_3", $alpha: 40)}
+  );
+  flex: 0 0 20px;
+  font-family: inherit;
+  outline: none;
+  padding: 0.5em 0;
+  pointer-events: auto;
+  visibility: visible;
+
+  &:active {
+    padding: 0.5em 0;
+  }
+
+  &:before,
+  &:after {
+    border-style: solid;
+    border-width: 10px;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  &:before {
+    border-color: colour($group: "base", $variant: "white", $alpha: 0)
+      colour($group: "base", $variant: "white", $alpha: 0)
+      colour($group: "base", $variant: "white")
+      colour($group: "base", $variant: "white");
+    bottom: 100%;
+  }
+
+  &:after {
+    border-color: colour($group: "base", $variant: "white")
+      colour($group: "base", $variant: "white", $alpha: 0)
+      colour($group: "base", $variant: "white", $alpha: 0)
+      colour($group: "base", $variant: "white");
+    top: 100%;
+  }
+}
+
+.toggle__text {
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  text-orientation: upright;
+  text-transform: uppercase;
+  writing-mode: vertical-lr;
+}
+
+.list {
+  background-image: radial-gradient(
+      circle at 75% 25%,
+      #{colour($group: "base", $variant: "black", $alpha: 50)},
+      #{colour($group: "base", $variant: "black", $alpha: 75)} 40%,
+      #{colour($group: "base", $variant: "black", $alpha: 50)}
+    ),
+    repeating-radial-gradient(
+      circle at 0 50%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 10)} 2.5px,
+      #{colour($group: "base", $variant: "black", $alpha: 20)} 3px,
+      #{colour($group: "base", $variant: "black", $alpha: 10)} 3.5px,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 4px,
+      #{colour($group: "base", $variant: "white", $alpha: 0)} 6px,
+      #{colour($group: "base", $variant: "white", $alpha: 10)} 6.5px,
+      #{colour($group: "base", $variant: "white", $alpha: 20)} 7px,
+      #{colour($group: "base", $variant: "white", $alpha: 10)} 7.5px,
+      #{colour($group: "base", $variant: "white", $alpha: 0)} 8px
+    ),
+    radial-gradient(
+      circle at 0 100%,
+      #{colour($group: "base", $variant: "black", $alpha: 50)},
+      #{colour($group: "base", $variant: "grey_2", $alpha: 75)} 40%,
+      #{colour($group: "base", $variant: "black", $alpha: 50)}
+    );
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 15px 0 10px -7.5px #{colour(
+      $group: "base",
+      $variant: "grey_3",
+      $alpha: 40
+    )};
+  color: colour($group: "base", $variant: "white");
+  flex: 0 0 100%;
+  font-size: 28px;
+  letter-spacing: 0.05em;
+  list-style: none;
+  padding: 60px;
+  pointer-events: auto;
+  margin: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  visibility: visible;
+  word-spacing: -0.25em;
+}
+
+.item {
+  margin: 0.75em 0;
+}
+
+.link {
+  color: colour($group: "base", $variant: "white");
+  text-decoration: none;
+}

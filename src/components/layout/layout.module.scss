@@ -1,0 +1,84 @@
+@import "../../styles/toolkit";
+
+.grid {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template:
+    ". . ." 30px
+    ". header ." auto
+    ". content ." 1fr
+    ". footer ." auto
+    ". . ." 30px
+    / 30px 1fr 30px;
+  place-items: stretch;
+
+  @media screen and (min-width: 720px) {
+    grid-template:
+      ". . . . ." 30px
+      ". . header . ." auto
+      ". . content . ." 1fr
+      ". . footer . ." auto
+      ". . . . ." 30px
+      / 30px 60px 1fr 60px 30px;
+  }
+}
+
+.header,
+.main,
+.footer {
+  max-width: 1200px;
+  place-self: center;
+  width: 100%;
+}
+
+.header {
+  grid-area: header;
+}
+
+.main {
+  background-image: radial-gradient(
+      circle at 0 50%,
+      #{colour($group: "base", $variant: "white", $alpha: 0)},
+      #{colour($group: "base", $variant: "white")}
+    ),
+    repeating-radial-gradient(
+      circle at 0 50%,
+      transparent 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 25)} 2.5px,
+      #{colour($group: "base", $variant: "black")} 3px,
+      #{colour($group: "base", $variant: "black", $alpha: 25)} 3.5px,
+      transparent 4px 8px
+    );
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position: 0px 50%;
+  font-style: italic;
+  font-weight: 400;
+  grid-area: content;
+  letter-spacing: -0.033em;
+  line-height: 1.2;
+  padding: 0 20px;
+  word-spacing: -0.033em;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.aside {
+  align-items: flex-start;
+  display: flex;
+  flex-flow: column nowrap;
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
+  overflow: hidden;
+  pointer-events: none;
+  position: relative;
+  visibility: hidden;
+  z-index: 1;
+
+  @media screen and (min-width: 720px) {
+    grid-column: 2 / span 3;
+    grid-row: 2 / span 3;
+  }
+}

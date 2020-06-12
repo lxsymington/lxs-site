@@ -1,0 +1,30 @@
+@import "../../styles/toolkit";
+
+.header {
+  font-variant: small-caps;
+}
+
+.container {
+  &:after {
+    border-width: 2px 0;
+    border-style: solid;
+    border-image: linear-gradient(
+        175deg,
+        #{colour($group: "base", $variant: "black")},
+        #{colour($group: "base", $variant: "grey_3", $alpha: 50)},
+        transparent
+      )
+      1;
+    content: "";
+    display: block;
+    height: 6px;
+  }
+}
+
+.title {
+  margin: 0;
+}
+
+.link {
+  text-decoration: none;
+}

@@ -37,4 +37,4 @@ const Image: React.FC = () => {
   return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
 }
 
-export default Image
+export { Image }
