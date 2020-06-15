@@ -2,12 +2,18 @@ import React from "react"
 import { Link } from "gatsby"
 import * as headerStyles from "./header.module.scss"
 
-type DataProps = {
-  siteTitle: string
+const defaultProps = {
+  className: ``,
+  siteTitle: ``,
 }
 
-const Header: React.FC<DataProps> = ({ siteTitle } = { siteTitle: `` }) => (
-  <header className={headerStyles.header}>
+type HeaderProps = typeof defaultProps
+
+const Header: React.FC<HeaderProps> = ({
+  className,
+  siteTitle,
+}: HeaderProps) => (
+  <header className={`${className} ${headerStyles.root}`}>
     <div className={headerStyles.container}>
       <h1 className={headerStyles.title}>
         <Link to="/" className={headerStyles.link}>
@@ -19,3 +25,5 @@ const Header: React.FC<DataProps> = ({ siteTitle } = { siteTitle: `` }) => (
 )
 
 export { Header }
+
+Header.defaultProps = defaultProps

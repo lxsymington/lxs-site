@@ -104,13 +104,16 @@
       $alpha: 40
     )};
   color: colour($group: "base", $variant: "white");
+  display: flex;
+  flex-flow: column nowrap;
   flex: 0 0 100%;
   font-size: 28px;
+  justify-content: center;
   letter-spacing: 0.05em;
   list-style: none;
+  margin: 0;
   padding: 60px;
   pointer-events: auto;
-  margin: 0;
   text-decoration: none;
   text-transform: uppercase;
   visibility: visible;
