@@ -12,6 +12,13 @@ const Navigation: React.FC = () => {
         navOpen ? navigationStyles.open : ``
       }`}
     >
+      <button
+        type="button"
+        className={navigationStyles.toggle}
+        onClick={() => setNavOpen(!navOpen)}
+      >
+        <span className={navigationStyles.toggle__text}>Menu</span>
+      </button>
       <ul className={navigationStyles.list}>
         <li className={navigationStyles.item}>
           <Link className={navigationStyles.link} to="/">
@@ -29,13 +36,6 @@ const Navigation: React.FC = () => {
           </Link>
         </li>
       </ul>
-      <button
-        type="button"
-        className={navigationStyles.toggle}
-        onClick={() => setNavOpen(!navOpen)}
-      >
-        <span className={navigationStyles.toggle__text}>Menu</span>
-      </button>
     </nav>
   )
 }

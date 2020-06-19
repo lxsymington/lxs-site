@@ -1,24 +1,30 @@
 @import "../../styles/toolkit";
 
-.header {
+.root {
+  align-items: center;
   color: inherit;
-  font-variant: small-caps;
-}
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  line-height: 2;
 
-.container {
   &:after {
-    border-width: 2px 0;
-    border-style: solid;
-    border-image: linear-gradient(
-        175deg,
-        #{colour($group: "base", $variant: "black")},
-        #{colour($group: "base", $variant: "grey_3", $alpha: 50)},
-        transparent
-      )
-      1;
+    background-image: repeating-linear-gradient(
+      #{colour($group: "base", $variant: "black")},
+      #{colour($group: "base", $variant: "black")} 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 4px
+    );
     content: "";
     display: block;
+    flex: 1 0 100%;
     height: 6px;
+    mask-image: linear-gradient(
+      175deg,
+      #{colour($group: "base", $variant: "black")},
+      #{colour($group: "base", $variant: "grey_2", $alpha: 50)} 40%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)}
+    );
   }
 }
 
@@ -28,5 +34,29 @@
 
 .link {
   color: inherit;
+  flex: 0 0 auto;
+  font-variant: small-caps;
+  font-weight: 800;
   text-decoration: none;
+}
+
+.social {
+  color: colour($group: "base", $variant: "grey_2");
+  flex: 0 0 auto;
+  font-size: 0.75em;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  text-decoration: none;
+}
+
+.social__icon {
+  display: inline-block;
+  height: 1.25em;
+  vertical-align: middle;
+  width: auto;
+}
+
+.social__text {
+  display: inline-block;
+  vertical-align: middle;
 }

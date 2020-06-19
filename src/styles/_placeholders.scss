@@ -1,0 +1,15 @@
+%copy {
+  color: colour($group: "base", $variant: "grey_3");
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0 0 1.5em;
+
+  &:last-of-type {
+    margin: 0 0 3em;
+  }
+
+  &:last-child {
+    margin: 0;
+  }
+}

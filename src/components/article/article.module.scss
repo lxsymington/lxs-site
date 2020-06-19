@@ -1,0 +1,83 @@
+@import "../../styles/_toolkit.scss";
+
+.root {
+  margin: 30px 0;
+
+  @media screen and (min-width: 720px) {
+    margin: 60px 0;
+  }
+
+  &:nth-of-type(even) {
+  }
+}
+
+.copy,
+.media {
+  max-width: 62.5%;
+}
+
+.copy {
+  padding: 0 0 0 20px;
+  position: relative;
+
+  &:before {
+    background-image: repeating-radial-gradient(
+      circle at 0 50%,
+      transparent 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 25)} 2.5px,
+      #{colour($group: "base", $variant: "black")} 3px,
+      #{colour($group: "base", $variant: "black", $alpha: 25)} 3.5px,
+      transparent 4px 8px
+    );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px 50%;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    mask-image: radial-gradient(
+      circle at 0 50%,
+      #{colour($group: "base", $variant: "black")},
+      #{colour($group: "base", $variant: "grey_2", $alpha: 50)} 60%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)}
+    );
+    position: absolute;
+    top: 0;
+    width: 10px;
+  }
+}
+
+.gallery {
+  background-color: colour($group: "colours", $variant: "ivory", $alpha: 40);
+  display: inline-block;
+  padding: 30px;
+  position: relative;
+
+  &:before,
+  &:after {
+    border-color: colour($group: "colours", $variant: "olive");
+    border-style: solid;
+    content: "";
+    display: block;
+    height: 30%;
+    position: absolute;
+    width: 30%;
+  }
+
+  &:before {
+    border-width: 1px 0 0 1px;
+    left: 20px;
+    top: 20px;
+  }
+
+  &:after {
+    border-width: 0 1px 1px 0;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+.media {
+  min-width: 220px;
+}

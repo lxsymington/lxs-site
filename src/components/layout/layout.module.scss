@@ -6,17 +6,18 @@
   grid-template:
     ". . ." 30px
     ". header ." auto
-    ". content ." 1fr
+    ". . ." 1fr
     ". footer ." auto
     ". . ." 30px
     / 30px 1fr 30px;
-  place-items: stretch;
+  height: 100%;
+  overflow: auto;
 
   @media screen and (min-width: 720px) {
     grid-template:
       ". . . . ." 30px
       ". . header . ." auto
-      ". . content . ." 1fr
+      ". . . . ." 1fr
       ". . footer . ." auto
       ". . . . ." 30px
       / 30px 60px 1fr 60px 30px;
@@ -24,45 +25,65 @@
 }
 
 .header,
-.main,
 .footer {
   max-width: 1200px;
-  place-self: center;
   width: 100%;
 }
 
 .header {
   grid-area: header;
+  place-self: center;
 }
 
 .main {
-  background-image: radial-gradient(
-      circle at 0 50%,
-      #{colour($group: "base", $variant: "white", $alpha: 0)},
-      #{colour($group: "base", $variant: "white")}
-    ),
-    repeating-radial-gradient(
-      circle at 0 50%,
-      transparent 2px,
-      #{colour($group: "base", $variant: "black", $alpha: 25)} 2.5px,
-      #{colour($group: "base", $variant: "black")} 3px,
-      #{colour($group: "base", $variant: "black", $alpha: 25)} 3.5px,
-      transparent 4px 8px
-    );
-  background-size: 10px;
-  background-repeat: no-repeat;
-  background-position: 0px 50%;
-  font-style: italic;
-  font-weight: 400;
-  grid-area: content;
+  box-sizing: content-box;
+  display: grid;
+  grid-template:
+    ". . ." 90px
+    ". content ." auto
+    ". . ." 90px
+    / 30px 1fr 30px;
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
   letter-spacing: -0.033em;
-  line-height: 1.2;
-  padding: 0 20px;
+  line-height: 1.5;
+  mask-image: linear-gradient(
+    #{colour($group: "base", $variant: "black", $alpha: 0)},
+    #{colour($group: "base", $variant: "black", $alpha: 15)} 90px,
+    #{colour($group: "base", $variant: "black")} 150px,
+    #{colour($group: "base", $variant: "black")} calc(100% - 150px),
+    #{colour($group: "base", $variant: "black", $alpha: 15)} calc(100% - 90px),
+    #{colour($group: "base", $variant: "black", $alpha: 0)}
+  );
+  max-height: 100%;
+  overflow: auto;
+  place-self: stretch;
+  position: relative;
+  scrollbar-color: colour($group: "colours", $variant: "olive", $alpha: 40)
+    colour($group: "colours", $variant: "ivory", $alpha: 40);
+  scrollbar-width: thin;
   word-spacing: -0.033em;
+  z-index: 0;
+
+  @media screen and (min-width: 720px) {
+    grid-column: 1 / span 5;
+    grid-template:
+      ". . ." 90px
+      ". content ." auto
+      ". . ." 90px
+      / 90px 1fr 90px;
+  }
+}
+
+.content {
+  grid-area: content;
+  place-self: safe center;
+  max-width: 1200px;
 }
 
 .footer {
   grid-area: footer;
+  place-self: center;
 }
 
 .aside {
@@ -73,12 +94,21 @@
   grid-row: 1 / span 5;
   overflow: hidden;
   pointer-events: none;
-  position: relative;
+  position: sticky;
+  top: 0;
   visibility: hidden;
   z-index: 1;
 
   @media screen and (min-width: 720px) {
     grid-column: 2 / span 3;
     grid-row: 2 / span 3;
+    top: 30px;
   }
+}
+
+.initials {
+  display: inline-block;
+  height: 1.25em;
+  vertical-align: middle;
+  width: auto;
 }

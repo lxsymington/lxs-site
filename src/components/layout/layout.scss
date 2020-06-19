@@ -9,7 +9,7 @@
 html {
   box-sizing: border-box;
   height: 100%;
-  overflow-y: auto;
+  overflow: hidden;
   text-decoration-skip: objects;
   text-size-adjust: 100%;
 }
@@ -74,52 +74,80 @@ h3,
 h4,
 h5,
 h6 {
-  color: colour($group: "base", $variant: "grey_1");
-  font-weight: 800;
-  line-height: 1.1;
-  margin: 0 0 0.5em;
-  padding: 0;
-  text-rendering: optimizeLegibility;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0 0 1em;
+
+  strong {
+    color: colour($group: "colours", $variant: "olive");
+    display: block;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 0.5em;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+  }
+
+  span {
+    @extend %copy;
+  }
 }
 
 h1 {
-  font-size: 2.25rem;
+  strong {
+    font-size: 2.25rem;
+  }
 }
 
 h2 {
-  font-size: 1.62671rem;
+  strong {
+    font-size: 1.62671rem;
+  }
 }
 
 h3 {
-  font-size: 1.38316rem;
+  strong {
+    font-size: 1.38316rem;
+  }
 }
 
 h4 {
-  font-size: 1rem;
+  strong {
+    font-size: 1rem;
+  }
 }
 
 h5 {
-  font-size: 0.85028rem;
+  strong {
+    font-size: 0.85028rem;
+  }
 }
 
 h6 {
-  font-size: 0.78405rem;
+  strong {
+    font-size: 0.78405rem;
+  }
 }
 
 p {
-  color: colour($group: "base", $variant: "grey_3");
-  font-size: 14px;
-  margin: 0 0 0.5em;
-
-  &:last-of-type {
-    margin: 0 0 1em;
-  }
-
-  &:last-child {
-    margin: 0;
-  }
+  @extend %copy;
 }
 
 table {
   font-feature-settings: "tnum";
+}
+
+a {
+  color: colour($group: "colours", $variant: "apricot");
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: colour($group: "colours", $variant: "tawny");
+  }
+
+  &:active {
+    color: colour($group: "colours", $variant: "ruby");
+    transition-duration: 0;
+  }
 }

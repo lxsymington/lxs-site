@@ -26,6 +26,33 @@ $colours: (
       100,
     ),
   ),
+  "colours": (
+    "ivory": (
+      38,
+      20,
+      81,
+    ),
+    "olive": (
+      54,
+      59,
+      28,
+    ),
+    "ruby": (
+      0,
+      75,
+      43,
+    ),
+    "tawny": (
+      10,
+      85,
+      52,
+    ),
+    "apricot": (
+      31,
+      93,
+      48,
+    ),
+  ),
 );
 
 @function colour($group, $variant, $alpha: null) {
