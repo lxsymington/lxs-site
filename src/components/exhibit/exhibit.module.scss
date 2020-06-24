@@ -1,0 +1,126 @@
+@import "../../styles/toolkit";
+
+.root {
+  background-color: colour($group: "base", $variant: "white", $alpha: 85);
+  box-shadow: 0 10px 15px 5px
+      colour($group: "base", $variant: "grey_2", $alpha: 10),
+    0 0 10px colour($group: "base", $variant: "grey_2", $alpha: 20);
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  text-decoration: none;
+}
+
+.header,
+.footer {
+  padding: 12px 24px;
+}
+
+.header,
+.footer {
+  background-color: colour($group: "base", $variant: "grey_2", $alpha: 5);
+  border-color: colour($group: "base", $variant: "grey_3", $alpha: 50);
+  border-style: solid;
+  flex: 0 0 auto;
+}
+
+.header {
+  background-image: radial-gradient(
+      circle farthest-corner at 0 50%,
+      #{colour($group: "colours", $variant: "ruby", $alpha: 85)},
+      #{colour($group: "colours", $variant: "apricot", $alpha: 85)}
+    ),
+    repeating-radial-gradient(
+      circle at 0 50%,
+      transparent 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 5)} 2.5px,
+      #{colour($group: "base", $variant: "black", $alpha: 20)} 3px,
+      #{colour($group: "base", $variant: "black", $alpha: 5)} 3.5px,
+      transparent 4px 8px
+    );
+  background-blend-mode: color-dodge;
+  border-width: 0 0 1px;
+}
+
+.heading {
+  margin: 0;
+}
+
+.heading__text {
+  color: white;
+  text-shadow: 0.05em 0.05em 0
+      colour($group: "base", $variant: "grey_1", $alpha: 50),
+    -0.01em -0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    0.01em -0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    -0.01em 0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    0.01em 0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50);
+}
+
+.body {
+  flex: 1 0 auto;
+  padding: 24px;
+}
+
+.description {
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex-flow: row wrap;
+
+  &:before {
+    align-self: stretch;
+    background-image: repeating-radial-gradient(
+      circle at 50% 50%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 0 1px,
+      #{colour($group: "base", $variant: "black", $alpha: 20)} 1px,
+      #{colour($group: "base", $variant: "black")} 1.5px,
+      #{colour($group: "base", $variant: "black", $alpha: 20)} 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 2px
+    );
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 6px 10px;
+    content: "";
+    display: block;
+    flex: 0 0 6px;
+    margin: 0 10px 0 0;
+  }
+
+  strong {
+    flex: 1 0 0;
+  }
+}
+
+.footer {
+  align-items: center;
+  border-width: 1px 0 0;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 15px;
+}
+
+.tag__cloud {
+  align-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1 1 auto;
+  font-size: 10px;
+  gap: 1ch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  background-color: colour($group: "colours", $variant: "olive");
+  border-radius: 0.75em / 50%;
+  color: colour($group: "base", $variant: "white");
+  flex: 0 0 auto;
+  line-height: (3 / 2);
+  padding: 0 1ch;
+  text-transform: uppercase;
+}
+
+.date {
+  flex: 0 0 auto;
+}

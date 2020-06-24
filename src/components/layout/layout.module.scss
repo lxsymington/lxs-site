@@ -33,9 +33,33 @@
 .header {
   grid-area: header;
   place-self: center;
+  position: relative;
+  z-index: 2;
 }
 
 .main {
+  /* background-image: radial-gradient(
+      transparent 0 8px,
+      #{colour($group: "colours", $variant: "olive", $alpha: 25)} 8.25px 8.75px,
+      transparent 9px
+    ),
+    linear-gradient(
+      240deg,
+      #{colour($group: "colours", $variant: "ivory")} 0 40%,
+      transparent 40%
+    ),
+    repeating-linear-gradient(
+      60deg,
+      #{colour($group: "colours", $variant: "apricot")} 0 1px,
+      transparent 8px,
+      #{colour($group: "colours", $variant: "ruby")},
+      transparent 9px 60px
+    );
+  background-size: 40px 40px, cover, 100% 20%;
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-position: center center, center center, -50% 25%;
+  background-attachment: fixed;
+  background-blend-mode: hard-light; */
   box-sizing: content-box;
   display: grid;
   grid-template:
@@ -50,8 +74,7 @@
   mask-image: linear-gradient(
     #{colour($group: "base", $variant: "black", $alpha: 0)},
     #{colour($group: "base", $variant: "black", $alpha: 15)} 90px,
-    #{colour($group: "base", $variant: "black")} 150px,
-    #{colour($group: "base", $variant: "black")} calc(100% - 150px),
+    #{colour($group: "base", $variant: "black")} 150px calc(100% - 150px),
     #{colour($group: "base", $variant: "black", $alpha: 15)} calc(100% - 90px),
     #{colour($group: "base", $variant: "black", $alpha: 0)}
   );
@@ -79,11 +102,14 @@
   grid-area: content;
   place-self: safe center;
   max-width: 1200px;
+  width: 100%;
 }
 
 .footer {
   grid-area: footer;
   place-self: center;
+  position: relative;
+  z-index: 1;
 }
 
 .aside {
@@ -97,7 +123,7 @@
   position: sticky;
   top: 0;
   visibility: hidden;
-  z-index: 1;
+  z-index: 3;
 
   @media screen and (min-width: 720px) {
     grid-column: 2 / span 3;

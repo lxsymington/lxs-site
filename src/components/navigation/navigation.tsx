@@ -26,13 +26,13 @@ const Navigation: React.FC = () => {
           </Link>
         </li>
         <li className={navigationStyles.item}>
-          <Link className={navigationStyles.link} to="/page-2/">
-            Short read
+          <Link className={navigationStyles.link} to="/short-reads/">
+            Short reads
           </Link>
         </li>
         <li className={navigationStyles.item}>
-          <Link className={navigationStyles.link} to="/using-typescript/">
-            Long read
+          <Link className={navigationStyles.link} to="/long-reads/">
+            Long reads
           </Link>
         </li>
       </ul>

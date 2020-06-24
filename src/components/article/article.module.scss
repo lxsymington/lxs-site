@@ -1,10 +1,17 @@
 @import "../../styles/_toolkit.scss";
 
 .root {
+  background-color: colour($group: "base", $variant: "white", $alpha: 85);
+  border: 1px solid colour($group: "base", $variant: "grey_2", $alpha: 5);
+  box-shadow: 0 10px 15px 5px
+      colour($group: "base", $variant: "grey_2", $alpha: 5),
+    0 0 10px colour($group: "base", $variant: "grey_2", $alpha: 10);
   margin: 30px 0;
+  padding: 30px;
 
   @media screen and (min-width: 720px) {
     margin: 60px 0;
+    padding: 60px;
   }
 
   &:nth-of-type(even) {

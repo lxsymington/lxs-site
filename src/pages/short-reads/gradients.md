@@ -1,0 +1,27 @@
+---
+title: "Gradients: smoothing the edges"
+date: "2020-06-10"
+description: "A quick look into improving the appearance of gradients with hard edges"
+tags: ["visuals", "css", "gradients"]
+---
+
+# Rough around the edges
+
+While building this site I wanted to use some more complex gradients since, being an engineer, I don't have much in the
+way of images. One of the things that I tried experimenting with was drawing thin lines with CSS gradients. I did this
+by making use of the widely adopted technique of declaring each color stop immediately after the previous one finished.
+For example:
+
+```css
+.gradient {
+  background-image: repeating-linear-gradient(
+    60deg,
+    transparent 0 2px,
+    black 2px 3px,
+    transparent 3px 5px
+  );
+}
+```
+
+Unfortunately I found this experimentation mostly produced poor results. Not one to be put off when things don't work
+first time, I decided to have a go at improving the results.

@@ -1,4 +1,6 @@
 export * from "./article"
+export * from "./exhibit"
+export * from "./gallery"
 export * from "./header"
 export * from "./image"
 export * from "./layout"
