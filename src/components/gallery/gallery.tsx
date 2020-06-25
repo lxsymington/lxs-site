@@ -2,7 +2,7 @@ import React from "react"
 import { Exhibit } from "../../components"
 import * as galleryStyles from "./gallery.module.scss"
 
-export type MarkdownNode = {
+export type MdxNode = {
   fields: {
     slug: string
   }
@@ -16,7 +16,7 @@ export type MarkdownNode = {
 }
 
 type GalleryProps = {
-  exhibits: MarkdownNode[]
+  exhibits: MdxNode[]
 }
 
 const Gallery: React.FC<GalleryProps> = ({ exhibits }) => (

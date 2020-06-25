@@ -1,11 +1,11 @@
 import React, { ReactElement } from "react"
 import { graphql } from "gatsby"
-import { Gallery, Layout, MarkdownNode } from "../components"
+import { Gallery, Layout, MdxNode } from "../components"
 
 type QueryProps = {
   data: {
-    allMarkdownRemark: {
-      nodes: MarkdownNode[]
+    allMdx: {
+      nodes: MdxNode[]
     }
   }
 }
@@ -17,14 +17,14 @@ export default function Short({ data }: QueryProps): ReactElement {
       <h1>
         <strong>Short Reads</strong>
       </h1>
-      <Gallery exhibits={data.allMarkdownRemark.nodes} />
+      <Gallery exhibits={data.allMdx.nodes} />
     </Layout>
   )
 }
 
 export const query = graphql`
   query {
-    allMarkdownRemark(
+    allMdx(
       filter: { timeToRead: { lt: 5 } }
       sort: { fields: frontmatter___date, order: ASC }
     ) {

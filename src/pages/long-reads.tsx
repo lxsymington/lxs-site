@@ -17,7 +17,7 @@ export default function Short({ data }): ReactElement {
             </tr>
           </thead>
           <tbody>
-            {data.allMarkdownRemark.nodes.map(({ frontmatter }, index) => (
+            {data.allMdx.nodes.map(({ frontmatter }, index) => (
               <tr key={index}>
                 <td>{frontmatter.title}</td>
                 <td>{frontmatter.description}</td>
@@ -40,7 +40,7 @@ export default function Short({ data }): ReactElement {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(
+    allMdx(
       filter: { timeToRead: { gte: 5 } }
       sort: { fields: frontmatter___date, order: ASC }
     ) {
