@@ -18,11 +18,12 @@ $fonts: (
 @each $format in map-get($fonts, formats) {
   @each $style in map-get($fonts, styles) {
     @each $name, $value in map-get($fonts, weights) {
-      $suffix: $name + ($style == "normal" ? "": "-#{$style}");
+      $suffix: $name + if($style == "normal", "", "-#{$style}");
       @font-face {
-        font-family: "Font Name";
-        src: url("../fonts/#{format}/JetBrainsMono-#{$suffix}.#{$format}");
-        font-style: $style;
+        font-family: "JetBrains Mono";
+        src: url("../fonts/#{$format}/JetBrainsMono-#{$suffix}.#{$format}");
+        font-display: swap;
+        font-style: unquote($style);
         font-weight: $value;
       }
     }

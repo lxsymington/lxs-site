@@ -4,7 +4,7 @@ const cssnano = require("cssnano")
 module.exports = {
   siteMetadata: {
     title: `Luke Xavier Symington`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `A Front-end Engineer's personal blog made up of posts about what I am working on or learning about. At the moment mostly CSS, TypeScript, Rust and Web Assembly with some basic WebGL thrown in.`,
     author: `@lxsymington`,
   },
   plugins: [
@@ -18,22 +18,28 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         defaultLayouts: {
-          default: require.resolve("./src/templates/blog-post.tsx"),
+          posts: require.resolve("./src/templates/post.tsx"),
+          default: require.resolve("./src/components/layout/layout.tsx"),
         },
-        extensions: [".mdx", ".md"],
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/src/posts/`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-page-creator",
+      options: {
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-react-svg`,

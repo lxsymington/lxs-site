@@ -1,10 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Layout } from "../components"
+import { Layout, SEO } from "../components"
 
 export default function Short({ data }): ReactElement {
   return (
     <Layout>
+      <SEO title="Long Reads" />
       <div>
         <h1>Long Reads</h1>
         <table>

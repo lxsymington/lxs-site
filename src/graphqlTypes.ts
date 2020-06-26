@@ -1634,14 +1634,7 @@ export type DirectoryGroupConnection = {
 };
 
 export type SitePageContextFilterInput = {
-  frontmatter?: Maybe<SitePageContextFrontmatterFilterInput>;
-};
-
-export type SitePageContextFrontmatterFilterInput = {
-  title?: Maybe<StringQueryOperatorInput>;
-  date?: Maybe<DateQueryOperatorInput>;
-  description?: Maybe<StringQueryOperatorInput>;
-  tags?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginFilterInput = {
@@ -1743,15 +1736,7 @@ export type SitePage = Node & {
 
 export type SitePageContext = {
   __typename?: 'SitePageContext';
-  frontmatter?: Maybe<SitePageContextFrontmatter>;
-};
-
-export type SitePageContextFrontmatter = {
-  __typename?: 'SitePageContextFrontmatter';
-  title?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['Date']>;
-  description?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug?: Maybe<Scalars['String']>;
 };
 
 export type SitePlugin = Node & {
@@ -1943,10 +1928,7 @@ export enum SitePageFieldsEnum {
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
   IsCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
-  ContextFrontmatterTitle = 'context___frontmatter___title',
-  ContextFrontmatterDate = 'context___frontmatter___date',
-  ContextFrontmatterDescription = 'context___frontmatter___description',
-  ContextFrontmatterTags = 'context___frontmatter___tags',
+  ContextSlug = 'context___slug',
   PluginCreatorId = 'pluginCreator___id',
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
@@ -3166,16 +3148,16 @@ export type Unnamed_5_Query = (
   )> }
 );
 
-export type Unnamed_6_QueryVariables = {
-  slug: Scalars['String'];
+export type PostQueryQueryVariables = {
+  id?: Maybe<Scalars['String']>;
 };
 
 
-export type Unnamed_6_Query = (
+export type PostQueryQuery = (
   { __typename?: 'Query' }
   & { mdx?: Maybe<(
     { __typename?: 'Mdx' }
-    & Pick<Mdx, 'body'>
+    & Pick<Mdx, 'id' | 'body'>
     & { frontmatter?: Maybe<(
       { __typename?: 'MdxFrontmatter' }
       & Pick<MdxFrontmatter, 'title'>

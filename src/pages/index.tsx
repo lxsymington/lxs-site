@@ -31,8 +31,9 @@ const IndexPage: React.FC = () => (
       </p>
       <p>
         To get started I'll be focussing mostly on{" "}
-        <Link to="/short">short reads</Link>, before diving into something in
-        more depth in some <Link to="/long">long reads</Link>
+        <Link to="/short-reads/">short reads</Link>, before diving into
+        something in more depth in some{" "}
+        <Link to="/long-reads/">long reads</Link>
       </p>
     </Article>
   </Layout>
