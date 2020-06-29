@@ -63,21 +63,28 @@
   box-sizing: content-box;
   display: grid;
   grid-template:
-    ". . ." 90px
+    ". content ." 90px
     ". content ." auto
-    ". . ." 90px
+    ". content ." 90px
     / 30px 1fr 30px;
   grid-column: 1 / span 3;
   grid-row: 1 / span 5;
   letter-spacing: -0.033em;
   line-height: 1.5;
   mask-image: linear-gradient(
-    #{colour($group: "base", $variant: "black", $alpha: 0)},
-    #{colour($group: "base", $variant: "black", $alpha: 15)} 90px,
-    #{colour($group: "base", $variant: "black")} 150px calc(100% - 150px),
-    #{colour($group: "base", $variant: "black", $alpha: 15)} calc(100% - 90px),
-    #{colour($group: "base", $variant: "black", $alpha: 0)}
-  );
+      to bottom,
+      #{colour($group: "base", $variant: "black", $alpha: 0)},
+      #{colour($group: "base", $variant: "black", $alpha: 15)} 90px,
+      #{colour($group: "base", $variant: "black")} 150px 50%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 50%
+    ),
+    linear-gradient(
+      to top,
+      #{colour($group: "base", $variant: "black", $alpha: 0)},
+      #{colour($group: "base", $variant: "black", $alpha: 15)} 90px,
+      #{colour($group: "base", $variant: "black")} 150px 50%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 50%
+    );
   max-height: 100%;
   overflow: auto;
   place-self: stretch;
@@ -91,9 +98,9 @@
   @media screen and (min-width: 720px) {
     grid-column: 1 / span 5;
     grid-template:
-      ". . ." 90px
+      ". content ." 90px
       ". content ." auto
-      ". . ." 90px
+      ". content ." 90px
       / 90px 1fr 90px;
   }
 }
@@ -102,7 +109,12 @@
   grid-area: content;
   place-self: safe center;
   max-width: 1200px;
+  padding: 120px 0;
   width: 100%;
+
+  @media screen and (min-width: 720px) {
+    padding: 150px 0;
+  }
 }
 
 .footer {

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -10,36 +10,33 @@ const components = { Link }
 type PostProps = {
   data: {
     mdx: {
-      id: string
+      frontmatter: {
+        title: string
+      }
       body: string
     }
   }
 }
 
-export default class PostLayout {
-  private props: PostProps
-
-  constructor(props: PostProps) {
-    this.props = props
-  }
-
-  render() {
-    return (
-      <Layout>
-        <SEO title="test" />
-        <h1>test</h1>
-        <MDXProvider components={components}>
-          <MDXRenderer>{this.props.data.mdx.body}</MDXRenderer>
-        </MDXProvider>
-      </Layout>
-    )
-  }
+export default function BlogPost({ data }: PostProps): ReactElement {
+  const post = data.mdx
+  return (
+    <Layout>
+      <SEO title={post.frontmatter.title} />
+      <h1>{post.frontmatter.title}</h1>
+      <MDXProvider components={components}>
+        <MDXRenderer>{post.body}</MDXRenderer>
+      </MDXProvider>
+    </Layout>
+  )
 }
 
-export const pageQuery = graphql`
+export const query = graphql`
   query MDXQuery($id: String!) {
     mdx(id: { eq: $id }) {
-      id
+      frontmatter {
+        title
+      }
       body
     }
   }

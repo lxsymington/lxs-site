@@ -1,5 +1,5 @@
-const autoprefixer = require("autoprefixer")
-const cssnano = require("cssnano")
+const autoprefixer = require(`autoprefixer`)
+const cssnano = require(`cssnano`)
 
 module.exports = {
   siteMetadata: {
@@ -18,12 +18,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        defaultLayouts: {
-          posts: require.resolve("./src/templates/post.tsx"),
-          default: require.resolve("./src/components/layout/layout.tsx"),
-        },
+        name: `pages`,
+        path: `${__dirname}/src/pages/`,
       },
     },
     {
@@ -34,9 +32,12 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-page-creator",
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        path: `${__dirname}/src/posts`,
+        defaultLayouts: {
+          default: require.resolve(`./src/components/layout/index.ts`),
+        },
+        extensions: [`.mdx`, `.md`],
       },
     },
     `gatsby-transformer-sharp`,
@@ -62,13 +63,13 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-scss-typescript",
+      resolve: `gatsby-plugin-scss-typescript`,
       options: {
         sassLoaderOptions: {
           sourceMap: true,
         },
         postCssLoaderOptions: {
-          plugins: [autoprefixer({ grid: "no-autoplace" }), cssnano({})],
+          plugins: [autoprefixer({ grid: `no-autoplace` }), cssnano({})],
         },
       },
     },

@@ -1634,7 +1634,7 @@ export type DirectoryGroupConnection = {
 };
 
 export type SitePageContextFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginFilterInput = {
@@ -1656,6 +1656,7 @@ export type SitePluginFilterInput = {
 export type SitePluginPluginOptionsFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
+  defaultLayouts?: Maybe<SitePluginPluginOptionsDefaultLayoutsFilterInput>;
   extensions?: Maybe<StringQueryOperatorInput>;
   short_name?: Maybe<StringQueryOperatorInput>;
   start_url?: Maybe<StringQueryOperatorInput>;
@@ -1670,6 +1671,10 @@ export type SitePluginPluginOptionsFilterInput = {
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   sassLoaderOptions?: Maybe<SitePluginPluginOptionsSassLoaderOptionsFilterInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsDefaultLayoutsFilterInput = {
+  default?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsSassLoaderOptionsFilterInput = {
@@ -1736,7 +1741,7 @@ export type SitePage = Node & {
 
 export type SitePageContext = {
   __typename?: 'SitePageContext';
-  slug?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
 };
 
 export type SitePlugin = Node & {
@@ -1760,6 +1765,7 @@ export type SitePluginPluginOptions = {
   __typename?: 'SitePluginPluginOptions';
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
+  defaultLayouts?: Maybe<SitePluginPluginOptionsDefaultLayouts>;
   extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
   short_name?: Maybe<Scalars['String']>;
   start_url?: Maybe<Scalars['String']>;
@@ -1774,6 +1780,11 @@ export type SitePluginPluginOptions = {
   cacheDigest?: Maybe<Scalars['String']>;
   sassLoaderOptions?: Maybe<SitePluginPluginOptionsSassLoaderOptions>;
   pathCheck?: Maybe<Scalars['Boolean']>;
+};
+
+export type SitePluginPluginOptionsDefaultLayouts = {
+  __typename?: 'SitePluginPluginOptionsDefaultLayouts';
+  default?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsSassLoaderOptions = {
@@ -1928,7 +1939,7 @@ export enum SitePageFieldsEnum {
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
   IsCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
-  ContextSlug = 'context___slug',
+  ContextId = 'context___id',
   PluginCreatorId = 'pluginCreator___id',
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
@@ -1972,6 +1983,7 @@ export enum SitePageFieldsEnum {
   PluginCreatorVersion = 'pluginCreator___version',
   PluginCreatorPluginOptionsName = 'pluginCreator___pluginOptions___name',
   PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
+  PluginCreatorPluginOptionsDefaultLayoutsDefault = 'pluginCreator___pluginOptions___defaultLayouts___default',
   PluginCreatorPluginOptionsExtensions = 'pluginCreator___pluginOptions___extensions',
   PluginCreatorPluginOptionsShortName = 'pluginCreator___pluginOptions___short_name',
   PluginCreatorPluginOptionsStartUrl = 'pluginCreator___pluginOptions___start_url',
@@ -2840,6 +2852,7 @@ export enum SitePluginFieldsEnum {
   Version = 'version',
   PluginOptionsName = 'pluginOptions___name',
   PluginOptionsPath = 'pluginOptions___path',
+  PluginOptionsDefaultLayoutsDefault = 'pluginOptions___defaultLayouts___default',
   PluginOptionsExtensions = 'pluginOptions___extensions',
   PluginOptionsShortName = 'pluginOptions___short_name',
   PluginOptionsStartUrl = 'pluginOptions___start_url',
@@ -3148,16 +3161,16 @@ export type Unnamed_5_Query = (
   )> }
 );
 
-export type PostQueryQueryVariables = {
-  id?: Maybe<Scalars['String']>;
+export type MdxQueryQueryVariables = {
+  id: Scalars['String'];
 };
 
 
-export type PostQueryQuery = (
+export type MdxQueryQuery = (
   { __typename?: 'Query' }
   & { mdx?: Maybe<(
     { __typename?: 'Mdx' }
-    & Pick<Mdx, 'id' | 'body'>
+    & Pick<Mdx, 'body'>
     & { frontmatter?: Maybe<(
       { __typename?: 'MdxFrontmatter' }
       & Pick<MdxFrontmatter, 'title'>

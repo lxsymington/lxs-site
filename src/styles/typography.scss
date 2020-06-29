@@ -6,8 +6,8 @@ $fonts: (
     "ExtraBold": 800,
   ),
   styles: (
-    "normal",
-    "italic",
+    "Normal",
+    "Italic",
   ),
   formats: (
     "woff",
@@ -18,7 +18,7 @@ $fonts: (
 @each $format in map-get($fonts, formats) {
   @each $style in map-get($fonts, styles) {
     @each $name, $value in map-get($fonts, weights) {
-      $suffix: $name + if($style == "normal", "", "-#{$style}");
+      $suffix: $name + if($style == "Normal", "", "-#{$style}");
       @font-face {
         font-family: "JetBrains Mono";
         src: url("../fonts/#{$format}/JetBrainsMono-#{$suffix}.#{$format}");
