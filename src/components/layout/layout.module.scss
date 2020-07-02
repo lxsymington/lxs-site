@@ -95,6 +95,11 @@
   word-spacing: -0.033em;
   z-index: 0;
 
+  @media (prefers-color-scheme: dark) {
+    scrollbar-color: colour($group: "colours", $variant: "apricot")
+      colour($group: "base", $variant: "white", $alpha: 20);
+  }
+
   @media screen and (min-width: 720px) {
     grid-column: 1 / span 5;
     grid-template:

@@ -9,6 +9,14 @@
   margin: 30px 0;
   padding: 30px;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: colour($group: "base", $variant: "white", $alpha: 15);
+    border: 1px solid colour($group: "base", $variant: "grey_1", $alpha: 95);
+    box-shadow: 0 10px 15px 5px
+        colour($group: "base", $variant: "grey_1", $alpha: 95),
+      0 0 10px colour($group: "base", $variant: "grey_1", $alpha: 90);
+  }
+
   @media screen and (min-width: 720px) {
     margin: 60px 0;
     padding: 60px;
@@ -52,6 +60,17 @@
     position: absolute;
     top: 0;
     width: 10px;
+
+    @media (prefers-color-scheme: dark) {
+      background-image: repeating-radial-gradient(
+        circle at 0 50%,
+        transparent 2px,
+        #{colour($group: "base", $variant: "white", $alpha: 25)} 2.5px,
+        #{colour($group: "base", $variant: "white")} 3px,
+        #{colour($group: "base", $variant: "white", $alpha: 25)} 3.5px,
+        transparent 4px 8px
+      );
+    }
   }
 }
 

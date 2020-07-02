@@ -26,6 +26,11 @@ body {
   margin: 0;
   height: 100%;
   word-wrap: break-word;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: colour($group: "base", $variant: "black");
+    color: colour($group: "base", $variant: "white");
+  }
 }
 
 #___gatsby {
@@ -88,6 +93,10 @@ h6 {
     margin: 0 0 0.5em;
     padding: 0;
     text-rendering: optimizeLegibility;
+
+    @media (prefers-color-scheme: dark) {
+      color: colour($group: "colours", $variant: "apricot");
+    }
 
     &:last-child {
       margin: 0;

@@ -25,6 +25,15 @@
       #{colour($group: "base", $variant: "grey_2", $alpha: 50)} 40%,
       #{colour($group: "base", $variant: "black", $alpha: 0)}
     );
+
+    @media (prefers-color-scheme: dark) {
+      background-image: repeating-linear-gradient(
+        #{colour($group: "base", $variant: "white")},
+        #{colour($group: "base", $variant: "white")} 2px,
+        #{colour($group: "base", $variant: "white", $alpha: 0)} 2px,
+        #{colour($group: "base", $variant: "white", $alpha: 0)} 4px
+      );
+    }
   }
 }
 
@@ -47,6 +56,10 @@
   font-style: italic;
   letter-spacing: -0.05em;
   text-decoration: none;
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "base", $variant: "grey_3");
+  }
 }
 
 .social__icon {

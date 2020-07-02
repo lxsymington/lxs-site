@@ -1,9 +1,13 @@
 %copy {
-  color: colour($group: "base", $variant: "grey_3");
+  color: colour($group: "base", $variant: "grey_2");
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   margin: 0 0 1.5em;
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "base", $variant: "grey_3");
+  }
 
   &:last-of-type {
     margin: 0 0 3em;
