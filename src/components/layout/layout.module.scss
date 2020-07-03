@@ -38,28 +38,6 @@
 }
 
 .main {
-  /* background-image: radial-gradient(
-      transparent 0 8px,
-      #{colour($group: "colours", $variant: "olive", $alpha: 25)} 8.25px 8.75px,
-      transparent 9px
-    ),
-    linear-gradient(
-      240deg,
-      #{colour($group: "colours", $variant: "ivory")} 0 40%,
-      transparent 40%
-    ),
-    repeating-linear-gradient(
-      60deg,
-      #{colour($group: "colours", $variant: "apricot")} 0 1px,
-      transparent 8px,
-      #{colour($group: "colours", $variant: "ruby")},
-      transparent 9px 60px
-    );
-  background-size: 40px 40px, cover, 100% 20%;
-  background-repeat: repeat, no-repeat, no-repeat;
-  background-position: center center, center center, -50% 25%;
-  background-attachment: fixed;
-  background-blend-mode: hard-light; */
   box-sizing: content-box;
   display: grid;
   grid-template:
@@ -89,14 +67,18 @@
   overflow: auto;
   place-self: stretch;
   position: relative;
-  scrollbar-color: colour($group: "colours", $variant: "olive", $alpha: 40)
-    colour($group: "colours", $variant: "ivory", $alpha: 40);
+  scrollbar-color: colour(
+      $group: "colours",
+      $variant: "very_dark_violet",
+      $alpha: 40
+    )
+    colour($group: "colours", $variant: "pale_yellow", $alpha: 40);
   scrollbar-width: thin;
   word-spacing: -0.033em;
   z-index: 0;
 
   @media (prefers-color-scheme: dark) {
-    scrollbar-color: colour($group: "colours", $variant: "apricot")
+    scrollbar-color: colour($group: "colours", $variant: "bright_orange")
       colour($group: "base", $variant: "white", $alpha: 20);
   }
 

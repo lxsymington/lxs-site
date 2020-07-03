@@ -13,22 +13,12 @@
 
 .open {
   transform: none;
-
-  .toggle {
-    background-color: colour($group: "base", $variant: "black");
-    color: colour($group: "base", $variant: "white");
-
-    @media (prefers-color-scheme: dark) {
-      background-color: colour($group: "colours", $variant: "apricot");
-      color: colour($group: "base", $variant: "black");
-    }
-  }
 }
 
 .toggle {
   align-self: center;
   appearance: none;
-  background-color: colour($group: "colours", $variant: "ivory");
+  background-color: colour($group: "colours", $variant: "very_dark_violet");
   border-radius: 0 100% 100% 0 / 0 2em 2em 0;
   border: 0;
   box-shadow: inset 5px 0 10px -5px #{colour(
@@ -37,6 +27,7 @@
         $alpha: 10
       )},
     0 0 10px 5px #{colour($group: "base", $variant: "grey_3", $alpha: 20)};
+  color: colour($group: "base", $variant: "white");
   display: block;
   flex: 0 0 20px;
   font-family: inherit;
@@ -45,7 +36,7 @@
   padding: 2em 0;
   padding: 2em 0;
   position: relative;
-  transition: background-color 0.6s ease, color 0.6s ease;
+  transition: background-color 0.6s ease, color 0.6s ease, transform 0.6s ease;
 
   @media (prefers-color-scheme: dark) {
     box-shadow: inset 5px 0 10px -5px #{colour(
@@ -60,12 +51,15 @@
     padding: 2em 0;
   }
 
+  .open &,
   &:focus {
-    background-color: colour($group: "base", $variant: "black");
-    color: colour($group: "base", $variant: "white");
+    background-color: colour($group: "colours", $variant: "pale_yellow");
+    color: colour($group: "colours", $variant: "very_dark_violet");
+    transform: scale3d(1.25, 1.25, 1);
+    transform-origin: 0 50%;
 
     @media (prefers-color-scheme: dark) {
-      background-color: colour($group: "colours", $variant: "apricot");
+      background-color: colour($group: "colours", $variant: "bright_orange");
       color: colour($group: "base", $variant: "black");
     }
   }
@@ -109,11 +103,8 @@
     );
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: 5px 0 10px -5px #{colour(
-      $group: "base",
-      $variant: "grey_2",
-      $alpha: 40
-    )};
+  box-shadow: 5px 0 10px -5px colour($group: "base", $variant: "grey_2", $alpha:
+        40);
   color: colour($group: "base", $variant: "white");
   display: flex;
   flex-flow: column nowrap;

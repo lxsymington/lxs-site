@@ -16,6 +16,24 @@ html {
 }
 
 body {
+  background-image: radial-gradient(
+      transparent 0 2px,
+      #{colour($group: "base", $variant: "grey_3", $alpha: 5)} 2.25px,
+      #{colour($group: "base", $variant: "grey_3", $alpha: 10)} 5.75px,
+      transparent 6px 8px,
+      #{colour($group: "base", $variant: "grey_3", $alpha: 25)} 8.25px 8.75px,
+      transparent 9px
+    ),
+    linear-gradient(
+      60deg,
+      transparent 0 40%,
+      #{colour($group: "colours", $variant: "mostly_black_violet")} 40% 70%,
+      #{colour($group: "colours", $variant: "very_dark_violet")} 70%
+    );
+  background-size: 40px 40px, cover, 100% 75%;
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-position: center center, center center, 0 50%;
+  background-attachment: fixed;
   font-family: "JetBrains Mono", -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
@@ -86,7 +104,7 @@ h6 {
   margin: 0 0 1em;
 
   strong {
-    color: colour($group: "colours", $variant: "olive");
+    color: colour($group: "colours", $variant: "very_dark_violet");
     display: block;
     font-weight: 800;
     line-height: 1.1;
@@ -95,7 +113,7 @@ h6 {
     text-rendering: optimizeLegibility;
 
     @media (prefers-color-scheme: dark) {
-      color: colour($group: "colours", $variant: "apricot");
+      color: colour($group: "colours", $variant: "bright_orange");
     }
 
     &:last-child {
@@ -153,15 +171,15 @@ table {
 }
 
 a {
-  color: colour($group: "colours", $variant: "apricot");
+  color: colour($group: "colours", $variant: "moderate_red");
   transition: color 0.3s ease;
 
   &:hover {
-    color: colour($group: "colours", $variant: "tawny");
+    color: colour($group: "colours", $variant: "dark_moderate_pink");
   }
 
   &:active {
-    color: colour($group: "colours", $variant: "ruby");
+    color: colour($group: "colours", $variant: "very_dark_violet");
     transition-duration: 0;
   }
 }

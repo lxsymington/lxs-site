@@ -1,8 +1,4 @@
-/*
- * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
- * Based on https://github.com/chriskempson/tomorrow-theme
- * @author Rose Pritchard
- */
+@import "toolkit";
 
 code[class*="language-"],
 pre[class*="language-"] {
@@ -53,7 +49,11 @@ pre[class*="language-"] {
   left: -3.8em;
   width: 3em; /* works for line-numbers below 1000 lines */
   letter-spacing: -1px;
-  border-right: 1px solid #999;
+  border-right: 1px solid colour($group: "base", $variant: "grey_3");
+
+  @media (prefers-color-scheme: dark) {
+    border-color: colour($group: "base", $variant: "grey_1");
+  }
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -68,10 +68,14 @@ pre[class*="language-"] {
 
 .line-numbers-rows > span:before {
   content: counter(linenumber);
-  color: #999;
+  color: colour($group: "base", $variant: "grey_3");
   display: block;
   padding-right: 0.8em;
   text-align: right;
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "base", $variant: "grey_1");
+  }
 }
 
 /* Inline code */
@@ -86,35 +90,59 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #999;
+  color: colour($group: "base", $variant: "grey_3");
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "base", $variant: "grey_1");
+  }
 }
 
 .token.punctuation {
-  color: #ccc;
+  color: colour($group: "colours", $variant: "dark_moderate_pink");
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "colours", $variant: "bright_orange");
+  }
 }
 
 .token.tag,
 .token.attr-name,
 .token.namespace,
 .token.deleted {
-  color: #e2777a;
+  color: colour($group: "colours", $variant: "soft_red");
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "colours", $variant: "soft_red");
+  }
 }
 
 .token.function-name {
-  color: #6196cc;
+  color: colour($group: "colours", $variant: "very_dark_violet");
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "colours", $variant: "soft_yellow");
+  }
 }
 
 .token.boolean,
 .token.number,
 .token.function {
-  color: #f08d49;
+  color: colour($group: "colours", $variant: "moderate_pink");
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "colours", $variant: "moderate_pink");
+  }
 }
 
 .token.property,
 .token.class-name,
 .token.constant,
 .token.symbol {
-  color: #f8c555;
+  color: colour($group: "colours", $variant: "soft_yellow");
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "colours", $variant: "soft_yellow");
+  }
 }
 
 .token.selector,
@@ -122,7 +150,11 @@ pre[class*="language-"] {
 .token.atrule,
 .token.keyword,
 .token.builtin {
-  color: #cc99cd;
+  color: colour($group: "colours", $variant: "very_dark_magenta");
+
+  @media (prefers-color-scheme: dark) {
+    color: colour($group: "colours", $variant: "very_dark_magenta");
+  }
 }
 
 .token.string,
