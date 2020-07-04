@@ -38,14 +38,6 @@ module.exports = {
           default: require.resolve(`./src/components/layout/index.ts`),
         },
         extensions: [`.mdx`, `.md`],
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              showLineNumbers: true,
-            },
-          },
-        ],
       },
     },
     `gatsby-transformer-sharp`,

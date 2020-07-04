@@ -2,26 +2,25 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: #ccc;
+  background-color: colour($group: "base", $variant: "black", $alpha: 25);
   background: none;
+  box-decoration-break: clone;
+  color: colour($group: "base", $variant: "grey_3");
   font-family: "JetBrains Mono", -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
+  hyphens: none;
+  line-height: 1.5;
+  tab-size: 4;
   text-align: left;
   white-space: pre;
-  word-spacing: normal;
   word-break: normal;
+  word-spacing: normal;
   word-wrap: normal;
-  line-height: 1.5;
 
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
+  mark {
+    background-color: transparent;
+  }
 }
 
 /* Code blocks */
@@ -30,9 +29,9 @@ pre[class*="language-"] {
   overflow: auto;
 
   &.line-numbers {
-    position: relative;
-    padding-left: 3ch;
     counter-reset: linenumber;
+    padding-left: 3ch;
+    position: relative;
 
     > code {
       position: relative;
@@ -42,33 +41,29 @@ pre[class*="language-"] {
 }
 
 .line-numbers .line-numbers-rows {
-  position: absolute;
-  pointer-events: none;
-  top: 0;
+  border-right: 1px solid colour($group: "base", $variant: "grey_3");
   font-size: 100%;
   left: -3.8em;
-  width: 3em; /* works for line-numbers below 1000 lines */
   letter-spacing: -1px;
-  border-right: 1px solid colour($group: "base", $variant: "grey_3");
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  user-select: none;
+  width: 3em; /* works for line-numbers below 1000 lines */
 
   @media (prefers-color-scheme: dark) {
     border-color: colour($group: "base", $variant: "grey_1");
   }
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .line-numbers-rows > span {
-  display: block;
   counter-increment: linenumber;
+  display: block;
 }
 
 .line-numbers-rows > span:before {
-  content: counter(linenumber);
   color: colour($group: "base", $variant: "grey_3");
+  content: counter(linenumber);
   display: block;
   padding-right: 0.8em;
   text-align: right;
@@ -80,8 +75,8 @@ pre[class*="language-"] {
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-  padding: 0 0.5ch;
   border-radius: 0.25ch;
+  padding: 0 0.5ch;
   white-space: normal;
 }
 
@@ -98,7 +93,7 @@ pre[class*="language-"] {
 }
 
 .token.punctuation {
-  color: colour($group: "colours", $variant: "dark_moderate_pink");
+  color: colour($group: "colours", $variant: "moderate_red");
 
   @media (prefers-color-scheme: dark) {
     color: colour($group: "colours", $variant: "bright_orange");

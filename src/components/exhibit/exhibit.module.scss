@@ -115,9 +115,8 @@
   flex-flow: row wrap;
   flex: 1 1 auto;
   font-size: 10px;
-  gap: 1ch;
   list-style: none;
-  margin: 0;
+  margin: 0 -0.5ch;
   padding: 0;
 }
 
@@ -127,6 +126,7 @@
   color: colour($group: "base", $variant: "white");
   flex: 0 0 auto;
   line-height: (3 / 2);
+  margin: 0 0.5ch;
   padding: 0 1ch;
   text-transform: uppercase;
 }

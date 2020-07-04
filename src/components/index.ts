@@ -1,4 +1,5 @@
 export * from "./article"
+export * from "./showcase"
 export * from "./exhibit"
 export * from "./gallery"
 export * from "./header"

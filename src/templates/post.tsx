@@ -3,9 +3,13 @@ import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import { Layout, SEO } from "../components"
+import { Showcase, Layout, SEO } from "../components"
 
-const components = { Link }
+const components = {
+  /* pre: (props: { [index: string]: any }) => <div {...props} />, */
+  code: Showcase,
+  Link,
+}
 
 type PostProps = {
   data: {
