@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({
     <a
       className={headerStyles.social}
       href="https://github.com/lxsymington"
-      title="Luke Xavier Symingoton's Github Profile"
+      title="Luke Xavier Symington's Github Profile"
     >
       <GithubMark className={headerStyles.social__icon} />
       <span className={headerStyles.social__text}>

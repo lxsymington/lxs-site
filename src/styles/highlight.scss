@@ -13,6 +13,12 @@ pre[class*="language-"] {
   line-height: 1.5;
   tab-size: 4;
   text-align: left;
+  text-shadow: 0.05em 0.05em 0
+      colour($group: "base", $variant: "white", $alpha: 50),
+    -0.01em -0.01em 0 colour($group: "base", $variant: "white", $alpha: 50),
+    0.01em -0.01em 0 colour($group: "base", $variant: "white", $alpha: 50),
+    -0.01em 0.01em 0 colour($group: "base", $variant: "white", $alpha: 50),
+    0.01em 0.01em 0 colour($group: "base", $variant: "white", $alpha: 50);
   white-space: pre;
   word-break: normal;
   word-spacing: normal;
@@ -92,52 +98,28 @@ pre[class*="language-"] {
   }
 }
 
-.token.punctuation {
-  color: colour($group: "colours", $variant: "moderate_red");
-
-  @media (prefers-color-scheme: dark) {
-    color: colour($group: "colours", $variant: "bright_orange");
-  }
-}
-
 .token.tag,
 .token.attr-name,
 .token.namespace,
 .token.deleted {
-  color: colour($group: "colours", $variant: "soft_red");
-
-  @media (prefers-color-scheme: dark) {
-    color: colour($group: "colours", $variant: "soft_red");
-  }
+  color: colour($group: "colours", $variant: "mostly_black_violet");
 }
 
 .token.function-name {
   color: colour($group: "colours", $variant: "very_dark_violet");
-
-  @media (prefers-color-scheme: dark) {
-    color: colour($group: "colours", $variant: "soft_yellow");
-  }
 }
 
 .token.boolean,
 .token.number,
 .token.function {
-  color: colour($group: "colours", $variant: "moderate_pink");
-
-  @media (prefers-color-scheme: dark) {
-    color: colour($group: "colours", $variant: "moderate_pink");
-  }
+  color: colour($group: "colours", $variant: "very_dark_magenta");
 }
 
 .token.property,
 .token.class-name,
 .token.constant,
 .token.symbol {
-  color: colour($group: "colours", $variant: "soft_yellow");
-
-  @media (prefers-color-scheme: dark) {
-    color: colour($group: "colours", $variant: "soft_yellow");
-  }
+  color: colour($group: "colours", $variant: "dark_moderate_pink");
 }
 
 .token.selector,
@@ -145,11 +127,15 @@ pre[class*="language-"] {
 .token.atrule,
 .token.keyword,
 .token.builtin {
-  color: colour($group: "colours", $variant: "very_dark_magenta");
+  color: colour($group: "colours", $variant: "moderate_pink");
+}
 
-  @media (prefers-color-scheme: dark) {
-    color: colour($group: "colours", $variant: "very_dark_magenta");
-  }
+.token.unit {
+  color: colour($group: "colours", $variant: "moderate_red");
+}
+
+.token.plain {
+  color: colour($group: "colours", $variant: "soft_red");
 }
 
 .token.string,
@@ -157,13 +143,17 @@ pre[class*="language-"] {
 .token.attr-value,
 .token.regex,
 .token.variable {
-  color: #7ec699;
+  color: colour($group: "colours", $variant: "bright_orange");
 }
 
 .token.operator,
 .token.entity,
 .token.url {
-  color: #67cdcc;
+  color: colour($group: "colours", $variant: "soft_orange");
+}
+
+.token.punctuation {
+  color: colour($group: "colours", $variant: "soft_yellow");
 }
 
 .token.important,

@@ -11,7 +11,6 @@ type QueryProps = {
 }
 
 export default function Short({ data }: QueryProps): ReactElement {
-  console.log(data)
   return (
     <Layout>
       <SEO title="Short Reads" />

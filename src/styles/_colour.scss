@@ -87,31 +87,6 @@ $colours: (
       100,
       81,
     ),
-    "ivory": (
-      38,
-      20,
-      81,
-    ),
-    "olive": (
-      54,
-      59,
-      28,
-    ),
-    "ruby": (
-      0,
-      75,
-      43,
-    ),
-    "tawny": (
-      10,
-      85,
-      52,
-    ),
-    "apricot": (
-      31,
-      93,
-      48,
-    ),
   ),
 );
 
@@ -131,10 +106,6 @@ $colours: (
   @if ($alpha != null) {
     @if ($alpha < 0 or $alpha > 100) {
       @error "alpha value out of bounds; percent value expected, value was `#{$alpha}`";
-    }
-
-    @if ($alpha % 5 != 0) {
-      @warn "please try and keep alpha values to 5% steps for consistency, value was `#{$alpha}`";
     }
 
     $colour: append($colour, $alpha, $separator: space);

@@ -51,17 +51,33 @@
   line-height: 1.5;
   mask-image: linear-gradient(
       to bottom,
-      #{colour($group: "base", $variant: "black", $alpha: 0)},
-      #{colour($group: "base", $variant: "black", $alpha: 15)} 90px,
-      #{colour($group: "base", $variant: "black")} 150px 50%,
-      #{colour($group: "base", $variant: "black", $alpha: 0)} 50%
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 0 30px,
+      #{colour($group: "base", $variant: "black", $alpha: 1)} 39px,
+      #{colour($group: "base", $variant: "black", $alpha: 4)} 48px,
+      #{colour($group: "base", $variant: "black", $alpha: 9)} 57px,
+      #{colour($group: "base", $variant: "black", $alpha: 16)} 66px,
+      #{colour($group: "base", $variant: "black", $alpha: 25)} 75px,
+      #{colour($group: "base", $variant: "black", $alpha: 36)} 84px,
+      #{colour($group: "base", $variant: "black", $alpha: 49)} 93px,
+      #{colour($group: "base", $variant: "black", $alpha: 64)} 102px,
+      #{colour($group: "base", $variant: "black", $alpha: 81)} 111px,
+      #{colour($group: "base", $variant: "black")} 120px 60%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 60%
     ),
     linear-gradient(
       to top,
-      #{colour($group: "base", $variant: "black", $alpha: 0)},
-      #{colour($group: "base", $variant: "black", $alpha: 15)} 90px,
-      #{colour($group: "base", $variant: "black")} 150px 50%,
-      #{colour($group: "base", $variant: "black", $alpha: 0)} 50%
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 0 30px,
+      #{colour($group: "base", $variant: "black", $alpha: 1)} 39px,
+      #{colour($group: "base", $variant: "black", $alpha: 4)} 48px,
+      #{colour($group: "base", $variant: "black", $alpha: 9)} 57px,
+      #{colour($group: "base", $variant: "black", $alpha: 16)} 66px,
+      #{colour($group: "base", $variant: "black", $alpha: 25)} 75px,
+      #{colour($group: "base", $variant: "black", $alpha: 36)} 84px,
+      #{colour($group: "base", $variant: "black", $alpha: 49)} 93px,
+      #{colour($group: "base", $variant: "black", $alpha: 64)} 102px,
+      #{colour($group: "base", $variant: "black", $alpha: 81)} 111px,
+      #{colour($group: "base", $variant: "black")} 120px 60%,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 60%
     );
   max-height: 100%;
   overflow: auto;
@@ -89,6 +105,36 @@
       ". content ." auto
       ". content ." 90px
       / 90px 1fr 90px;
+    mask-image: linear-gradient(
+        to bottom,
+        #{colour($group: "base", $variant: "black", $alpha: 0)} 0 30px,
+        #{colour($group: "base", $variant: "black", $alpha: 1)} 42px,
+        #{colour($group: "base", $variant: "black", $alpha: 4)} 54px,
+        #{colour($group: "base", $variant: "black", $alpha: 9)} 66px,
+        #{colour($group: "base", $variant: "black", $alpha: 16)} 78px,
+        #{colour($group: "base", $variant: "black", $alpha: 25)} 90px,
+        #{colour($group: "base", $variant: "black", $alpha: 36)} 102px,
+        #{colour($group: "base", $variant: "black", $alpha: 49)} 114px,
+        #{colour($group: "base", $variant: "black", $alpha: 64)} 126px,
+        #{colour($group: "base", $variant: "black", $alpha: 81)} 138px,
+        #{colour($group: "base", $variant: "black")} 150px 60%,
+        #{colour($group: "base", $variant: "black", $alpha: 0)} 60%
+      ),
+      linear-gradient(
+        to top,
+        #{colour($group: "base", $variant: "black", $alpha: 0)} 0 30px,
+        #{colour($group: "base", $variant: "black", $alpha: 1)} 42px,
+        #{colour($group: "base", $variant: "black", $alpha: 4)} 54px,
+        #{colour($group: "base", $variant: "black", $alpha: 9)} 66px,
+        #{colour($group: "base", $variant: "black", $alpha: 16)} 78px,
+        #{colour($group: "base", $variant: "black", $alpha: 25)} 90px,
+        #{colour($group: "base", $variant: "black", $alpha: 36)} 102px,
+        #{colour($group: "base", $variant: "black", $alpha: 49)} 114px,
+        #{colour($group: "base", $variant: "black", $alpha: 64)} 126px,
+        #{colour($group: "base", $variant: "black", $alpha: 81)} 138px,
+        #{colour($group: "base", $variant: "black")} 150px 60%,
+        #{colour($group: "base", $variant: "black", $alpha: 0)} 60%
+      );
   }
 }
 

@@ -12,6 +12,9 @@
 
   @media (prefers-color-scheme: dark) {
     background-color: colour($group: "base", $variant: "black", $alpha: 85);
+    box-shadow: 0 10px 15px 5px
+        colour($group: "colours", $variant: "soft_red", $alpha: 10),
+      0 0 10px colour($group: "colours", $variant: "soft_red", $alpha: 20);
   }
 }
 
@@ -94,6 +97,17 @@
     display: block;
     flex: 0 0 6px;
     margin: 0 10px 0 0;
+
+    @media (prefers-color-scheme: dark) {
+      background-image: repeating-radial-gradient(
+        circle at 50% 50%,
+        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 0)} 0 1px,
+        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 20)} 1px,
+        #{colour($group: "colours", $variant: "soft_yellow")} 1.5px,
+        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 20)} 2px,
+        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 0)} 2px
+      );
+    }
   }
 
   strong {
@@ -116,7 +130,7 @@
   flex: 1 1 auto;
   font-size: 10px;
   list-style: none;
-  margin: 0 -0.5ch;
+  margin: -0.25em -0.5ch;
   padding: 0;
 }
 
@@ -126,7 +140,7 @@
   color: colour($group: "base", $variant: "white");
   flex: 0 0 auto;
   line-height: (3 / 2);
-  margin: 0 0.5ch;
+  margin: 0.25em 0.5ch;
   padding: 0 1ch;
   text-transform: uppercase;
 }

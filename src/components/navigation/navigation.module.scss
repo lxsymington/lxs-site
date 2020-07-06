@@ -37,14 +37,15 @@
   padding: 2em 0;
   position: relative;
   transition: background-color 0.6s ease, color 0.6s ease, transform 0.6s ease;
+  z-index: 0;
 
   @media (prefers-color-scheme: dark) {
     box-shadow: inset 5px 0 10px -5px #{colour(
-          $group: "base",
-          $variant: "white",
+          $group: "colours",
+          $variant: "soft_red",
           $alpha: 20
         )},
-      0 0 10px 2px #{colour($group: "base", $variant: "white", $alpha: 40)};
+      0 0 10px 2px #{colour($group: "colours", $variant: "soft_red", $alpha: 40)};
   }
 
   &:active {
@@ -59,8 +60,16 @@
     transform-origin: 0 50%;
 
     @media (prefers-color-scheme: dark) {
-      background-color: colour($group: "colours", $variant: "bright_orange");
-      color: colour($group: "base", $variant: "black");
+      background-color: colour(
+        $group: "colours",
+        $variant: "mostly_black_violet"
+      );
+      box-shadow: 0 0 10px 2px #{colour(
+          $group: "colours",
+          $variant: "soft_red",
+          $alpha: 40
+        )};
+      color: colour($group: "base", $variant: "white");
     }
   }
 }
@@ -76,6 +85,7 @@
 }
 
 .list {
+  backdrop-filter: blur(5px);
   background-image: radial-gradient(
       circle at 75% 25%,
       #{colour($group: "base", $variant: "black", $alpha: 50)},
@@ -116,42 +126,45 @@
   margin: 0;
   order: 0;
   padding: 30px;
+  position: relative;
   text-decoration: none;
   text-transform: uppercase;
   word-spacing: -0.25em;
+  z-index: 1;
 
   @media (prefers-color-scheme: dark) {
     background-image: radial-gradient(
         circle at 75% 25%,
-        #{colour($group: "base", $variant: "white", $alpha: 50)},
-        #{colour($group: "base", $variant: "white", $alpha: 75)} 40%,
-        #{colour($group: "base", $variant: "white", $alpha: 50)}
+        #{colour($group: "colours", $variant: "mostly_black_violet", $alpha: 75)},
+        #{colour($group: "colours", $variant: "mostly_black_violet", $alpha: 50)}
+          40%,
+        #{colour($group: "colours", $variant: "mostly_black_violet", $alpha: 75)}
       ),
       repeating-radial-gradient(
         circle at 0 50%,
-        #{colour($group: "base", $variant: "white", $alpha: 0)} 2px,
-        #{colour($group: "base", $variant: "white", $alpha: 10)} 2.5px,
-        #{colour($group: "base", $variant: "white", $alpha: 20)} 3px,
-        #{colour($group: "base", $variant: "white", $alpha: 10)} 3.5px,
-        #{colour($group: "base", $variant: "white", $alpha: 0)} 4px,
-        #{colour($group: "base", $variant: "black", $alpha: 0)} 6px,
-        #{colour($group: "base", $variant: "black", $alpha: 10)} 6.5px,
-        #{colour($group: "base", $variant: "black", $alpha: 20)} 7px,
-        #{colour($group: "base", $variant: "black", $alpha: 10)} 7.5px,
-        #{colour($group: "base", $variant: "black", $alpha: 0)} 8px
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 0)} 2px,
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 30)} 2.5px,
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 60)} 3px,
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 30)} 3.5px,
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 0)} 4px,
+        #{colour($group: "colours", $variant: "soft_red", $alpha: 0)} 6px,
+        #{colour($group: "colours", $variant: "soft_red", $alpha: 10)} 6.5px,
+        #{colour($group: "colours", $variant: "soft_red", $alpha: 20)} 7px,
+        #{colour($group: "colours", $variant: "soft_red", $alpha: 10)} 7.5px,
+        #{colour($group: "colours", $variant: "soft_red", $alpha: 0)} 8px
       ),
       radial-gradient(
         circle at 0 100%,
-        #{colour($group: "base", $variant: "white", $alpha: 50)},
-        #{colour($group: "base", $variant: "grey_3", $alpha: 75)} 40%,
-        #{colour($group: "base", $variant: "white", $alpha: 50)}
+        #{colour($group: "base", $variant: "black", $alpha: 75)},
+        #{colour($group: "base", $variant: "grey_2", $alpha: 75)} 40%,
+        #{colour($group: "base", $variant: "black", $alpha: 75)}
       );
     box-shadow: 5px 0 10px -5px #{colour(
-        $group: "base",
-        $variant: "white",
+        $group: "colours",
+        $variant: "soft_red",
         $alpha: 40
       )};
-    color: colour($group: "base", $variant: "black");
+    color: colour($group: "base", $variant: "white");
   }
 
   @media screen and (min-width: 720px) {
