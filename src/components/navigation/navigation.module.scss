@@ -60,10 +60,7 @@
     transform-origin: 0 50%;
 
     @media (prefers-color-scheme: dark) {
-      background-color: colour(
-        $group: "colours",
-        $variant: "mostly_black_violet"
-      );
+      background-color: colour($group: "colours", $variant: "very_dark_violet");
       box-shadow: 0 0 10px 2px #{colour(
           $group: "colours",
           $variant: "soft_red",
@@ -135,10 +132,9 @@
   @media (prefers-color-scheme: dark) {
     background-image: radial-gradient(
         circle at 75% 25%,
-        #{colour($group: "colours", $variant: "mostly_black_violet", $alpha: 75)},
-        #{colour($group: "colours", $variant: "mostly_black_violet", $alpha: 50)}
-          40%,
-        #{colour($group: "colours", $variant: "mostly_black_violet", $alpha: 75)}
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 75)},
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)} 40%,
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 75)}
       ),
       repeating-radial-gradient(
         circle at 0 50%,

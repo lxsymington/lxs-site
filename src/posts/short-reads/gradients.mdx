@@ -10,21 +10,38 @@ tags: ["visuals", "css", "gradients"]
 While building this site I wanted to use some more complex gradients as, being an engineer, I don't have much in the
 way of images. One of the things that I tried experimenting with was drawing thin lines with CSS gradients. I did this
 by making use of the widely adopted technique of declaring each color stop immediately after the previous one finished.
+Lets have a quick look at some basic `linear-gradient`s.
+
 For example:
-```css
-backgroundImage: repeating-linear-gradient(
-  black 2px 3px,
-  transparent 3px 5px
-);
-```
 
 ```css
-backgroundImage: repeating-linear-gradient(
-  45deg,
-  transparent 0 2px,
-  black 2px 3px,
-  transparent 3px 5px
-);
+background-image:
+  repeating-linear-gradient(
+    black 2px 3px,
+    transparent 3px 5px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    black 2px 3px,
+    transparent 3px 5px
+  );
+```
+
+As is shown in the above example this produces decent results for horizontal and vertical lines.
+
+```css
+background-image:
+  repeating-linear-gradient(
++   45deg,
+    black 2px 3px,
+    transparent 3px 5px
+  ),
+  repeating-linear-gradient(
+-   90deg,
++   135deg,
+    black 2px 3px,
+    transparent 3px 5px
+  );
 ```
 
 Unfortunately I found this experimentation mostly produced poor results. Not one to be put off when things don't work

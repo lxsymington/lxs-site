@@ -1,92 +1,38 @@
 $colours: (
   "base": (
-    "black": (
-      0,
-      0,
-      0,
-    ),
-    "grey_1": (
-      0,
-      0,
-      20,
-    ),
-    "grey_2": (
-      0,
-      0,
-      40,
-    ),
-    "grey_3": (
-      0,
-      0,
-      60,
-    ),
-    "white": (
-      0,
-      0,
-      100,
-    ),
+    "black": hsl(0deg, 0%, 0%),
+    "grey_1": hsl(0deg, 0%, 20%),
+    "grey_2": hsl(0deg, 0%, 40%),
+    "grey_3": hsl(0deg, 0%, 60%),
+    "white": hsl(0deg, 0%, 100%),
   ),
   "colours": (
-    "mostly_black": (
-      0,
-      0,
-      1.6,
-    ),
-    "mostly_black_violet": (
-      260.7,
-      42,
-      13.5,
-    ),
-    "very_dark_violet": (
-      284,
-      44.6,
-      19.8,
-    ),
-    "very_dark_magenta": (
-      303,
-      46.6,
-      25.7,
-    ),
-    "dark_moderate_pink": (
-      316.6,
-      49.7,
-      34.3,
-    ),
-    "moderate_pink": (
-      330,
-      47.3,
-      43.9,
-    ),
-    "moderate_red": (
-      345.9,
-      49.4,
-      54.3,
-    ),
-    "soft_red": (
-      7.8,
-      66.5,
-      61.4,
-    ),
-    "bright_orange": (
-      27,
-      85.7,
-      58.8,
-    ),
-    "soft_orange": (
-      36.9,
-      89.7,
-      62,
-    ),
-    "soft_yellow": (
-      45.9,
-      90.9,
-      69.8,
-    ),
-    "pale_yellow": (
-      59.4,
-      100,
-      81,
-    ),
+    "soft_yellow": hsl(51, 91%, 71%),
+    "bright_orange": hsl(43, 95%, 63%),
+    "moderate_orange": hsl(38, 96%, 54%),
+    "vivid_orange": hsl(31, 95%, 53%),
+    "dark_orange": hsl(13, 86%, 60%),
+    "soft_red": hsl(352, 68%, 59%),
+    "moderate_pink": hsl(335, 57%, 49%),
+    "dark_pink": hsl(323, 68%, 39%),
+    "dark_magenta": hsl(313, 83%, 30%),
+    "very_dark_magenta": hsl(303, 98%, 22%),
+    "moderate_violet": hsl(293, 100%, 18%),
+    "very_dark_violet": hsl(279, 100%, 15%),
+  ),
+  "highlights": (
+    0: hsl(343, 99%, 65%),
+    30: hsl(28, 96%, 53%),
+    60: hsl(44, 94%, 57%),
+    90: hsl(63, 96%, 58%),
+    120: hsl(95, 95%, 55%),
+    150: hsl(160, 96%, 55%),
+    180: hsl(175, 95%, 56%),
+    210: hsl(187, 97%, 57%),
+    240: hsl(200, 97%, 54%),
+    270: hsl(249, 97%, 74%),
+    300: hsl(293, 98%, 63%),
+    330: hsl(317, 98%, 61%),
   ),
 );
 
@@ -103,23 +49,30 @@ $colours: (
 
   $colour: map_get($colour-group, $variant);
 
+  @if not type-of($colour) == color {
+    @error "Invalid colour! Received: `#{$colour}`";
+  }
+
   @if ($alpha != null) {
     @if ($alpha < 0 or $alpha > 100) {
       @error "alpha value out of bounds; percent value expected, value was `#{$alpha}`";
     }
 
-    $colour: append($colour, $alpha, $separator: space);
+    @return unquote(
+      "hsla(
+        #{hue($colour)},
+        #{saturation($colour)},
+        #{lightness($colour)},
+        #{percentage($alpha / 100)}
+      )"
+    );
   }
 
-  @if length($colour) == 4 {
-    @return unquote(
-      "hsla(#{nth($colour, 1)}deg #{nth($colour, 2)}% #{nth($colour, 3)}% / #{nth($colour, 4)}%)"
-    );
-  } @else if length($colour) == 3 {
-    @return unquote(
-      "hsl(#{nth($colour, 1)}deg #{nth($colour, 2)}% #{nth($colour, 3)}%)"
-    );
-  } @else {
-    @error "Incorrect number of colour values to make a valid hsl(a) colour! Received: `#{$colour}`";
-  }
+  @return unquote(
+    "hsl(
+      #{hue($colour)},
+      #{saturation($colour)},
+      #{lightness($colour)}
+    )"
+  );
 }

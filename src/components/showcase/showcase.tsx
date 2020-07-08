@@ -7,7 +7,7 @@ type ShowcaseProps = {
 }
 
 const Showcase: React.FC<ShowcaseProps> = ({ children, className }) => {
-  const language = className.replace(/language-/, "")
+  const language = className?.replace(/language-/, ``)
   return (
     <Highlight Prism={Prism} code={children.trim()} language={language}>
       {({ className, tokens, getLineProps, getTokenProps }) => (
