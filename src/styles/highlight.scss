@@ -1,7 +1,9 @@
 @import "toolkit";
 
 code[class*="language-"],
-pre[class*="language-"] {
+pre[class*="language-"],
+[class*="language-"] > pre,
+[class*="language-"] > textarea {
   background-blend-mode: multiply;
   background-color: colour($group: "colours", $variant: "very_dark_violet");
   background-image: radial-gradient(
@@ -14,9 +16,9 @@ pre[class*="language-"] {
   border-radius: 4px;
   color: colour($group: "base", $variant: "grey_3");
   display: inline-block;
-  font-family: "JetBrains Mono", -apple-system, BlinkMacSystemFont, Segoe UI,
-    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: "JetBrains Mono", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
   hyphens: none;
   line-height: 1.5;
   padding: 0.75em 1.5em;
@@ -112,39 +114,39 @@ pre[class*="language-"] {
 .token.tag,
 .token.attr-name,
 .token.namespace {
-  color: colour($group: "highlights", $variant: 30);
+  color: colour($group: "highlights", $variant: "lc_30");
 }
 
 .token.deleted,
 .token.function,
 .token.function-name {
-  color: colour($group: "highlights", $variant: 0);
+  color: colour($group: "highlights", $variant: "lc_0");
 }
 
 .token.boolean,
 .token.number {
-  color: colour($group: "highlights", $variant: 60);
+  color: colour($group: "highlights", $variant: "lc_60");
 }
 
 .token.property,
 .token.class-name,
 .token.constant,
 .token.symbol {
-  color: colour($group: "highlights", $variant: 90);
+  color: colour($group: "highlights", $variant: "lc_90");
 }
 
 .token.keyword,
 .token.builtin {
-  color: colour($group: "highlights", $variant: 120);
+  color: colour($group: "highlights", $variant: "lc_120");
 }
 
 .token.operator,
 .token.unit {
-  color: colour($group: "highlights", $variant: 150);
+  color: colour($group: "highlights", $variant: "lc_150");
 }
 
 .token.plain {
-  color: colour($group: "highlights", $variant: 180);
+  color: colour($group: "highlights", $variant: "lc_180");
 }
 
 .token.string,
@@ -152,18 +154,18 @@ pre[class*="language-"] {
 .token.attr-value,
 .token.regex,
 .token.variable {
-  color: colour($group: "highlights", $variant: 210);
+  color: colour($group: "highlights", $variant: "lc_210");
 }
 .token.punctuation,
 .token.entity,
 .token.url {
-  color: colour($group: "highlights", $variant: 240);
+  color: colour($group: "highlights", $variant: "lc_240");
 }
 
 .token.selector,
 .token.important,
 .token.atrule {
-  color: colour($group: "highlights", $variant: 270);
+  color: colour($group: "highlights", $variant: "lc_270");
 }
 
 .token.important,

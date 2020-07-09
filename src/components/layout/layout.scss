@@ -19,9 +19,8 @@ body {
   background-image: linear-gradient(
       60deg,
       transparent 0 40%,
-      #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 25)} 40%
-        70%,
-      #{colour($group: "colours", $variant: "moderate_violet", $alpha: 25)} 70%
+      #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 3)} 40% 70%,
+      #{colour($group: "colours", $variant: "moderate_violet", $alpha: 6)} 70%
     ),
     radial-gradient(
       transparent 0 2px,
@@ -48,6 +47,21 @@ body {
 
   @media (prefers-color-scheme: dark) {
     background-color: colour($group: "base", $variant: "black");
+    background-image: linear-gradient(
+        60deg,
+        transparent 0 40%,
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 25)} 40%
+          70%,
+        #{colour($group: "colours", $variant: "moderate_violet", $alpha: 25)} 70%
+      ),
+      radial-gradient(
+        transparent 0 2px,
+        #{colour($group: "base", $variant: "grey_3", $alpha: 2)} 2.25px,
+        #{colour($group: "base", $variant: "grey_3", $alpha: 4)} 5.75px,
+        transparent 6px 8px,
+        #{colour($group: "base", $variant: "grey_3", $alpha: 10)} 8.25px 8.75px,
+        transparent 9px
+      );
     color: colour($group: "base", $variant: "white");
   }
 }
