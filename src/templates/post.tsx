@@ -6,6 +6,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Layout, SEO, Showcase } from "../components"
 
 const components = {
+  pre: ({ children }) => <>{children}</>,
   code: Showcase,
   Link,
 }
