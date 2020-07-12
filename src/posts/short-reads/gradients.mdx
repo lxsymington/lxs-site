@@ -1,11 +1,11 @@
 ---
-title: "Gradients: smoothing the edges"
+title: "Gradients: achieving smooth edges"
 date: "2020-06-10"
 description: "A quick look into improving the appearance of edges in gradients"
 tags: ["visuals", "css", "gradients"]
 ---
 
-# Rough around the edges
+## **Rough around the edges**
 
 While building this site I wanted to use some more complex gradients as, being an engineer, I don't have much in the
 way of images. One of the things that I tried experimenting with was drawing thin lines with CSS gradients. I did this
@@ -17,14 +17,17 @@ For example:
 ```css
 background-image:
   repeating-linear-gradient(
-    black 2px 3px,
-    transparent 3px 5px
+    transparent 0 calc(12.5px - 1px / var(--dpr)),
+    black calc(12.5px - 1px / var(--dpr)) calc(12.5px + 1px / var(--dpr)),
+    transparent calc(12.5px + 1px / var(--dpr)) 25px
   ),
   repeating-linear-gradient(
     90deg,
-    black 2px 3px,
-    transparent 3px 5px
+    transparent 0 11px,
+    black 11px 14px,
+    transparent 14px 25px
   );
+background-position: center;
 ```
 
 As is shown in the above example this produces decent results for horizontal and vertical lines.
@@ -33,16 +36,70 @@ As is shown in the above example this produces decent results for horizontal and
 background-image:
   repeating-linear-gradient(
     45deg,
-    black 2px 3px,
-    transparent 3px 5px
+    transparent 0 11px,
+    black 11px 14px,
+    transparent 14px 25px
   ),
   repeating-linear-gradient(
-    90deg,
     135deg,
-    black 2px 3px,
-    transparent 3px 5px
+    transparent 0 11px,
+    black 11px 14px,
+    transparent 14px 25px
   );
+background-position: center;
 ```
 
 Unfortunately I found this experimentation mostly produced poor results. Not one to be put off when things don't work
 first time, I decided to have a go at improving the results.
+
+```css
+background-image:
+  repeating-linear-gradient(
+    30deg,
+    transparent 0 11px,
+    black 11px 14px,
+    transparent 14px 25px
+  ),
+  repeating-linear-gradient(
+    120deg,
+    transparent 0 11px,
+    black 11px 14px,
+    transparent 14px 25px
+  );
+background-position: center;
+```
+
+```css
+background-image:
+  repeating-linear-gradient(
+    60deg,
+    transparent 0 11px,
+    black 11px 14px,
+    transparent 14px 25px
+  ),
+  repeating-linear-gradient(
+    150deg,
+    transparent 0 11px,
+    black 11px 14px,
+    transparent 14px 25px
+  );
+background-position: center;
+```
+
+```css
+background-image:
+  repeating-linear-gradient(
+    60deg,
+    transparent 0 11px,
+    black 12px 13px,
+    transparent 14px 25px
+  ),
+  repeating-linear-gradient(
+    150deg,
+    transparent 0px 11px,
+    black 12px 13px,
+    transparent 14px 25px
+  );
+background-position: center;
+```
+

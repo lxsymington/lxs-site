@@ -16,8 +16,8 @@ const Showcase: React.FC<ShowcaseProps> = ({ children, className }) => {
   switch (language) {
     case `css`:
       return <CSSShowcase>{children}</CSSShowcase>
-    case `javascript`:
-      return <div></div>
+    /* case `javascript`: */
+    /*   return <div></div> */
     default:
       return <CodeBlock language={language}>{children}</CodeBlock>
   }

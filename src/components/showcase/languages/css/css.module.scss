@@ -1,0 +1,58 @@
+@import "../../../../styles/toolkit";
+
+.root {
+  align-items: stretch;
+  align-content: stretch;
+  background-color: colour($group: "base", $variant: "white", $alpha: 25);
+  display: flex;
+  flex-flow: row wrap;
+  min-height: 300px;
+  margin: 3em 0;
+  padding: 15px;
+}
+
+.source,
+.preview,
+.caption {
+  margin: 15px;
+}
+
+.source,
+.preview {
+  flex: 1 1 300px;
+}
+
+.preview {
+  background-color: colour($group: "base", $variant: "white");
+  position: relative;
+}
+
+.live {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.caption {
+  align-items: center;
+  color: colour($group: "base", $variant: "black");
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 0 1 100%;
+
+  &:before,
+  &:after {
+    background-color: colour($group: "base", $variant: "black");
+    content: "";
+    display: block;
+    flex: 0 1 50%;
+    height: 1px;
+  }
+}
+
+.caption__text {
+  flex: 1 0 auto;
+  margin: 0 1ch;
+}

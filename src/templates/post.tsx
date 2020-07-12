@@ -27,7 +27,9 @@ export default function BlogPost({ data }: PostProps): ReactElement {
   return (
     <Layout>
       <SEO title={post.frontmatter.title} />
-      <h1>{post.frontmatter.title}</h1>
+      <h1>
+        <strong>{post.frontmatter.title}</strong>
+      </h1>
       <MDXProvider components={components}>
         <MDXRenderer>{post.body}</MDXRenderer>
       </MDXProvider>
