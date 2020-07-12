@@ -2,7 +2,6 @@ import React from "react"
 import { Language } from "prism-react-renderer"
 
 import { CodeBlock } from "../../components"
-import showcaseStyles from "./showcase.module.scss"
 
 import { CSSShowcase } from "./languages"
 

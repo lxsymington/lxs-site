@@ -1,4 +1,5 @@
 export const root: string;
+export const frame: string;
 export const source: string;
 export const preview: string;
 export const caption: string;
