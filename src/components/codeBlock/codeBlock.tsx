@@ -15,7 +15,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   return (
     <Highlight Prism={Prism} code={(children as string).trim()} language={language}>
       {({ className, tokens, getLineProps, getTokenProps }) => (
-        <pre className={`${customClass} ${codeBlockStyles.root}`}>
+        <pre className={`${customClass ?? ``} ${codeBlockStyles.root}`}>
           <code className={`${className} ${codeBlockStyles.code}`}>
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line, key: i })}>

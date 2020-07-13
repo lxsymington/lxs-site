@@ -4,7 +4,7 @@
   max-height: 100%;
   overflow: auto;
   scrollbar-color: colour($group: "colours", $variant: "very_dark_violet", $alpha: 40)
-    colour($group: "colours", $variant: "soft_yellow", $alpha: 40);
+    colour($group: "base", $variant: "grey_4", $alpha: 40);
   scrollbar-width: thin;
 }
 
@@ -12,9 +12,5 @@
   border-radius: 4px;
   box-sizing: border-box;
   height: 100%;
-
-  @media (prefers-color-scheme: dark) {
-    scrollbar-color: colour($group: "colours", $variant: "bright_orange")
-      colour($group: "base", $variant: "white", $alpha: 20);
-  }
+  min-width: 100%;
 }
