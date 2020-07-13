@@ -83,11 +83,7 @@
   overflow: auto;
   place-self: stretch;
   position: relative;
-  scrollbar-color: colour(
-      $group: "colours",
-      $variant: "very_dark_violet",
-      $alpha: 40
-    )
+  scrollbar-color: colour($group: "colours", $variant: "very_dark_violet", $alpha: 40)
     colour($group: "colours", $variant: "soft_yellow", $alpha: 40);
   scrollbar-width: thin;
   word-spacing: -0.033em;
@@ -139,9 +135,11 @@
 }
 
 .content {
+  counter-reset: showcase;
   grid-area: content;
   place-self: safe center;
   max-width: 1200px;
+  min-width: 260px;
   padding: 120px 0;
   width: 100%;
 

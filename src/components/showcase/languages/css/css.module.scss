@@ -1,156 +1,35 @@
 @import "../../../../styles/toolkit";
 
 .root {
+  counter-increment: showcase;
   align-items: stretch;
   align-content: stretch;
-  background-color: colour($group: "base", $variant: "white", $alpha: 25);
+  background-color: colour($group: "base", $variant: "white", $alpha: 85);
   display: flex;
   flex-flow: row wrap;
   margin: 0;
   min-height: 300px;
-  padding: 15px;
+  padding: 6px;
+
+  @media screen and (min-min-width: 720px) {
+    padding: 15px;
+  }
 }
 
 .frame {
-  background-image: radial-gradient(
-      circle at 0 0,
-      transparent 0 23px,
-      #{colour($group: "colours", $variant: "bright_orange")} 24px,
-      #{colour($group: "colours", $variant: "moderate_orange")}
-    ),
-    radial-gradient(
-      circle at 100% 0,
-      transparent 0 23px,
-      #{colour($group: "colours", $variant: "bright_orange")} 24px,
-      #{colour($group: "colours", $variant: "moderate_orange")}
-    ),
-    radial-gradient(
-      circle at 4px 12px,
-      #{colour($group: "colours", $variant: "moderate_orange")},
-      #{colour($group: "colours", $variant: "bright_orange")} 12px,
-      transparent 13px
-    ),
-    radial-gradient(
-      circle at 0 100%,
-      transparent 0 23px,
-      #{colour($group: "colours", $variant: "bright_orange")} 24px,
-      #{colour($group: "colours", $variant: "moderate_orange")}
-    ),
-    radial-gradient(
-      circle at 12px 4px,
-      #{colour($group: "colours", $variant: "moderate_orange")},
-      #{colour($group: "colours", $variant: "bright_orange")} 12px,
-      transparent 13px
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      transparent 0 23px,
-      #{colour($group: "colours", $variant: "bright_orange")} 24px,
-      #{colour($group: "colours", $variant: "moderate_orange")}
-    ),
-    radial-gradient(
-      circle at 18px 4px,
-      #{colour($group: "colours", $variant: "moderate_orange")},
-      #{colour($group: "colours", $variant: "bright_orange")} 12px,
-      transparent 13px
-    ),
-    radial-gradient(
-      circle at 4px 18px,
-      #{colour($group: "colours", $variant: "moderate_orange")},
-      #{colour($group: "colours", $variant: "bright_orange")} 12px,
-      transparent 13px
-    );
-  background-position: top left, top right, top right, bottom left, bottom left,
-    bottom right, bottom right, bottom right;
-  background-repeat: no-repeat;
-  background-size: 30px 30px;
-  filter: drop-shadow(
-    2px 2px 3px #{colour($group: "base", $variant: "grey_1", $alpha: 40)}
-  );
+  @extend %frame;
+
   margin: 3em 0;
-  padding: 30px;
-  position: relative;
-
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-  }
-
-  &:before {
-    background-image: radial-gradient(
-        circle at 50% 0,
-        transparent 0 12px,
-        #{colour($group: "colours", $variant: "bright_orange")} 13px,
-        #{colour($group: "colours", $variant: "moderate_orange")}
-      ),
-      radial-gradient(
-        circle at calc(50% - 12px) 12px,
-        #{colour($group: "colours", $variant: "moderate_orange")},
-        #{colour($group: "colours", $variant: "bright_orange")} 12px,
-        transparent 13px
-      ),
-      radial-gradient(
-        circle at 50% 100%,
-        transparent 0 12px,
-        #{colour($group: "colours", $variant: "bright_orange")} 13px,
-        #{colour($group: "colours", $variant: "moderate_orange")}
-      ),
-      radial-gradient(
-        circle at calc(50% - 12px) 18px,
-        #{colour($group: "colours", $variant: "moderate_orange")},
-        #{colour($group: "colours", $variant: "bright_orange")} 12px,
-        transparent 13px
-      );
-    background-position: left top, left top, left bottom, left bottom;
-    background-size: 40px 30px;
-    background-repeat: round no-repeat;
-    bottom: 0;
-    left: 30px;
-    right: 30px;
-    top: 0;
-  }
-
-  &:after {
-    background-image: radial-gradient(
-        circle at 0 50%,
-        transparent 0 12px,
-        #{colour($group: "colours", $variant: "bright_orange")} 13px,
-        #{colour($group: "colours", $variant: "moderate_orange")}
-      ),
-      radial-gradient(
-        circle at 12px calc(50% - 12px),
-        #{colour($group: "colours", $variant: "moderate_orange")},
-        #{colour($group: "colours", $variant: "bright_orange")} 12px,
-        transparent 13px
-      ),
-      radial-gradient(
-        circle at 100% 50%,
-        transparent 0 12px,
-        #{colour($group: "colours", $variant: "bright_orange")} 13px,
-        #{colour($group: "colours", $variant: "moderate_orange")}
-      ),
-      radial-gradient(
-        circle at 18px calc(50% - 12px),
-        #{colour($group: "colours", $variant: "moderate_orange")},
-        #{colour($group: "colours", $variant: "bright_orange")} 12px,
-        transparent 13px
-      );
-    background-position: left top, left top, right top, right top;
-    background-size: 30px 40px;
-    background-repeat: no-repeat round;
-    bottom: 30px;
-    left: 0;
-    right: 0;
-    top: 30px;
-  }
 }
 
 .source,
 .preview,
 .caption {
-  margin: 15px;
+  margin: 6px;
+
+  @media screen and (min-min-width: 720px) {
+    margin: 15px;
+  }
 }
 
 .source,
@@ -160,6 +39,7 @@
 
 .preview {
   background-color: colour($group: "base", $variant: "white");
+  border: medium inset colour($group: "base", $variant: "grey_4");
   position: relative;
 
   &:after {
@@ -180,22 +60,31 @@
 
 .caption {
   align-items: center;
-  color: colour($group: "base", $variant: "black");
+  color: colour($group: "base", $variant: "grey_1");
   display: flex;
+  font-style: italic;
   flex-flow: row nowrap;
   flex: 0 1 100%;
 
   &:before,
   &:after {
-    background-color: colour($group: "base", $variant: "black");
+    background-color: colour($group: "base", $variant: "grey_3");
     content: "";
     display: block;
     flex: 0 1 50%;
     height: 1px;
+    min-width: 30px;
   }
 }
 
 .caption__text {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
+  font-size: 0.75em;
   margin: 0 1ch;
+  text-align: center;
+
+  &:before {
+    color: colour($group: "base", $variant: "grey_2");
+    content: "fig. " counter(showcase) "\00a0\2014\00a0";
+  }
 }

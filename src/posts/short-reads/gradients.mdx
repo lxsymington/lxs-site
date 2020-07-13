@@ -14,37 +14,37 @@ Lets have a quick look at some basic `linear-gradient`s.
 
 For example:
 
-```css
+```css caption=Vertical_and_Horizontal_Gradient_Lines
 background-image:
   repeating-linear-gradient(
-    transparent 0 calc(12.5px - 1px / var(--dpr)),
-    black calc(12.5px - 1px / var(--dpr)) calc(12.5px + 1px / var(--dpr)),
-    transparent calc(12.5px + 1px / var(--dpr)) 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   ),
   repeating-linear-gradient(
     90deg,
-    transparent 0 11px,
-    black 11px 14px,
-    transparent 14px 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   );
 background-position: center;
 ```
 
 As is shown in the above example this produces decent results for horizontal and vertical lines.
 
-```css
+```css caption=45_degree_Gradient_Lines
 background-image:
   repeating-linear-gradient(
     45deg,
-    transparent 0 11px,
-    black 11px 14px,
-    transparent 14px 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   ),
   repeating-linear-gradient(
     135deg,
-    transparent 0 11px,
-    black 11px 14px,
-    transparent 14px 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   );
 background-position: center;
 ```
@@ -52,53 +52,53 @@ background-position: center;
 Unfortunately I found this experimentation mostly produced poor results. Not one to be put off when things don't work
 first time, I decided to have a go at improving the results.
 
-```css
+```css caption=30_degree_Gradient_Lines
 background-image:
   repeating-linear-gradient(
     30deg,
-    transparent 0 11px,
-    black 11px 14px,
-    transparent 14px 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   ),
   repeating-linear-gradient(
     120deg,
-    transparent 0 11px,
-    black 11px 14px,
-    transparent 14px 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   );
 background-position: center;
 ```
 
-```css
+```css caption=60_degree_Gradient_Lines
 background-image:
   repeating-linear-gradient(
     60deg,
-    transparent 0 11px,
-    black 11px 14px,
-    transparent 14px 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   ),
   repeating-linear-gradient(
     150deg,
-    transparent 0 11px,
-    black 11px 14px,
-    transparent 14px 25px
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
   );
 background-position: center;
 ```
 
-```css
+```css caption=Graded_60_degree_Gradient_Lines
 background-image:
   repeating-linear-gradient(
     60deg,
     transparent 0 11px,
-    black 12px 13px,
-    transparent 14px 25px
+    black calc(11px + 1px / var(--dpr)) calc(11px + 2px / var(--dpr)),
+    transparent calc(11px + 3px / var(--dpr)) 25px
   ),
   repeating-linear-gradient(
     150deg,
     transparent 0px 11px,
-    black 12px 13px,
-    transparent 14px 25px
+    black calc(11px + 1px / var(--dpr)) calc(11px + 2px / var(--dpr)),
+    transparent calc(11px + 3px / var(--dpr)) 25px
   );
 background-position: center;
 ```

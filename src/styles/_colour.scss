@@ -71,21 +71,8 @@ $colours: (
       @error "alpha value out of bounds; percent value expected, value was `#{$alpha}`";
     }
 
-    @return unquote(
-      "hsla(
-        #{hue($colour)},
-        #{saturation($colour)},
-        #{lightness($colour)},
-        #{percentage($alpha / 100)}
-      )"
-    );
+    @return hsla(hue($colour), saturation($colour), lightness($colour), $alpha / 100);
   }
 
-  @return unquote(
-    "hsl(
-      #{hue($colour)},
-      #{saturation($colour)},
-      #{lightness($colour)}
-    )"
-  );
+  @return hsl(hue($colour), saturation($colour), lightness($colour));
 }

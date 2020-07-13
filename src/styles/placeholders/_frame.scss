@@ -1,0 +1,225 @@
+@import "../colour";
+
+$gold: scale-color(
+  colour(
+    $group: "colours",
+    $variant: "bright_orange",
+  ),
+  $saturation: -17.5%,
+  $lightness: -32.5%
+);
+$dark_gold: scale-color(
+  colour(
+    $group: "colours",
+    $variant: "moderate_orange",
+  ),
+  $saturation: -20%,
+  $lightness: -35%
+);
+$very_dark_gold: scale-color(
+  colour(
+    $group: "colours",
+    $variant: "vivid_orange",
+  ),
+  $saturation: -22.5%,
+  $lightness: -37.5%
+);
+
+%frame {
+  background-image: radial-gradient(
+      circle at 100% 100%,
+      #{$very_dark_gold} 0,
+      #{$gold} calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 4px) calc(var(--scale) * 5px),
+      transparent calc(var(--scale) * 5px)
+    ),
+    radial-gradient(
+      circle farthest-corner at 0 0,
+      transparent 0 calc(var(--scale) * 11.5px),
+      #{$gold} calc(var(--scale) * calc(var(--scale) * 6px)),
+      #{$dark_gold}
+    ),
+    radial-gradient(
+      circle at 0 100%,
+      #{$very_dark_gold} 0,
+      #{$gold} calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 4px) calc(var(--scale) * 5px),
+      transparent calc(var(--scale) * 5px)
+    ),
+    radial-gradient(
+      circle farthest-corner at 100% 0,
+      transparent 0 calc(var(--scale) * 11.5px),
+      #{$gold} calc(var(--scale) * calc(var(--scale) * 6px)),
+      #{$dark_gold}
+    ),
+    radial-gradient(
+      circle at 4px calc(var(--scale) * 6px),
+      #{$very_dark_gold} 0 calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 6px),
+      transparent calc(var(--scale) * 6.5px)
+    ),
+    radial-gradient(
+      circle at 100% 0,
+      #{$very_dark_gold} 0,
+      #{$gold} calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 4px) calc(var(--scale) * 5px),
+      transparent calc(var(--scale) * 5px)
+    ),
+    radial-gradient(
+      circle farthest-corner at 0 100%,
+      transparent 0 calc(var(--scale) * 11.5px),
+      #{$gold} calc(var(--scale) * calc(var(--scale) * 6px)),
+      #{$dark_gold}
+    ),
+    radial-gradient(
+      circle at calc(var(--scale) * 6px) 4px,
+      #{$very_dark_gold} 0 calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 6px),
+      transparent calc(var(--scale) * 6.5px)
+    ),
+    radial-gradient(
+      circle at 0 0,
+      #{$very_dark_gold} 0,
+      #{$gold} calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 4px) calc(var(--scale) * 5px),
+      transparent calc(var(--scale) * 5px)
+    ),
+    radial-gradient(
+      circle farthest-corner at 100% 100%,
+      transparent 0 calc(var(--scale) * 11.5px),
+      #{$gold} calc(var(--scale) * calc(var(--scale) * 6px)),
+      #{$dark_gold}
+    ),
+    radial-gradient(
+      circle at calc(var(--scale) * 9px) 4px,
+      #{$very_dark_gold} 0 calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 6px),
+      transparent calc(var(--scale) * 6.5px)
+    ),
+    radial-gradient(
+      circle at 4px calc(var(--scale) * 9px),
+      #{$very_dark_gold} 0 calc(var(--scale) * 4px),
+      #{$dark_gold} calc(var(--scale) * 6px),
+      transparent calc(var(--scale) * 6.5px)
+    );
+  background-position: top left, top left, top right, top right, top right, bottom left,
+    bottom left, bottom left, bottom right, bottom right, bottom right, bottom right;
+  background-repeat: no-repeat;
+  background-size: calc(var(--scale) * 15px) calc(var(--scale) * 15px);
+  filter: drop-shadow(
+    2px 2px 2px #{colour($group: "base", $variant: "grey_1", $alpha: 40)}
+  );
+  padding: calc(var(--scale) * 15px);
+  position: relative;
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+  }
+
+  &:before {
+    background-image: linear-gradient(
+        #{$dark_gold} 0 calc(var(--scale) * 1px),
+        #{$gold} calc(var(--scale) * 1px),
+        #{$very_dark_gold}
+      ),
+      linear-gradient(
+        to top,
+        #{$dark_gold} 0 calc(var(--scale) * 1px),
+        #{$gold} calc(var(--scale) * 1px),
+        #{$very_dark_gold}
+      ),
+      radial-gradient(
+        circle farthest-corner at 50% 0,
+        transparent 0 calc(var(--scale) * 6px),
+        #{$gold} calc(var(--scale) * 6.5px),
+        #{$dark_gold}
+      ),
+      radial-gradient(
+        circle at calc(50% - var(--scale) * 6px) calc(var(--scale) * 6px),
+        #{$very_dark_gold},
+        #{$dark_gold} calc(var(--scale) * 6px),
+        transparent calc(var(--scale) * 6.5px)
+      ),
+      radial-gradient(
+        circle farthest-corner at 50% 100%,
+        transparent 0 calc(var(--scale) * 6px),
+        #{$gold} calc(var(--scale) * 6.5px),
+        #{$dark_gold}
+      ),
+      radial-gradient(
+        circle at calc(50% - var(--scale) * 6px) calc(var(--scale) * 9px),
+        #{$very_dark_gold},
+        #{$dark_gold} calc(var(--scale) * 6px),
+        transparent calc(var(--scale) * 6.5px)
+      );
+    background-position: center calc(var(--scale) * 10px),
+      center calc(100% - var(--scale) * 10px), left top, left top, left bottom,
+      left bottom;
+    background-size: 100% calc(var(--scale) * 5px), 100% calc(var(--scale) * 5px),
+      calc(var(--scale) * 30px) calc(var(--scale) * 15px),
+      calc(var(--scale) * 30px) calc(var(--scale) * 15px),
+      calc(var(--scale) * 30px) calc(var(--scale) * 15px),
+      calc(var(--scale) * 30px) calc(var(--scale) * 15px);
+    background-repeat: no-repeat, no-repeat, round no-repeat, round no-repeat,
+      round no-repeat, round no-repeat;
+    bottom: 0;
+    left: calc(var(--scale) * 15px);
+    right: calc(var(--scale) * 15px);
+    top: 0;
+  }
+
+  &:after {
+    background-image: linear-gradient(
+        to right,
+        #{$dark_gold} 0 calc(var(--scale) * 1px),
+        #{$gold} calc(var(--scale) * 1px),
+        #{$very_dark_gold}
+      ),
+      linear-gradient(
+        to left,
+        #{$dark_gold} 0 calc(var(--scale) * 1px),
+        #{$gold} calc(var(--scale) * 1px),
+        #{$very_dark_gold}
+      ),
+      radial-gradient(
+        circle farthest-corner at 0 50%,
+        transparent 0 calc(var(--scale) * 6px),
+        #{$gold} calc(var(--scale) * 6.5px),
+        #{$dark_gold}
+      ),
+      radial-gradient(
+        circle at calc(var(--scale) * 6px) calc(50% - var(--scale) * 6px),
+        #{$very_dark_gold},
+        #{$dark_gold} calc(var(--scale) * 6px),
+        transparent calc(var(--scale) * 6.5px)
+      ),
+      radial-gradient(
+        circle farthest-corner at 100% 50%,
+        transparent 0 calc(var(--scale) * 6px),
+        #{$gold} calc(var(--scale) * 6.5px),
+        #{$dark_gold}
+      ),
+      radial-gradient(
+        circle at calc(var(--scale) * 9px) calc(50% - var(--scale) * 6px),
+        #{$very_dark_gold},
+        #{$dark_gold} calc(var(--scale) * 6px),
+        transparent calc(var(--scale) * 6.5px)
+      );
+    background-position: calc(var(--scale) * 10px) center,
+      calc(100% - var(--scale) * 10px) center, left top, left top, right top, right top;
+    background-size: calc(var(--scale) * 5px) 100%, calc(var(--scale) * 5px) 100%,
+      calc(var(--scale) * 15px) calc(var(--scale) * 30px),
+      calc(var(--scale) * 15px) calc(var(--scale) * 30px),
+      calc(var(--scale) * 15px) calc(var(--scale) * 30px),
+      calc(var(--scale) * 15px) calc(var(--scale) * 30px);
+    background-repeat: no-repeat, no-repeat, no-repeat round, no-repeat round,
+      no-repeat round, no-repeat round;
+    bottom: calc(var(--scale) * 15px);
+    left: 0;
+    right: 0;
+    top: calc(var(--scale) * 15px);
+  }
+}
