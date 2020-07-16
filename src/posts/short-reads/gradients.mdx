@@ -8,9 +8,35 @@ tags: ["visuals", "css", "gradients"]
 ## **Rough around the edges**
 
 While building this site I wanted to use some more complex gradients as, being an engineer, I don't have much in the
-way of images. One of the things that I tried experimenting with was drawing thin lines with CSS gradients. I did this
-by making use of the widely adopted technique of declaring each color stop immediately after the previous one finished.
-Lets have a quick look at some basic `linear-gradient`s.
+way of images. I was particularly interested in creating patterns using gradients. While creating patterns, I found that
+I kept getting poor results whenever I used the _"double stop technique"_ to create _"edges"_.
+
+For the sake of clarity, I would like to take a moment to explain what I mean by the _"double stop technique"_. **_Fig. 1_** is
+an example of what is probably the simplest implementation of a CSS `linear-gradient`.
+
+```css caption=Simple_Gradient
+background-image:
+  linear-gradient(
+    black,
+    transparent
+  );
+```
+
+In **_fig. 1_** there are two `color-stop`s the first stop `black` and the last stop `transparent`. In this
+instance the `color-stop` positions have been omitted for simplicity, the result is that the first and last stops are placed at the
+start (0%) an end (100%) of the gradient line respectively. If we do set the positions for the `color-stop`s we can
+reduce the size of the transition between the two colours as shown in **_fig. 2_**.
+
+```css caption=Positioned_Color_Stop_Gradient
+background-image:
+  linear-gradient(
+    black 25%,
+    transparent 75%
+  );
+```
+
+If we continue to move the `color-stop` positions closer together, eventually we get to the point where they share the
+same position.
 
 For example:
 
@@ -97,6 +123,50 @@ background-image:
   repeating-linear-gradient(
     150deg,
     transparent 0px 11px,
+    black calc(11px + 1px / var(--dpr)) calc(11px + 2px / var(--dpr)),
+    transparent calc(11px + 3px / var(--dpr)) 25px
+  );
+background-position: center;
+```
+
+```css caption=Circular_Radial_Gradient
+background-image:
+  repeating-radial-gradient(
+    circle at 50% 50%,
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
+  );
+background-position: center;
+```
+
+```css caption=Graded_Circular_Radial_Gradient
+background-image:
+  repeating-radial-gradient(
+    circle at 50% 50%,
+    transparent 0 11px,
+    black calc(11px + 1px / var(--dpr)) calc(11px + 2px / var(--dpr)),
+    transparent calc(11px + 3px / var(--dpr)) 25px
+  );
+background-position: center;
+```
+
+```css caption=Elliptical_Radial_Gradient
+background-image:
+  repeating-radial-gradient(
+    ellipse at 50% 50%,
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
+  );
+background-position: center;
+```
+
+```css caption=Graded_Elliptical_Radial_Gradient
+background-image:
+  repeating-radial-gradient(
+    ellipse at 50% 50%,
+    transparent 0 11px,
     black calc(11px + 1px / var(--dpr)) calc(11px + 2px / var(--dpr)),
     transparent calc(11px + 3px / var(--dpr)) 25px
   );

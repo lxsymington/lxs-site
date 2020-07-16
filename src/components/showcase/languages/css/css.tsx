@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { nanoid } from "nanoid/non-secure"
 
-import { CodeBlock } from "../../../../components"
+import { CodeBlock, Modal } from "../../../../components"
 import cssShowcaseStyles from "./css.module.scss"
 
 type CSSShowcaseProps = {
@@ -20,14 +20,15 @@ const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
         </CodeBlock>
         {/* Preview */}
         <style type="text/css">
-          {`.${cssShowcaseStyles.live}.live-${scope} {
+          {`.${cssShowcaseStyles.live}#live-${scope} {
             ${styles}
           }`}
         </style>
         <aside className={cssShowcaseStyles.preview}>
-          <div className={`${cssShowcaseStyles.live} live-${scope}`}></div>
+          <div id={`live-${scope}`} className={cssShowcaseStyles.live}></div>
         </aside>
         {/* Image */}
+        <Modal>Hello</Modal>
         <figcaption className={cssShowcaseStyles.caption}>
           <span className={cssShowcaseStyles.caption__text}>
             {caption.replace(/_/g, ` `)}

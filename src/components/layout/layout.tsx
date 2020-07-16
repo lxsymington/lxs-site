@@ -33,11 +33,8 @@ const Layout: React.FC = ({ children }) => {
   `)
 
   return (
-    <div className={layoutStyles.grid}>
-      <Header
-        className={layoutStyles.header}
-        siteTitle={data.site.siteMetadata.title}
-      />
+    <div className={layoutStyles.grid} id="ModalRoot">
+      <Header className={layoutStyles.header} siteTitle={data.site.siteMetadata.title} />
       <aside className={layoutStyles.aside}>
         <Navigation />
       </aside>

@@ -3,12 +3,13 @@ import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import { Layout, SEO, Showcase } from "../components"
+import { Layout, Modal, SEO, Showcase } from "../components"
 
 const components = {
   pre: ({ children }) => <>{children}</>,
   code: Showcase,
   Link,
+  Modal,
 }
 
 type PostProps = {

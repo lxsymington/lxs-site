@@ -7,11 +7,7 @@ const Navigation: React.FC = () => {
   const [navOpen, setNavOpen] = useState(false)
 
   return (
-    <nav
-      className={`${navigationStyles.root} ${
-        navOpen ? navigationStyles.open : ``
-      }`}
-    >
+    <nav className={`${navigationStyles.root} ${navOpen ? navigationStyles.open : ``}`}>
       <button
         type="button"
         className={navigationStyles.toggle}
