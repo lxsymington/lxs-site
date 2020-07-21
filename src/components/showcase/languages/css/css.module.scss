@@ -4,7 +4,7 @@
   counter-increment: showcase;
   align-items: stretch;
   align-content: stretch;
-  background-color: colour($group: "base", $variant: "white", $alpha: 85);
+  background-color: colour($group: "base", $variant: "white", $alpha: 95);
   display: flex;
   flex-flow: row wrap;
   margin: 0;
@@ -13,15 +13,29 @@
   position: relative;
   z-index: 1;
 
-  @media screen and (min-min-width: 720px) {
+  @media screen and (min-width: 720px) {
     padding: 15px;
   }
 }
 
 .frame {
-  @extend %frame;
-
+  background-image: repeating-linear-gradient(
+      45deg,
+      #{colour($group: "base", $variant: "grey_4")} 0 5px,
+      #{colour($group: "base", $variant: "grey_4", $alpha: 0)} 5px 10px
+    ),
+    repeating-linear-gradient(
+      135deg,
+      #{colour($group: "base", $variant: "grey_3")} 0 5px,
+      #{colour($group: "base", $variant: "grey_3", $alpha: 0)} 5px 10px
+    );
   margin: 3em 0;
+  padding: 12px;
+  position: relative;
+
+  @media screen and (min-width: 720px) {
+    padding: 30px;
+  }
 }
 
 .source,
@@ -29,7 +43,7 @@
 .caption {
   margin: 6px;
 
-  @media screen and (min-min-width: 720px) {
+  @media screen and (min-width: 720px) {
     margin: 15px;
   }
 }
@@ -37,6 +51,23 @@
 .source,
 .preview {
   flex: 1 1 300px;
+}
+
+.source {
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+}
+
+.codeBlock {
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+.edit {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
 }
 
 .preview {

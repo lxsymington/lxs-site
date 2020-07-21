@@ -11,13 +11,30 @@ type CSSShowcaseProps = {
 const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
   const [scope] = useState(nanoid)
   const [styles, setStyles] = useState(children?.toString() ?? ``)
+  const [editSource, setEditSource] = useState(false)
+
+  const Button: React.FC = () => (
+    <button className={cssShowcaseStyles.edit} onClick={() => setEditSource(!editSource)}>
+      Edit
+    </button>
+  )
+
+  const close = () => {
+    console.log(`Closing`)
+    setEditSource(false)
+  }
 
   return (
     <div className={cssShowcaseStyles.frame}>
       <figure className={cssShowcaseStyles.root}>
-        <CodeBlock className={cssShowcaseStyles.source} language="css">
-          {styles}
-        </CodeBlock>
+        <section className={cssShowcaseStyles.source}>
+          <CodeBlock className={cssShowcaseStyles.codeBlock} language="css">
+            {styles}
+          </CodeBlock>
+          <Modal button={Button} open={editSource} close={close}>
+            Hello
+          </Modal>
+        </section>
         {/* Preview */}
         <style type="text/css">
           {`.${cssShowcaseStyles.live}#live-${scope} {
@@ -28,7 +45,6 @@ const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
           <div id={`live-${scope}`} className={cssShowcaseStyles.live}></div>
         </aside>
         {/* Image */}
-        <Modal>Hello</Modal>
         <figcaption className={cssShowcaseStyles.caption}>
           <span className={cssShowcaseStyles.caption__text}>
             {caption.replace(/_/g, ` `)}

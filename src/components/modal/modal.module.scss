@@ -1,0 +1,20 @@
+@import "../../styles/toolkit";
+
+.backdrop {
+  align-items: stretch;
+  background-color: colour($group: "base", $variant: "grey_4", $alpha: 85);
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.content {
+  background-color: colour($group: "base", $variant: "white", $alpha: 85);
+  flex: 1 1 auto;
+
+  @media screen {
+    margin: 30px;
+  }
+}
