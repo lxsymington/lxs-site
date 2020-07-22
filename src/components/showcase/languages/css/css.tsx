@@ -9,46 +9,72 @@ type CSSShowcaseProps = {
 }
 
 const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
+  const showcaseCaption = caption.replace(/_/g, ` `)
   const [scope] = useState(nanoid)
   const [styles, setStyles] = useState(children?.toString() ?? ``)
   const [editSource, setEditSource] = useState(false)
 
+  const open = () => {
+    console.log(editSource)
+    setEditSource(true)
+  }
+
+  const close = () => {
+    console.log(editSource)
+    setEditSource(false)
+  }
+
   const Button: React.FC = () => (
-    <button className={cssShowcaseStyles.edit} onClick={() => setEditSource(!editSource)}>
+    <button className={cssShowcaseStyles.editor__toggle} onClick={open}>
       Edit
     </button>
   )
 
-  const close = () => {
-    console.log(`Closing`)
-    setEditSource(false)
+  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    setStyles(e.target.value)
+    console.log(document.hasFocus)
   }
 
   return (
     <div className={cssShowcaseStyles.frame}>
       <figure className={cssShowcaseStyles.root}>
-        <section className={cssShowcaseStyles.source}>
-          <CodeBlock className={cssShowcaseStyles.codeBlock} language="css">
-            {styles}
-          </CodeBlock>
-          <Modal button={Button} open={editSource} close={close}>
-            Hello
-          </Modal>
-        </section>
-        {/* Preview */}
         <style type="text/css">
           {`.${cssShowcaseStyles.live}#live-${scope} {
             ${styles}
           }`}
         </style>
-        <aside className={cssShowcaseStyles.preview}>
+        <section className={cssShowcaseStyles.preview}>
           <div id={`live-${scope}`} className={cssShowcaseStyles.live}></div>
-        </aside>
-        {/* Image */}
+          <Modal
+            button={Button}
+            className={cssShowcaseStyles.editor}
+            open={editSource}
+            close={close}
+          >
+            <label
+              className={cssShowcaseStyles.editor__title}
+              htmlFor={`source-${scope}`}
+            >
+              {showcaseCaption}
+            </label>
+            <textarea
+              id={`source-${scope}`}
+              className={cssShowcaseStyles.editor__source}
+              name={`${caption}_Source`}
+              onInput={handleInput}
+            >
+              {styles}
+            </textarea>
+            <CodeBlock className={cssShowcaseStyles.editor__codeBlock} language="css">
+              {styles}
+            </CodeBlock>
+            <aside className={cssShowcaseStyles.editor__preview}>
+              <div id={`live-${scope}`} className={cssShowcaseStyles.live}></div>
+            </aside>
+          </Modal>
+        </section>
         <figcaption className={cssShowcaseStyles.caption}>
-          <span className={cssShowcaseStyles.caption__text}>
-            {caption.replace(/_/g, ` `)}
-          </span>
+          <span className={cssShowcaseStyles.caption__text}>{showcaseCaption}</span>
         </figcaption>
       </figure>
     </div>

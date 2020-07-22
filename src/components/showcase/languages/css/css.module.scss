@@ -1,12 +1,11 @@
 @import "../../../../styles/toolkit";
 
 .root {
-  counter-increment: showcase;
   align-items: stretch;
-  align-content: stretch;
   background-color: colour($group: "base", $variant: "white", $alpha: 95);
+  counter-increment: showcase;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   margin: 0;
   min-height: 300px;
   padding: 6px;
@@ -29,16 +28,18 @@
       #{colour($group: "base", $variant: "grey_3")} 0 5px,
       #{colour($group: "base", $variant: "grey_3", $alpha: 0)} 5px 10px
     );
-  margin: 3em 0;
+  box-sizing: border-box;
+  margin: 3em auto;
+  max-width: 800px;
   padding: 12px;
   position: relative;
+  width: 100%;
 
   @media screen and (min-width: 720px) {
     padding: 30px;
   }
 }
 
-.source,
 .preview,
 .caption {
   margin: 6px;
@@ -48,32 +49,11 @@
   }
 }
 
-.source,
-.preview {
-  flex: 1 1 300px;
-}
-
-.source {
-  display: flex;
-  flex-flow: column nowrap;
-  position: relative;
-}
-
-.codeBlock {
-  flex: 1 1 auto;
-  margin: 0;
-}
-
-.edit {
-  position: absolute;
-  right: 6px;
-  bottom: 6px;
-}
-
 .preview {
   background-color: colour($group: "base", $variant: "white");
   border: medium inset colour($group: "base", $variant: "grey_4");
   position: relative;
+  flex: 1 1 auto;
 
   &:after {
     content: "";
@@ -120,4 +100,64 @@
     color: colour($group: "base", $variant: "grey_2");
     content: "fig. " counter(showcase) "\00a0\2014\00a0";
   }
+}
+
+.editor {
+  display: grid;
+  grid-template:
+    "title" auto
+    "source" 1fr
+    "preview" 1fr
+    "close" auto
+    / "1fr";
+  padding: 12px;
+
+  @media screen and (min-width: 720px) {
+    grid-template:
+      "title title" auto
+      "source preview" 1fr
+      "close close" auto
+      / 1fr 1fr;
+    padding: 30px;
+  }
+}
+
+.editor__toggle {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+}
+
+.editor__title {
+  grid-area: title;
+}
+
+.editor__source,
+.editor__codeBlock {
+  grid-area: source;
+  position: relative;
+}
+
+.editor__source {
+  background: none;
+  border: 0;
+  color: colour($group: "base", $variant: "white");
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.5;
+  mix-blend-mode: multiply;
+  overflow: auto;
+  padding: 0.75em 1.5em;
+  resize: none;
+  z-index: 1;
+}
+
+.editor__codeBlock {
+  margin: 0;
+  z-index: 0;
+}
+
+.editor__preview {
+  grid-area: preview;
+  position: relative;
 }

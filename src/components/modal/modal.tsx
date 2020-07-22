@@ -6,48 +6,49 @@ import modalStyles from "./modal.module.scss"
 
 type ModalProps = {
   button: React.FC
+  className: string
   open: boolean
   close: () => void
 }
 
-const Modal: React.FC<ModalProps> = ({ button: Button, children, close, open }) => {
+const Modal: React.FC<ModalProps> = ({
+  button: Button,
+  children,
+  className,
+  close,
+  open,
+}) => {
   const [modalRoot, setModalRoot] = useState<HTMLElement>()
   const [dialogue, setDialogue] = useState<HTMLElement>()
 
   const Dialogue: React.FC = ({ children }) => (
-    <div className={modalStyles.content}>
+    <div className={`${className} ${modalStyles.content}`}>
       {children}
       <button onClick={close}>Close</button>
     </div>
   )
 
   useEffect(() => {
-    const modalRootElement = document.getElementById(`ModalRoot`)
+    const modalRootElement = modalRoot ?? document.getElementById(`ModalRoot`)
+    const dialogueElement = document.createElement(`section`)
+    dialogueElement.classList.add(dialogueClass)
+    dialogueElement.classList.add(modalStyles.backdrop)
 
     if (!modalRootElement) {
       throw Error("No `#ModalRoot` element available, please ensure one is present")
     }
 
+    setModalRoot(modalRootElement)
+    setDialogue(dialogueElement)
+  }, [])
+
+  useEffect(() => {
+    console.log(open, modalRoot, dialogue)
     if (!open) {
       modalRoot?.removeChild(dialogue as HTMLElement)
-      return
+    } else {
+      modalRoot?.appendChild(dialogue as HTMLElement)
     }
-
-    const dialogueElement =
-      [...modalRootElement.children].find(element =>
-        element.classList.contains(dialogueClass)
-      ) ?? modalRootElement.appendChild(document.createElement(`section`))
-
-    if (!dialogueElement.classList.contains(dialogueClass)) {
-      dialogueElement.classList.add(dialogueClass)
-    }
-
-    if (!dialogueElement.classList.contains(modalStyles.backdrop)) {
-      dialogueElement.classList.add(modalStyles.backdrop)
-    }
-
-    setModalRoot(modalRootElement)
-    setDialogue(dialogueElement as HTMLElement)
 
     return () => {
       modalRoot?.removeChild(dialogue as HTMLElement)
