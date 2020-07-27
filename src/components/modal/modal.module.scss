@@ -2,31 +2,37 @@
 
 .backdrop {
   align-items: stretch;
+  backdrop-filter: blur(5px);
   background-attachment: fixed;
   background-image: repeating-radial-gradient(
     circle at 50% 50%,
-    #{colour($group: "base", $variant: "grey_4")} 0 3px,
+    #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)} 0 3px,
     calc(3px + 1px / var(--dpr)),
     #{colour($group: "base", $variant: "white", $alpha: 50)} calc(3px + 2px / var(--dpr)) calc(12px -
           2px / var(--dpr)),
     calc(12px - 1px / var(--dpr)),
-    #{colour($group: "base", $variant: "grey_4")} 12px 15px
+    #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)} 12px 15px
   );
   background-position: center;
   background-repeat: repeat;
   background-size: 75px 75px;
-  display: flex;
-  flex-flow: column nowrap;
+  display: grid;
+  grid-template:
+    "content" auto
+    / minmax(auto, 1fr);
   overflow: auto;
   position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: colour($group: "colours", $variant: "very_dark_violet", $alpha: 40)
+    colour($group: "base", $variant: "grey_4", $alpha: 40);
   z-index: 10;
 }
 
 .content {
-  background-color: colour($group: "base", $variant: "white");
-  flex: 1 1 auto;
+  grid-area: content;
+  min-width: 50%;
 
-  @media screen {
-    margin: 30px;
+  @media screen and (min-width: 720px) {
+    padding: 30px;
   }
 }

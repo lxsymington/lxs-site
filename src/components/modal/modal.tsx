@@ -1,66 +1,52 @@
-import React, { useEffect, useState } from "react"
+import React, { memo, useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 
 import { dialogue as dialogueClass } from "../layout/layout.module.scss"
 import modalStyles from "./modal.module.scss"
 
 type ModalProps = {
-  button: React.FC
   className: string
-  open: boolean
-  close: () => void
+  dismissButton: React.FC
+  isOpen: boolean
+  launchButton: React.FC
+  scope: string
 }
 
-const Modal: React.FC<ModalProps> = ({
-  button: Button,
+const ModalComponent: React.FC<ModalProps> = ({
   children,
   className,
-  close,
-  open,
+  dismissButton: DismissButton,
+  isOpen,
+  launchButton: LaunchButton,
+  scope,
 }) => {
-  const [modalRoot, setModalRoot] = useState<HTMLElement>()
-  const [dialogue, setDialogue] = useState<HTMLElement>()
-
-  const Dialogue: React.FC = ({ children }) => (
-    <div className={`${className} ${modalStyles.content}`}>
-      {children}
-      <button onClick={close}>Close</button>
-    </div>
-  )
+  const [isStateOpen, setIsStateOpen] = useState(isOpen)
 
   useEffect(() => {
-    const modalRootElement = modalRoot ?? document.getElementById(`ModalRoot`)
-    const dialogueElement = document.createElement(`section`)
-    dialogueElement.classList.add(dialogueClass)
-    dialogueElement.classList.add(modalStyles.backdrop)
-
-    if (!modalRootElement) {
-      throw Error("No `#ModalRoot` element available, please ensure one is present")
-    }
-
-    setModalRoot(modalRootElement)
-    setDialogue(dialogueElement)
-  }, [])
-
-  useEffect(() => {
-    console.log(open, modalRoot, dialogue)
-    if (!open) {
-      modalRoot?.removeChild(dialogue as HTMLElement)
-    } else {
-      modalRoot?.appendChild(dialogue as HTMLElement)
-    }
-
-    return () => {
-      modalRoot?.removeChild(dialogue as HTMLElement)
-    }
-  }, [open])
+    setIsStateOpen(isOpen)
+  }, [isOpen])
 
   return (
     <>
-      <Button />
-      {open && createPortal(<Dialogue>{children}</Dialogue>, dialogue as HTMLElement)}
+      <LaunchButton />
+      {isStateOpen
+        ? createPortal(
+            <section
+              id={`dialogue-${scope}`}
+              className={`${dialogueClass} ${modalStyles.backdrop}`}
+            >
+              <div className={`${className} ${modalStyles.content}`}>
+                {children}
+                <DismissButton />
+              </div>
+            </section>,
+            document.body
+          )
+        : null}
     </>
   )
 }
+
+const Modal = memo(ModalComponent)
 
 export { Modal }

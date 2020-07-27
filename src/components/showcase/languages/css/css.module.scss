@@ -109,7 +109,7 @@
     "source" 1fr
     "preview" 1fr
     "close" auto
-    / "1fr";
+    / 1fr;
   padding: 12px;
 
   @media screen and (min-width: 720px) {
@@ -122,34 +122,62 @@
   }
 }
 
-.editor__toggle {
+.editor__launch {
+  bottom: 6px;
   position: absolute;
   right: 6px;
-  bottom: 6px;
+  text-transform: capitalize;
+
+  &:before {
+    content: "✏ ";
+  }
+
+  &:after {
+    content: " editor";
+  }
+}
+
+.editor__dismiss {
+  grid-area: close;
 }
 
 .editor__title {
+  background-color: colour($group: "base", $variant: "white");
+  color: colour($group: "colours", $variant: "very_dark_violet");
+  font-size: larger;
+  font-weight: 700;
   grid-area: title;
+  margin: 0.5em;
+  padding: 0.25em 1ch;
+  place-self: center;
+  text-align: center;
 }
 
 .editor__source,
 .editor__codeBlock {
   grid-area: source;
   position: relative;
+  scrollbar-width: thin;
 }
 
 .editor__source {
   background: none;
   border: 0;
-  color: colour($group: "base", $variant: "white");
+  caret-color: colour($group: "base", $variant: "white");
+  color: colour($group: "base", $variant: "white", $alpha: 0);
   font-size: 14px;
   font-family: inherit;
   line-height: 1.5;
-  mix-blend-mode: multiply;
   overflow: auto;
   padding: 0.75em 1.5em;
   resize: none;
+  white-space: pre;
   z-index: 1;
+
+  &::selection {
+    background-color: colour($group: "colours", $variant: "soft_yellow");
+    color: colour($group: "colours", $variant: "very_dark_violet");
+  }
 }
 
 .editor__codeBlock {
@@ -158,6 +186,7 @@
 }
 
 .editor__preview {
+  background-color: colour($group: "base", $variant: "white");
   grid-area: preview;
   position: relative;
 }

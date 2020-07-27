@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { nanoid } from "nanoid/non-secure"
 
-import { CodeBlock, Modal } from "../../../../components"
+import { CodeBlock, Modal, IScrollPosition } from "../../../../components"
 import cssShowcaseStyles from "./css.module.scss"
 
 type CSSShowcaseProps = {
@@ -10,46 +10,54 @@ type CSSShowcaseProps = {
 
 const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
   const showcaseCaption = caption.replace(/_/g, ` `)
-  const [scope] = useState(nanoid)
+  const scope = nanoid()
   const [styles, setStyles] = useState(children?.toString() ?? ``)
-  const [editSource, setEditSource] = useState(false)
+  const [hasModalOpen, setModalOpen] = useState(false)
+  const [sourceScrollPosition, setSourceScrollPosition] = useState<IScrollPosition>({
+    x: 0,
+    y: 0,
+  })
 
-  const open = () => {
-    console.log(editSource)
-    setEditSource(true)
+  const launchModal = useCallback(() => setModalOpen(true), [])
+  const dismissModal = useCallback(() => setModalOpen(false), [])
+
+  const handleSourceInput = (e: React.FormEvent<HTMLTextAreaElement>) =>
+    setStyles(e.target.value)
+
+  const handleSourceScroll = (e: React.UIEvent<HTMLElement>) => {
+    const { scrollLeft: x, scrollTop: y } = e.currentTarget
+    setSourceScrollPosition({ x, y })
   }
 
-  const close = () => {
-    console.log(editSource)
-    setEditSource(false)
-  }
-
-  const Button: React.FC = () => (
-    <button className={cssShowcaseStyles.editor__toggle} onClick={open}>
-      Edit
+  const launchButton: React.FC = () => (
+    <button className={cssShowcaseStyles.editor__launch} onClick={launchModal}>
+      Open
     </button>
   )
 
-  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    setStyles(e.target.value)
-    console.log(document.hasFocus)
-  }
+  const dismissButton: React.FC = () => (
+    <button className={cssShowcaseStyles.editor__dismiss} onClick={dismissModal}>
+      close
+    </button>
+  )
 
   return (
     <div className={cssShowcaseStyles.frame}>
       <figure className={cssShowcaseStyles.root}>
         <style type="text/css">
-          {`.${cssShowcaseStyles.live}#live-${scope} {
+          {`#preview-${scope},
+            #live-${scope} {
             ${styles}
           }`}
         </style>
         <section className={cssShowcaseStyles.preview}>
-          <div id={`live-${scope}`} className={cssShowcaseStyles.live}></div>
+          <div id={`preview-${scope}`} className={cssShowcaseStyles.live}></div>
           <Modal
-            button={Button}
             className={cssShowcaseStyles.editor}
-            open={editSource}
-            close={close}
+            dismissButton={dismissButton}
+            isOpen={hasModalOpen}
+            launchButton={launchButton}
+            scope={scope}
           >
             <label
               className={cssShowcaseStyles.editor__title}
@@ -61,11 +69,15 @@ const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
               id={`source-${scope}`}
               className={cssShowcaseStyles.editor__source}
               name={`${caption}_Source`}
-              onInput={handleInput}
+              onInput={handleSourceInput}
+              onScroll={handleSourceScroll}
+              value={styles}
+            />
+            <CodeBlock
+              className={cssShowcaseStyles.editor__codeBlock}
+              language="css"
+              scrollPosition={sourceScrollPosition}
             >
-              {styles}
-            </textarea>
-            <CodeBlock className={cssShowcaseStyles.editor__codeBlock} language="css">
               {styles}
             </CodeBlock>
             <aside className={cssShowcaseStyles.editor__preview}>
