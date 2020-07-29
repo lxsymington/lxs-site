@@ -4,18 +4,32 @@
   align-items: stretch;
   backdrop-filter: blur(5px);
   background-attachment: fixed;
-  background-image: repeating-radial-gradient(
-    circle at 50% 50%,
-    #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)} 0 3px,
-    calc(3px + 1px / var(--dpr)),
-    #{colour($group: "base", $variant: "white", $alpha: 50)} calc(3px + 2px / var(--dpr)) calc(12px -
-          2px / var(--dpr)),
-    calc(12px - 1px / var(--dpr)),
-    #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)} 12px 15px
-  );
+  background-blend-mode: color;
+  background-image: radial-gradient(
+      circle at 75% 25%,
+      #{colour($group: "base", $variant: "black", $alpha: 50)},
+      #{colour($group: "base", $variant: "black", $alpha: 75)} 40%,
+      #{colour($group: "base", $variant: "black", $alpha: 50)}
+    ),
+    radial-gradient(
+      circle at 0 100%,
+      #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)},
+      #{colour($group: "colours", $variant: "moderate_violet", $alpha: 75)} 40%,
+      #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)}
+    ),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      #{colour($group: "colours", $variant: "dark_pink", $alpha: 50)} 0 3px,
+      calc(3px + 1px / var(--dpr)),
+      #{colour($group: "colours", $variant: "dark_pink", $alpha: 0)} calc(
+          3px + 2px / var(--dpr)
+        ) calc(12px - 2px / var(--dpr)),
+      calc(12px - 1px / var(--dpr)),
+      #{colour($group: "colours", $variant: "dark_pink", $alpha: 50)} 12px 15px
+    );
   background-position: center;
-  background-repeat: repeat;
-  background-size: 75px 75px;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: cover, cover, 75px 75px;
   display: grid;
   grid-template:
     "content" auto

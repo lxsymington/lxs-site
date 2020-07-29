@@ -12,6 +12,8 @@ export const editor__dismiss: string;
 export const editorDismiss: string;
 export const editor__title: string;
 export const editorTitle: string;
+export const editor__titleText: string;
+export const editorTitleText: string;
 export const editor__source: string;
 export const editorSource: string;
 export const editor__codeBlock: string;

@@ -2,8 +2,7 @@
 
 .root {
   background-color: colour($group: "base", $variant: "white", $alpha: 85);
-  box-shadow: 0 10px 15px 5px
-      colour($group: "base", $variant: "grey_2", $alpha: 10),
+  box-shadow: 0 10px 15px 5px colour($group: "base", $variant: "grey_2", $alpha: 10),
     0 0 10px colour($group: "base", $variant: "grey_2", $alpha: 20);
   display: flex;
   flex-flow: column nowrap;
@@ -41,10 +40,10 @@
     repeating-radial-gradient(
       circle at 0 50%,
       transparent 2px,
-      #{colour($group: "base", $variant: "black", $alpha: 5)} 2.5px,
-      #{colour($group: "base", $variant: "black", $alpha: 20)} 3px,
-      #{colour($group: "base", $variant: "black", $alpha: 5)} 3.5px,
-      transparent 4px 8px
+      #{colour($group: "base", $variant: "black", $alpha: 5)} calc(2px + 1px / var(--dpr)),
+      #{colour($group: "base", $variant: "black", $alpha: 20)} calc(2px + 2px / var(--dpr)),
+      #{colour($group: "base", $variant: "black", $alpha: 5)} calc(2px + 3px / var(--dpr)),
+      transparent calc(2px + 4px / var(--dpr)) 8px
     );
   background-blend-mode: color-dodge;
   border-width: 0 0 1px;
@@ -55,18 +54,17 @@
 }
 
 .heading__text {
-  background-color: colour($group: "base", $variant: "black", $alpha: 25);
+  background-color: colour($group: "base", $variant: "black", $alpha: 37.5);
   box-decoration-break: clone;
   color: white;
   display: inline;
   line-height: 1.5;
   padding: 0 0.5ch;
-  text-shadow: 0.05em 0.05em 0
-      colour($group: "base", $variant: "grey_1", $alpha: 50),
-    -0.01em -0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
-    0.01em -0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
-    -0.01em 0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
-    0.01em 0.01em 0 colour($group: "base", $variant: "grey_1", $alpha: 50);
+  text-shadow: 0.06em 0.06em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    -0.015em -0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    0.015em -0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    -0.015em 0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    0.015em 0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50);
 }
 
 .body {
@@ -136,12 +134,12 @@
 
 .tag {
   background-color: colour($group: "colours", $variant: "very_dark_violet");
-  border-radius: 0.75em / 50%;
+  border-radius: 1ch / 50%;
   color: colour($group: "base", $variant: "white");
   flex: 0 0 auto;
   line-height: (3 / 2);
   margin: 0.25em 0.5ch;
-  padding: 0 1ch;
+  padding: 0 1.5ch;
   text-transform: uppercase;
 }
 

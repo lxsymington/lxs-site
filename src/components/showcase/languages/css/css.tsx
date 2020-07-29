@@ -22,7 +22,7 @@ const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
   const dismissModal = useCallback(() => setModalOpen(false), [])
 
   const handleSourceInput = (e: React.FormEvent<HTMLTextAreaElement>) =>
-    setStyles(e.target.value)
+    setStyles(e.currentTarget.value)
 
   const handleSourceScroll = (e: React.UIEvent<HTMLElement>) => {
     const { scrollLeft: x, scrollTop: y } = e.currentTarget
@@ -63,7 +63,9 @@ const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
               className={cssShowcaseStyles.editor__title}
               htmlFor={`source-${scope}`}
             >
-              {showcaseCaption}
+              <span className={cssShowcaseStyles.editor__titleText}>
+                {showcaseCaption}
+              </span>
             </label>
             <textarea
               id={`source-${scope}`}

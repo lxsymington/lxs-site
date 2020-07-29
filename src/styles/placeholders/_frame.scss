@@ -1,5 +1,7 @@
 @import "../colour";
 
+/* TODO: use dpr for sub pixel sizes */
+
 $gold: scale-color(
   colour(
     $group: "colours",

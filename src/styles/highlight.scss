@@ -104,11 +104,8 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: colour($group: "base", $variant: "grey_3");
-
-  @media (prefers-color-scheme: dark) {
-    color: colour($group: "base", $variant: "grey_1");
-  }
+  color: colour($group: "base", $variant: "grey_4");
+  font-style: italic;
 }
 
 .token.tag,

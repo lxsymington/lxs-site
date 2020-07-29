@@ -18,22 +18,63 @@
 }
 
 .frame {
-  background-image: repeating-linear-gradient(
-      45deg,
-      #{colour($group: "base", $variant: "grey_4")} 0 5px,
-      #{colour($group: "base", $variant: "grey_4", $alpha: 0)} 5px 10px
-    ),
-    repeating-linear-gradient(
-      135deg,
-      #{colour($group: "base", $variant: "grey_3")} 0 5px,
-      #{colour($group: "base", $variant: "grey_3", $alpha: 0)} 5px 10px
-    );
   box-sizing: border-box;
   margin: 3em auto;
   max-width: 800px;
   padding: 12px;
   position: relative;
   width: 100%;
+
+  &:after {
+    background-blend-mode: color-dodge;
+    background-image: repeating-radial-gradient(
+        circle at 0 50%,
+        #{colour($group: "base", $variant: "black", $alpha: 0)} 2px,
+        #{colour($group: "base", $variant: "black", $alpha: 5)} calc(2px + 1px /
+              var(--dpr)),
+        #{colour($group: "base", $variant: "black", $alpha: 20)} calc(2px + 2px /
+              var(--dpr)),
+        #{colour($group: "base", $variant: "black", $alpha: 5)} calc(2px + 3px /
+              var(--dpr)),
+        #{colour($group: "base", $variant: "black", $alpha: 0)} calc(
+            2px + 4px / var(--dpr)
+          ) 8px
+      ),
+      radial-gradient(
+        circle farthest-corner at 100% 0,
+        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 75)},
+        17%,
+        #{colour($group: "colours", $variant: "moderate_orange", $alpha: 75)},
+        34%,
+        #{colour($group: "colours", $variant: "soft_red", $alpha: 75)},
+        51%,
+        #{colour($group: "colours", $variant: "dark_pink", $alpha: 75)},
+        68%,
+        #{colour($group: "colours", $variant: "dark_magenta", $alpha: 75)},
+        85%,
+        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 75)}
+      );
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:before {
+      background-color: colour($group: "base", $variant: "white", $alpha: 75);
+      bottom: 0;
+      content: "";
+      display: block;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
 
   @media screen and (min-width: 720px) {
     padding: 30px;
@@ -104,6 +145,7 @@
 
 .editor {
   display: grid;
+  gap: 12px;
   grid-template:
     "title" auto
     "source" 1fr
@@ -113,6 +155,7 @@
   padding: 12px;
 
   @media screen and (min-width: 720px) {
+    gap: 30px;
     grid-template:
       "title title" auto
       "source preview" 1fr
@@ -138,19 +181,32 @@
 }
 
 .editor__dismiss {
+  background-color: colour($group: "base", $variant: "white");
+  border: 0;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 700;
   grid-area: close;
+  letter-spacing: 0.05em;
+  padding: 0.5em 2ch;
+  place-self: center;
+  text-transform: uppercase;
 }
 
 .editor__title {
-  background-color: colour($group: "base", $variant: "white");
-  color: colour($group: "colours", $variant: "very_dark_violet");
-  font-size: larger;
-  font-weight: 700;
   grid-area: title;
-  margin: 0.5em;
-  padding: 0.25em 1ch;
   place-self: center;
   text-align: center;
+}
+
+.editor__titleText {
+  background-color: colour($group: "base", $variant: "white");
+  box-decoration-break: clone;
+  color: colour($group: "colours", $variant: "very_dark_violet");
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.75;
+  padding: 0.0625em 1ch;
 }
 
 .editor__source,

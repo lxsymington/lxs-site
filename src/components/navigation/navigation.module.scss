@@ -5,6 +5,8 @@
   display: flex;
   flex-flow: row nowrap;
   flex: 1 1 auto;
+  max-height: 100%;
+  max-width: 280px;
   pointer-events: auto;
   position: relative;
   transform: translateX(-100%);
@@ -17,6 +19,10 @@
         $variant: "soft_yellow",
         $alpha: 40
       )};
+  }
+
+  @media screen and (min-width: 720px) {
+    max-width: 360px;
   }
 }
 
@@ -63,7 +69,7 @@
 
   .open &,
   &:focus {
-    background-color: colour($group: "colours", $variant: "soft_yellow");
+    background-color: colour($group: "colours", $variant: "bright_orange");
     color: colour($group: "colours", $variant: "very_dark_violet");
     transform: scale3d(1.25, 1.25, 1);
     transform-origin: 0 50%;
@@ -92,30 +98,29 @@
 
 .list {
   backdrop-filter: blur(5px);
-  background-image: radial-gradient(
-      circle at 75% 25%,
-      #{colour($group: "base", $variant: "black", $alpha: 50)},
-      #{colour($group: "base", $variant: "black", $alpha: 75)} 40%,
-      #{colour($group: "base", $variant: "black", $alpha: 50)}
-    ),
-    repeating-radial-gradient(
+  background-blend-mode: color-dodge;
+  background-image: repeating-radial-gradient(
       circle at 0 50%,
       #{colour($group: "base", $variant: "black", $alpha: 0)} 2px,
-      #{colour($group: "base", $variant: "black", $alpha: 10)} 2.5px,
-      #{colour($group: "base", $variant: "black", $alpha: 20)} 3px,
-      #{colour($group: "base", $variant: "black", $alpha: 10)} 3.5px,
-      #{colour($group: "base", $variant: "black", $alpha: 0)} 4px,
-      #{colour($group: "base", $variant: "white", $alpha: 0)} 6px,
-      #{colour($group: "base", $variant: "white", $alpha: 10)} 6.5px,
-      #{colour($group: "base", $variant: "white", $alpha: 20)} 7px,
-      #{colour($group: "base", $variant: "white", $alpha: 10)} 7.5px,
-      #{colour($group: "base", $variant: "white", $alpha: 0)} 8px
+      #{colour($group: "base", $variant: "black", $alpha: 5)} calc(2px + 1px / var(--dpr)),
+      #{colour($group: "base", $variant: "black", $alpha: 20)} calc(2px + 2px / var(--dpr)),
+      #{colour($group: "base", $variant: "black", $alpha: 5)} calc(2px + 3px / var(--dpr)),
+      #{colour($group: "base", $variant: "black", $alpha: 0)} calc(2px + 4px / var(--dpr))
+        8px
     ),
     radial-gradient(
-      circle at 0 100%,
-      #{colour($group: "base", $variant: "black", $alpha: 50)},
-      #{colour($group: "base", $variant: "grey_2", $alpha: 75)} 40%,
-      #{colour($group: "base", $variant: "black", $alpha: 50)}
+      circle farthest-corner at 0 100%,
+      #{colour($group: "colours", $variant: "soft_yellow", $alpha: 75)},
+      17%,
+      #{colour($group: "colours", $variant: "moderate_orange", $alpha: 75)},
+      34%,
+      #{colour($group: "colours", $variant: "dark_orange", $alpha: 75)},
+      51%,
+      #{colour($group: "colours", $variant: "moderate_pink", $alpha: 75)},
+      68%,
+      #{colour($group: "colours", $variant: "dark_magenta", $alpha: 75)},
+      85%,
+      #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 75)}
     );
   background-repeat: no-repeat;
   background-size: cover;
@@ -124,13 +129,17 @@
   flex-flow: column nowrap;
   flex: 0 0 100%;
   font-size: 28px;
-  justify-content: center;
+  justify-content: flex-start;
   letter-spacing: 0.05em;
   list-style: none;
   margin: 0;
   order: 0;
-  padding: 30px;
+  overflow: auto;
+  padding: 0;
   position: relative;
+  scrollbar-color: colour($group: "colours", $variant: "very_dark_violet", $alpha: 40)
+    colour($group: "base", $variant: "grey_4", $alpha: 40);
+  scrollbar-width: thin;
   text-decoration: none;
   text-transform: uppercase;
   transition: visibility 0.6s step-end;
@@ -143,45 +152,34 @@
     transition: visibility 0.6s step-start;
   }
 
-  @media (prefers-color-scheme: dark) {
-    background-image: radial-gradient(
-        circle at 75% 25%,
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 75)},
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)} 40%,
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 75)}
-      ),
-      repeating-radial-gradient(
-        circle at 0 50%,
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 0)} 2px,
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 30)} 2.5px,
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 60)} 3px,
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 30)} 3.5px,
-        #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 0)} 4px,
-        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 0)} 6px,
-        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 10)} 6.5px,
-        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 20)} 7px,
-        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 10)} 7.5px,
-        #{colour($group: "colours", $variant: "soft_yellow", $alpha: 0)} 8px
-      ),
-      radial-gradient(
-        circle at 0 100%,
-        #{colour($group: "base", $variant: "black", $alpha: 75)},
-        #{colour($group: "base", $variant: "grey_2", $alpha: 75)} 40%,
-        #{colour($group: "base", $variant: "black", $alpha: 75)}
-      );
-    color: colour($group: "base", $variant: "white");
+  &:after,
+  &:before {
+    content: "";
+    display: block;
+    flex: 1 1 0;
   }
 
-  @media screen and (min-width: 720px) {
-    padding: 60px;
+  @media (prefers-color-scheme: dark) {
+    background-blend-mode: overlay;
   }
 }
 
 .item {
+  flex: 0 0 auto;
   margin: 0.75em 0;
+  padding: 0 30px;
+
+  @media screen and (min-width: 720px) {
+    padding: 0 60px;
+  }
 }
 
 .link {
+  background-color: colour($group: "base", $variant: "black", $alpha: 60);
+  box-decoration-break: clone;
   color: inherit;
+  hyphens: auto;
+  line-height: 1.5;
+  padding: 0.25em 0.75ch;
   text-decoration: none;
 }
