@@ -21,8 +21,9 @@ const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
   const launchModal = useCallback(() => setModalOpen(true), [])
   const dismissModal = useCallback(() => setModalOpen(false), [])
 
-  const handleSourceInput = (e: React.FormEvent<HTMLTextAreaElement>) =>
+  const handleSourceInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
     setStyles(e.currentTarget.value)
+  }
 
   const handleSourceScroll = (e: React.UIEvent<HTMLElement>) => {
     const { scrollLeft: x, scrollTop: y } = e.currentTarget

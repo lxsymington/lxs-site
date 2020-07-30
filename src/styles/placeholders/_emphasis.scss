@@ -1,0 +1,9 @@
+@import "../colour";
+
+%emphasis {
+  text-shadow: 0.06em 0.06em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    -0.015em -0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    0.015em -0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    -0.015em 0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
+    0.015em 0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50);
+}

@@ -220,7 +220,8 @@ a {
     color: colour($group: "colours", $variant: "moderate_orange");
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: colour($group: "colours", $variant: "dark_magenta");
 
     @media (prefers-color-scheme: dark) {

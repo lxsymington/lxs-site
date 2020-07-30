@@ -1,3 +1,5 @@
+@import "../colour";
+
 %copy {
   color: colour($group: "base", $variant: "grey_2");
   font-size: 14px;

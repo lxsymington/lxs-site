@@ -94,6 +94,8 @@
   text-orientation: upright;
   text-transform: uppercase;
   writing-mode: vertical-lr;
+
+  @extend %emphasis;
 }
 
 .list {
@@ -182,4 +184,15 @@
   line-height: 1.5;
   padding: 0.25em 0.75ch;
   text-decoration: none;
+
+  @extend %emphasis;
+
+  &:hover,
+  &:focus {
+    color: colour($group: "colours", $variant: "bright_orange");
+  }
+
+  &:active {
+    color: colour($group: "colours", $variant: "soft_yellow");
+  }
 }

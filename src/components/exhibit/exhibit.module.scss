@@ -60,11 +60,8 @@
   display: inline;
   line-height: 1.5;
   padding: 0 0.5ch;
-  text-shadow: 0.06em 0.06em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
-    -0.015em -0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
-    0.015em -0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
-    -0.015em 0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50),
-    0.015em 0.015em 0 colour($group: "base", $variant: "grey_1", $alpha: 50);
+
+  @extend %emphasis;
 }
 
 .body {
