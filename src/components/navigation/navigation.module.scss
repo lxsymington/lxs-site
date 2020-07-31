@@ -24,6 +24,17 @@
   @media screen and (min-width: 720px) {
     max-width: 360px;
   }
+
+  &:before {
+    background-color: colour($group: "base", $variant: "white", $alpha: 75);
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 
 .open {

@@ -38,6 +38,7 @@ very much at the start of the journey towards incorporating accessible practices
 retrospectively, but hopefully with a little learning, a little feedback and some time I will get there._
 
 ## **Foundations**
+### **Basic varieties**
 As touched upon earlier in this post in the context of CSS gradients, a gradient is a transition from a colour to one or
 more colours over a specified distance. What was not discussed at that point was the direction of that transition. In
 gradients generally that is not important however in CSS gradients there are currently 6 varieties of gradient which can be
@@ -56,6 +57,13 @@ divided into 3 categories:
    CSS `conic-gradient`s are a little more different from the other 2 varieties in that they do not transition along (a)
    straight line(s). Instead they transition from a start angle to an end angle about a specified point.
 
+Each of the above categories have a default and repeating variety. The total span of the gradients produced by each
+variety of a category will be the same, however, a repeating variety will likely contain multiple instances of the same
+transition, where the default variety will only contain one instance. It is worth noting that a _transition_ here can
+contain multiple `color-stop`s and `color-hint`s that will add colours to the transition, i.e. a single transition could
+go from purple to yellow via orange, red and magenta. At this point it is probably worth looking at some examples.
+
+## **Linear Gradients**
 For the sake of clarity, I would like to take a moment to explain what I mean by the _"double stop technique"_. **_Fig.
 1_** is an example of what is probably the simplest implementation of a CSS `linear-gradient`.
 

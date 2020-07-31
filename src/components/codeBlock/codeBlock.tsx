@@ -22,16 +22,20 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const preRef = useRef(null)
 
   if (scrollPosition) {
-    useEffect(() => {
+    const setScrollPosition = () => {
       Object.assign(preRef.current, {
         scrollLeft: scrollPosition.x,
         scrollTop: scrollPosition.y,
       })
+    }
+
+    useEffect(() => {
+      requestAnimationFrame(setScrollPosition)
     }, [scrollPosition])
   }
 
   return (
-    <Highlight Prism={Prism} code={(children as string).trim()} language={language}>
+    <Highlight Prism={Prism} code={children as string} language={language}>
       {({ className, tokens, getLineProps, getTokenProps }) => (
         <pre className={`${customClass ?? ``} ${codeBlockStyles.root}`} ref={preRef}>
           <code className={`${className} ${codeBlockStyles.code}`}>
