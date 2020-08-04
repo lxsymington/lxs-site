@@ -6,13 +6,13 @@
   background-attachment: fixed;
   background-blend-mode: color;
   background-image: radial-gradient(
-      circle at 75% 25%,
+      circle farthest-corner at 75% 25%,
       #{colour($group: "base", $variant: "black", $alpha: 50)},
       #{colour($group: "base", $variant: "black", $alpha: 75)} 40%,
       #{colour($group: "base", $variant: "black", $alpha: 50)}
     ),
     radial-gradient(
-      circle at 0 100%,
+      circle farthest-corner at 0 100%,
       #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)},
       #{colour($group: "colours", $variant: "moderate_violet", $alpha: 75)} 40%,
       #{colour($group: "colours", $variant: "very_dark_violet", $alpha: 50)}

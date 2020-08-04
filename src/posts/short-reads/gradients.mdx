@@ -6,10 +6,11 @@ tags: ["visuals", "css", "gradients"]
 ---
 
 ## **Preamble**
-As this is my first post I thought that I would start with something relatively simple. Given that I am currently
-building this site and being an engineer I don't have much in the way of images, I have been using gradients in an
-effort to make the site more visually appealing (hopefully something that I have achieved). As such I thought that I
-would take this opportunity to look deeper into how they work and behave in CSS and what I have learnt about them.
+As this is my first post I thought that I would start with something relatively simple. Given that I am
+currently building this site and being an engineer I don't have much in the way of images, I have been using gradients
+in an effort to make the site more visually appealing (hopefully something that I have achieved). As such I thought that
+I would take this opportunity to look deeper into how they work and behave in CSS, thereby keeping a record of what I
+have learnt about them.
 
 ## **Introduction**
 ### **Positives**
@@ -56,6 +57,8 @@ divided into 3 categories:
  - **Conic**
    CSS `conic-gradient`s are a little more different from the other 2 varieties in that they do not transition along (a)
    straight line(s). Instead they transition from a start angle to an end angle about a specified point.
+   `conic-gradient`s are a newer addition to the CSS spec and therefore not implemented in some commonly used browsers,
+   consequently this post will focus more on the other two categories.
 
 Each of the above categories have a default and repeating variety. The total span of the gradients produced by each
 variety of a category will be the same, however, a repeating variety will likely contain multiple instances of the same
@@ -64,13 +67,19 @@ contain multiple `color-stop`s and `color-hint`s that will add colours to the tr
 go from purple to yellow via orange, red and magenta. At this point it is probably worth looking at some examples.
 
 ## **Linear Gradients**
-For the sake of clarity, I would like to take a moment to explain what I mean by the _"double stop technique"_. **_Fig.
-1_** is an example of what is probably the simplest implementation of a CSS `linear-gradient`.
+Below is probably the simplest declaration of a gradient in CSS. It declares a two colour gradient (the minimum
+required) without an `angle` or positions for the `color-stop`s. In the case where a direction is omitted the
+[spec](https://www.w3.org/TR/css-images-3/#linear-gradient-syntax)
+states that it defaults to '`to bottom`'. Simarlarly in the case where positions are not declared for the first and last
+`color-stops` the [spec](https://www.w3.org/TR/css-images-3/#color-stop-syntax) states that their positions should
+default to 0% and 100% respectively.
 
 ```css caption=Simple_Gradient
 /* Sample Comment */
-background-image: linear-gradient( black, transparent);
+background-image: linear-gradient(black, transparent);
 ```
+For the sake of clarity, I would like to take a moment to explain what I mean by the _"double stop technique"_. **_Fig.
+1_** is an example of what is probably the simplest implementation of a CSS `linear-gradient`.
 
 In **_fig. 1_** there are two `color-stop`s the first stop `black` and the last stop `transparent`. In this instance the
 `color-stop` positions have been omitted for simplicity, the result is that the first and last stops are placed at the
@@ -78,7 +87,7 @@ start (0%) an end (100%) of the gradient line respectively. If we do set the pos
 reduce the size of the transition between the two colours as shown in **_fig. 2_**.
 
 ```css caption=Positioned_Color_Stop_Gradient
-background-image: linear-gradient( black 25%, transparent 75%);
+background-image: linear-gradient(black 25%, transparent 75%);
 ```
 
 ## **Rough around the edges**
