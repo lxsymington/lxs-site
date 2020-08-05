@@ -1,40 +1,23 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { graphql } from "gatsby"
-import { Layout, SEO } from "../components"
+import { Gallery, Layout, SEO, MdxNode } from "../components"
 
-export default function Short({ data }): ReactElement {
+type QueryProps = {
+  data: {
+    allMdx: {
+      nodes: MdxNode[]
+    }
+  }
+}
+
+export default function Long({ data }: QueryProps): ReactElement {
   return (
     <Layout>
       <SEO title="Long Reads" />
-      <div>
-        <h1>Long Reads</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Tags</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.allMdx.nodes.map(({ frontmatter }, index) => (
-              <tr key={index}>
-                <td>{frontmatter.title}</td>
-                <td>{frontmatter.description}</td>
-                <td>
-                  <ul>
-                    {frontmatter.tags.map(tag => (
-                      <li>{tag}</li>
-                    ))}
-                  </ul>
-                </td>
-                <td>{frontmatter.date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <h1>
+        <strong>Long Reads</strong>
+      </h1>
+      <Gallery exhibits={data.allMdx.nodes} />
     </Layout>
   )
 }
@@ -46,12 +29,16 @@ export const query = graphql`
       sort: { fields: frontmatter___date, order: ASC }
     ) {
       nodes {
+        fields {
+          slug
+        }
         frontmatter {
           date(fromNow: true)
           title
           description
           tags
         }
+        timeToRead
       }
     }
   }

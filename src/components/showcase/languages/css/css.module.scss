@@ -18,6 +18,8 @@
 }
 
 .frame {
+  box-shadow: 0px 15px 30px -10px colour($group: "base", $variant: "black", $alpha: 25),
+    0 45px 15px -30px colour($group: "base", $variant: "black", $alpha: 15);
   box-sizing: border-box;
   margin: 3em auto;
   max-width: 800px;
@@ -64,6 +66,10 @@
   }
 
   @media (prefers-color-scheme: dark) {
+    box-shadow: 0px 15px 30px -10px colour($group: "colours", $variant: "soft_yellow", $alpha:
+            15),
+      0 45px 15px -30px colour($group: "colours", $variant: "soft_yellow", $alpha: 5);
+
     &:before {
       background-color: colour($group: "base", $variant: "white", $alpha: 75);
       bottom: 0;

@@ -30,7 +30,7 @@ this is still a common issue on the web even when using flat colours, let alone 
 multiple colours such as an image or gradient. With a little thought and a modicum of effort though there is usually
 ample opportunity to improve the situation for everyone!
 
----
+***
 
 _It has been fairly widely acknowledged that the web needs to more to be accessible to all users, as accessibility
 benefits everyone often in ways that are not immediately obvious. As a Frontend engineer and someone who spends most of
@@ -38,8 +38,7 @@ their time working, creating user interfaces, I want to ensure that accessible p
 very much at the start of the journey towards incorporating accessible practices as a default as opposed to
 retrospectively, but hopefully with a little learning, a little feedback and some time I will get there._
 
-## **Foundations**
-### **Basic varieties**
+## **Basic varieties**
 As touched upon earlier in this post in the context of CSS gradients, a gradient is a transition from a colour to one or
 more colours over a specified distance. What was not discussed at that point was the direction of that transition. In
 gradients generally that is not important however in CSS gradients there are currently 6 varieties of gradient which can be
@@ -72,12 +71,55 @@ required) without an `angle` or positions for the `color-stop`s. In the case whe
 [spec](https://www.w3.org/TR/css-images-3/#linear-gradient-syntax)
 states that it defaults to '`to bottom`'. Simarlarly in the case where positions are not declared for the first and last
 `color-stops` the [spec](https://www.w3.org/TR/css-images-3/#color-stop-syntax) states that their positions should
-default to 0% and 100% respectively.
+default to 0% and 100% respectively. It also states that in the case where one or more `color-stop`s are not the first or last and
+their positions are omitted then they are spaced evenly between the surrounding positioned `color-stops`. To view and
+interact with the source declaration click the _"Open Editor"_ button.
 
 ```css caption=Simple_Gradient
-/* Sample Comment */
+/*----------------------------------------------------------------------------*\
+ *
+ * The declaration of the `background-image` CSS property that results in the
+ * accompanying two tone gradient.
+ *
+ * Try changing the `color`s to something different, for example: `grey`,
+ * `green`, `#57316b`, hsla(352deg 68% 59% / 80%) etc.
+ * 
+ * Alternatively add a new `color-stop` - a `color` followed by a comma unless
+ * it is the last in the list.
+ *
+\*----------------------------------------------------------------------------*/
 background-image: linear-gradient(black, transparent);
 ```
+
+In an effort to keep this post focussed, while other CSS properties have been applied to the preview they are not shown
+in the _"source"_, they only serve the purpose of giving the preview a size and fitting it in with layout of this page.
+A `selector` is also used to target the `class` `attribute` of the preview `element`. The `declaration`s shown in the _"source"_ are
+inserted into the CSS `rule` that targets the preview's `selector`.
+
+### **_A picture is worth a thousand words_**
+&hellip;or so the adage goes. Ideally the gradient pictured above will have been the expected result, given the information
+in this post so far, and if not hopefully it has brought some clarity. With the visual aid of the above example it may
+be easier to go over how the transition from one colour to the next is resolved.
+
+Since the above case is one of the most straightforward examples of a gradient lets take that as a starting point. The
+actual size of the preview gradient will vary depending on the device it is being viewed on but if we think of it as being 100
+pixels in height it will help. As the gradient we are considering has a direction of `to bottom` the whole of the first
+row of pixels will be coloured `black` &mdash; the start colour from our declaration &mdash; at the default position of
+0%. This is because in this case the rows of pixels are all perpendicular to the `gradient-line` and therefore every
+pixel in a single row is the same distance along the `gradient-line`. Continuing along the `gradient-line` we arrive at
+the second row of pixels and are now offset 1px from the start. Given the gradient that we are considering is 100 pixels
+in height the position is not only 1px but also 1%, this gradient's next `color-stop` is also the last one and is in the
+default position (100%). Therefore the colour of this row of pixels should be 1% closer to the next colour.
+
+So we probably need to talk about colour representation in browsers. To make the web more accessible there are a number
+of `color` name `keyword`s these are more memorable shorthands that will resolve to a particular `color` value. This means
+that it is possible to set a `color` to be `red`, `coral`, `purple` etc. and the browser will know what to display,
+however, there are only a finite number of these (140 infact) and they are pre-defined.
+
+---
+***
+---
+
 For the sake of clarity, I would like to take a moment to explain what I mean by the _"double stop technique"_. **_Fig.
 1_** is an example of what is probably the simplest implementation of a CSS `linear-gradient`.
 
