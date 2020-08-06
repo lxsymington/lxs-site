@@ -67,13 +67,14 @@ go from purple to yellow via orange, red and magenta. At this point it is probab
 
 ## **Linear Gradients**
 Below is probably the simplest declaration of a gradient in CSS. It declares a two colour gradient (the minimum
-required) without an `angle` or positions for the `color-stop`s. In the case where a direction is omitted the
+required) without an `angle` or positions for the `color-stop`s. In the case where a direction is omitted, the
 [spec](https://www.w3.org/TR/css-images-3/#linear-gradient-syntax)
-states that it defaults to '`to bottom`'. Simarlarly in the case where positions are not declared for the first and last
+states that it defaults to '`to bottom`'. Simarlarly if positions are not declared for the first and last
 `color-stops` the [spec](https://www.w3.org/TR/css-images-3/#color-stop-syntax) states that their positions should
-default to 0% and 100% respectively. It also states that in the case where one or more `color-stop`s are not the first or last and
-their positions are omitted then they are spaced evenly between the surrounding positioned `color-stops`. To view and
-interact with the source declaration click the _"Open Editor"_ button.
+default to 0% and 100% respectively. It also states that when one or more `color-stop`s which are not the first or last and
+their positions are omitted, then they are spaced evenly between the surrounding positioned `color-stops`.
+
+To view and interact with the source declaration click the _"Open Editor"_ button.
 
 ```css caption=Simple_Gradient
 /*----------------------------------------------------------------------------*\
@@ -112,9 +113,31 @@ in height the position is not only 1px but also 1%, this gradient's next `color-
 default position (100%). Therefore the colour of this row of pixels should be 1% closer to the next colour.
 
 So we probably need to talk about colour representation in browsers. To make the web more accessible there are a number
-of `color` name `keyword`s these are more memorable shorthands that will resolve to a particular `color` value. This means
-that it is possible to set a `color` to be `red`, `coral`, `purple` etc. and the browser will know what to display,
-however, there are only a finite number of these (140 infact) and they are pre-defined.
+of `color` name `keyword`s these are more memorable shorthands that will resolve to a particular `color` value in `sRGB`
+`colorspace` <sup>1</sup>. This means that it is possible to set a `color` to be `red`, `coral`, `purple` etc. and the
+browser will know what to display, however, there are only a finite number of these (140 infact) and they are
+pre-defined which is quite limiting &mdash; the web would be rather homogenous if we could only use 140 colours! So what
+did that `sRGB` `colorspace` bit mean? Well there are lots of different ways of thinking about colour, but one that
+lends itself to being displayed on a screen is to think of a colour as being made up of different amounts of coloured
+light. For example if we start with scene with no light then the colour of the scene is black, if we were to shine a red
+light on the scene the colour of the scene would become red. If we were then to additionally shine a green light in
+equal amount to the red light on the scene it would result in a yellow colour. Finally if we were to shine a blue light
+on the scene as well, the scene would appear illuminated with white coloured light. By varying the amounts of these
+three coloured lights we can make the scene almost any colour required. This type of colour system is called "additive"
+in contrast to paint or ink based colour systems which are called "subtractive" &mdash; adding dye or pigment
+**subtracts** light. So going back to `sRGB`, if we now expand the acronym to the full name `standard Red Green Blue`
+`colorspace` the reason for choosing red, green and blue light in the earlier thought experiment may become apparent. As
+a side note the reason for red, green and blue being used as the _primary colours_ is purportedly related to the types
+of cone cells there are in the human retina, and the colour of the light they are most sensitive to. The last thing to
+address is the `standard` part of `sRGB`, it is important not to skip over this as it reflects that `sRGB` is
+device-independent, so regardless of a devices capabilities provided that it is `sRGB` capable it will display the same
+colour. How does all this relate to gradients? We now know that we can represent colours as a list of amounts of red,
+blue and green light, amounts otherwise known as _'channels'_. For example `red: 50%, green: 60%, blue: 70%`.
+
+Having discussed colour representation we should probably get back to the `linear-gradient` example.
+
+<sup>1</sup>At the time of writing Lab and LCH colorspaces have been defined in the CSS color level 4 spec but are yet to be
+implemented in any widely used browsers.
 
 ---
 ***

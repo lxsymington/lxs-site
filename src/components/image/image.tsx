@@ -28,22 +28,17 @@ type QueryData = {
 const Image: React.FC<ImageProps> = ({ className }) => {
   const data: QueryData = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
+      placeholderImage: file(relativePath: { eq: "profile.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
+          fluid(maxWidth: 450) {
+            ...GatsbyImageSharpFluid_tracedSVG
           }
         }
       }
     }
   `)
 
-  return (
-    <Img
-      className={className}
-      fluid={data.placeholderImage.childImageSharp.fluid}
-    />
-  )
+  return <Img className={className} fluid={data.placeholderImage.childImageSharp.fluid} />
 }
 
 export { Image }

@@ -1,6 +1,7 @@
 export * from "./article"
 export * from "./codeBlock"
 export * from "./exhibit"
+export * from "./footer"
 export * from "./gallery"
 export * from "./header"
 export * from "./image"

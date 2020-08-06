@@ -148,13 +148,6 @@
   }
 }
 
-.footer {
-  grid-area: footer;
-  place-self: center;
-  position: relative;
-  z-index: 1;
-}
-
 .aside {
   align-items: flex-start;
   display: flex;
@@ -173,11 +166,11 @@
   }
 }
 
-.initials {
-  display: inline-block;
-  height: 1.25em;
-  vertical-align: middle;
-  width: auto;
+.footer {
+  grid-area: footer;
+  place-self: center;
+  position: relative;
+  z-index: 1;
 }
 
 .dialogue {

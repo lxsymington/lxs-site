@@ -53,8 +53,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Luke Xavier Symington's Personal Site`,
+        short_name: `LXS Site`,
         start_url: `/`,
         background_color: `#FFFFFF`,
         theme_color: `#EC7E09`,
@@ -65,11 +65,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-scss-typescript`,
       options: {
-        sassLoaderOptions: {
-          sourceMap: true,
-        },
         postCssLoaderOptions: {
           plugins: [autoprefixer({ grid: `no-autoplace` }), cssnano({})],
+        },
+        sassLoaderOptions: {
+          sourceMap: true,
         },
       },
     },

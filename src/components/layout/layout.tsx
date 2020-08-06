@@ -8,9 +8,8 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { Header, Navigation } from "../../components"
+import { Footer, Header, Navigation } from "../../components"
 import "./layout.scss"
-import Initials from "../../assets/initials.inline.svg"
 import * as layoutStyles from "./layout.module.scss"
 
 type DataProps = {
@@ -41,12 +40,7 @@ const Layout: React.FC = ({ children }) => {
       <main className={layoutStyles.main}>
         <div className={layoutStyles.content}>{children}</div>
       </main>
-      <footer className={layoutStyles.footer}>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a> by{` `}
-        <Initials className={layoutStyles.initials} />
-      </footer>
+      <Footer className={layoutStyles.footer} />
     </div>
   )
 }

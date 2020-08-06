@@ -1,0 +1,41 @@
+@import "../../styles/toolkit";
+
+.root {
+  line-height: 2;
+  text-align: right;
+
+  &:before {
+    background-image: repeating-linear-gradient(
+      #{colour($group: "base", $variant: "black")},
+      #{colour($group: "base", $variant: "black")} 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 2px,
+      #{colour($group: "base", $variant: "black", $alpha: 0)} 4px
+    );
+    content: "";
+    display: block;
+    flex: 1 0 100%;
+    height: 6px;
+    mask-image: linear-gradient(
+      175deg,
+      #{colour($group: "base", $variant: "black", $alpha: 0)},
+      #{colour($group: "base", $variant: "grey_2", $alpha: 50)} 40%,
+      #{colour($group: "base", $variant: "black")}
+    );
+
+    @media (prefers-color-scheme: dark) {
+      background-image: repeating-linear-gradient(
+        #{colour($group: "base", $variant: "white")},
+        #{colour($group: "base", $variant: "white")} 2px,
+        #{colour($group: "base", $variant: "white", $alpha: 0)} 2px,
+        #{colour($group: "base", $variant: "white", $alpha: 0)} 4px
+      );
+    }
+  }
+}
+
+.initials {
+  display: inline-block;
+  height: 1.25em;
+  vertical-align: middle;
+  width: auto;
+}
