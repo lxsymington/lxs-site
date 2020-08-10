@@ -102,16 +102,6 @@ inserted into the CSS `rule` that targets the preview's `selector`.
 in this post so far, and if not hopefully it has brought some clarity. With the visual aid of the above example it may
 be easier to go over how the transition from one colour to the next is resolved.
 
-Since the above case is one of the most straightforward examples of a gradient lets take that as a starting point. The
-actual size of the preview gradient will vary depending on the device it is being viewed on but if we think of it as being 100
-pixels in height it will help. As the gradient we are considering has a direction of `to bottom` the whole of the first
-row of pixels will be coloured `black` &mdash; the start colour from our declaration &mdash; at the default position of
-0%. This is because in this case the rows of pixels are all perpendicular to the `gradient-line` and therefore every
-pixel in a single row is the same distance along the `gradient-line`. Continuing along the `gradient-line` we arrive at
-the second row of pixels and are now offset 1px from the start. Given the gradient that we are considering is 100 pixels
-in height the position is not only 1px but also 1%, this gradient's next `color-stop` is also the last one and is in the
-default position (100%). Therefore the colour of this row of pixels should be 1% closer to the next colour.
-
 So we probably need to talk about colour representation in browsers. To make the web more accessible there are a number
 of `color` name `keyword`s these are more memorable shorthands that will resolve to a particular `color` value in `sRGB`
 `colorspace` <sup>1</sup>. This means that it is possible to set a `color` to be `red`, `coral`, `purple` etc. and the
@@ -125,7 +115,7 @@ equal amount to the red light on the scene it would result in a yellow colour. F
 on the scene as well, the scene would appear illuminated with white coloured light. By varying the amounts of these
 three coloured lights we can make the scene almost any colour required. This type of colour system is called "additive"
 in contrast to paint or ink based colour systems which are called "subtractive" &mdash; adding dye or pigment
-**subtracts** light. So going back to `sRGB`, if we now expand the acronym to the full name `standard Red Green Blue`
+filters out light. So going back to `sRGB`, if we now expand the acronym to the full name `standard Red Green Blue`
 `colorspace` the reason for choosing red, green and blue light in the earlier thought experiment may become apparent. As
 a side note the reason for red, green and blue being used as the _primary colours_ is purportedly related to the types
 of cone cells there are in the human retina, and the colour of the light they are most sensitive to. The last thing to
@@ -134,9 +124,34 @@ device-independent, so regardless of a devices capabilities provided that it is 
 colour. How does all this relate to gradients? We now know that we can represent colours as a list of amounts of red,
 blue and green light, amounts otherwise known as _'channels'_. For example `red: 50%, green: 60%, blue: 70%`.
 
-Having discussed colour representation we should probably get back to the `linear-gradient` example.
+Having discussed colour representation we should probably get back to `linear-gradient`. Since **fig. 1** is one of the
+most straightforward examples of a gradient lets take that as a starting point. The actual size of the preview gradient
+will vary depending on the device it is being viewed on but if we think of it as being 100 pixels in height it will
+help. To summarise the gradient we are considering has a direction of `to bottom` with a start colour of `black` at the
+default position of `0%` and an end colour of `white` at the default position of `100%`. Lets consider how this will get
+displayed on our screens, starting with the first row of pixels. Given that this is the first row of pixels in a
+gradient that is 100 pixels high the top of the the row is offset 0 pixels or 0% from the top and the bottom of the row
+is offset 1 pixel or 1% from the top as each pixel can only be painted one colour we need to find the average colour for
+this section of the gradient line. We also know that all the pixels in this row should be the same colour because the
+row is perpendicular to the `gradient-line` and therefore every pixel in this row is the same distance along the
+`gradient-line`, this holds true for subsequent rows as well. Since this is a `linear-gradient` we know that there is a
+linear relationship between the displacement along the gradient line in pixels and the percentage _colour shift_, in
+fact as we are considering a 100 pixel gradient they are directly proportional meaning for each pixel of displacement
+along the `gradient-line` the _colour shift_ increases by a percent. Therefore we know that average colour of a row will
+be the same as that of the theoretical `gradient-line` at the pixel row's vertical **midpoint**. For the first row of
+pixels this will be at &frac12; a pixel along the gradient line. We now also know that colours can be represented
+numerically, which makes transforming and scaling them much easier. For instance `black`, the starting colour of our
+gradient, can also be described as `rgb(0, 0, 0)` (0 red light, 0 green light and 0 blue light) and the ending colour
+`white`, as `rgb(100% 100% 100%)` &mdash; more commonly written `rgb(255, 255, 255)`. There is also a similar, commonly
+used, shorter way of describing `RGB` colours using a triplet of 2 digit hexadecimal numbers written in the form
+`#RRGGBB`, in the case of `black` this is: `#000000`. In our example a &frac12;% shift from `black` to `white` would be
+`rgb(0.5%, 0.5%, 0.5%)` which seems fairly straightforward. To make matters a little more complicated most devices will
+be display 24-bit or "true" colour, this means that the device can displa <abbr title="16,777,216">2<sup>24</sup></abbr>
+colours. These are made from 256 (0 - 255) values in each colour channel that can be blended together.
 
-<sup>1</sup>At the time of writing Lab and LCH colorspaces have been defined in the CSS color level 4 spec but are yet to be
+<sup>1</sup>
+
+At the time of writing Lab and LCH colorspaces have been defined in the CSS color level 4 spec but are yet to be
 implemented in any widely used browsers.
 
 ---

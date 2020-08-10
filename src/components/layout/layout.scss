@@ -239,9 +239,16 @@ a {
   }
 }
 
-code {
+:not(pre) > code {
+  background-color: colour($group: "base", $variant: "white");
+  box-sizing: border-box;
+  border-radius: 0.25ch;
+  border: 1px solid colour($group: "base", $variant: "grey_4");
+  color: colour($group: "colours", $variant: "very_dark_violet");
+  font-family: inherit;
   font-weight: 700;
-  border-radius: 0.125ch;
-  background-color: aqua;
+  overflow: hidden;
   padding: 0 0.5ch;
+  position: relative;
+  white-space: nowrap;
 }
