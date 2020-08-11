@@ -38,6 +38,11 @@ module.exports = {
           default: require.resolve(`./src/components/layout/index.ts`),
         },
         extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-katex`,
+          },
+        ],
       },
     },
     `gatsby-transformer-sharp`,

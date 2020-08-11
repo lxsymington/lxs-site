@@ -88,7 +88,7 @@ To view and interact with the source declaration click the _"Open Editor"_ butto
  * it is the last in the list.
  *
 \*----------------------------------------------------------------------------*/
-background-image: linear-gradient(black, transparent);
+background-image: linear-gradient(black, white);
 ```
 
 In an effort to keep this post focussed, while other CSS properties have been applied to the preview they are not shown
@@ -101,6 +101,8 @@ inserted into the CSS `rule` that targets the preview's `selector`.
 in this post so far, and if not hopefully it has brought some clarity. With the visual aid of the above example it may
 be easier to go over how the transition from one colour to the next is resolved.
 
+## ** A deep dive**
+### **All the colours of the rainbow&hellip; well almost!**
 So we probably need to talk about colour representation in browsers. To make the web more accessible there are a number
 of `color` name `keyword`s these are more memorable shorthand forms that will resolve to a particular `color` value in
 `sRGB` `colorspace` <sup>1</sup>. This means that it is possible to set a `color` to be `red`, `coral`, `purple`
@@ -123,21 +125,22 @@ regardless of a devices capabilities provided that it is `sRGB` capable it will 
 this relate to gradients? We now know that we can represent colours as a list of amounts of red, blue and green light,
 amounts otherwise known as _'channels'_. For example `red: 50%, green: 60%, blue: 70%`.
 
+### **Walking the line**
 Having discussed colour representation we should probably get back to `linear-gradient`. Since **fig. 1** is one of the
 most straightforward examples of a gradient lets take that as a starting point. The actual size of the preview gradient
 will vary depending on the device it is being viewed on but if we think of it as being 100 pixels in height it will
 help. To summarise the gradient we are considering has a direction of `to bottom` with a start colour of `black` at the
 default position of `0%` and an end colour of `white` at the default position of `100%`. Lets consider how this will get
-displayed on our screens, starting with the first row of pixels. Given that this is the first row of pixels in
-a gradient that is 100 pixels high the top of the row is offset 0 pixels or 0% from the top and the bottom of the row is
+displayed on our screens, starting with the first row of pixels. Given that this is the first row of pixels in a
+gradient that is 100 pixels high the top of the row is offset 0 pixels or 0% from the top and the bottom of the row is
 offset 1 pixel or 1% from the top as each pixel can only be painted one colour we need to find the average colour for
 this section of the gradient line. We also know that all the pixels in this row should be the same colour because the
 row is perpendicular to the `gradient-line` and therefore every pixel in this row is the same distance along the
-`gradient-line`, this holds true for subsequent rows as well. Since this is a `linear-gradient` we know that there is
-a linear relationship between the displacement along the gradient line in pixels and the percentage _colour shift_, in
+`gradient-line`, this holds true for subsequent rows as well. Since this is a `linear-gradient` we know that there is a
+linear relationship between the displacement along the gradient line in pixels and the percentage _colour shift_, in
 fact as we are considering a 100 pixel gradient they are directly proportional meaning for each pixel of displacement
 along the `gradient-line` the _colour shift_ increases by a percent. Therefore we know that average colour of a row will
-be the same as that of the theoretical `gradient-line` at the pixel row's vertical **midpoint**. For the first row of
+be the same as that of the theoretical `gradient-line` at the pixel row's vertical **midpoint**.  For the first row of
 pixels this will be at &frac12; a pixel along the gradient line. We now also know that colours can be represented
 numerically, which makes transforming and scaling them much easier. For instance `black`, the starting colour of our
 gradient, can also be described as `rgb(0, 0, 0)` (0 red light, 0 green light and 0 blue light) and the ending colour
@@ -149,13 +152,66 @@ be display 24-bit or "true" colour, this means that the device can display 256 i
 the three channels. The channels are then blended together to create the colour that is then displayed on the screen, so
 there are many more colours than the 256 available in each channel. If you are familiar with permutations in mathematics
 you will know that when repetition is permitted (which for this application it is) the formula to get total number of
-permutations is _k<sup>n</sup>_ where _k_ is the number of elements in a set of options and _n_ is the number of choices
-to be made from that set. Therefore the total permutations of colour is 256<sup>3</sup>. 256 can also be written as
+permutations is $k^n$ where $k$ is the number of elements in a set of options and $n$ is the number of choices to be
+made from that set. Therefore the total permutations of colour is 256<sup>3</sup>. 256 can also be written as
 2<sup>8</sup>, so the number of permutations can be written as (2<sup>8</sup>)<sup>3</sup> and then simplified to <abbr
-title="16,777,216">2<sup>24</sup></abbr> &mdash; which is why it is called 24-bit colour. The reason for this tangent is
-that if we now go back to the colour of the first row of pixels which we worked out should be the colour `rgb(0.5%,
-0.5%, 0.5%)` and remember that there are 256 available increments in each channel starting with 0, we may realise that
-we have encountered a problem!
+title="16,777,216">2<sup>24</sup></abbr> &mdash; which is why it is called 24-bit colour, as it takes 24 bits of memory
+to store the colour data. The reason for this tangent is that if we now go back to the colour of the first row of pixels
+which we worked out should be the colour `rgb(0.5%, 0.5%, 0.5%)` and remember that there are 256 available increments in
+each channel starting with 0, we may realise that we have encountered a problem! The problem being, albeit not an
+insurmountable one, that 0.5% of 255 is 1.275 and this is not one of the 256 increments available, as such it needs to
+be rounded to the nearest incerement. The good news is that we have finally established what colour the first row of
+pixels in our gradient should be painted: `rgb(1, 1, 1)` or `#010101` and not only that but also a methodology for doing
+the same for subsequent rows. For example, the second row, is offset 1px more than the first but in all other dimensions
+is the same. So the midpoint of the second row will also be offset 1px from the first row's midpoint, `1&frac12;` pixels
+along the gradient line. Applying the same process as last time we get 1.5% of 255 = 3.825 and rounded 4 giving a colour
+of `rgb(4, 4, 4)` or `#040404`. 
+
+### **Let's get mathematical**
+The methodology we just discussed is actually quite common and known as linear interpolation. The formula for it is:
+
+$$
+{\displaystyle y=y_{0}+(x-x_{0}){\frac {y_{1}-y_{0}}{x_{1}-x_{0}}}}
+$$
+
+This will need to be applied for each channel.
+
+Now at a glance that can seem quite daunting, so lets try to break it down a bit. Working from left to right, we have
+$y$ for us this is the colour that we are trying to find at a position on the `gradient-line`, which we will input into
+the formula. On the other side of the equals is $y_{0}$ this is the start value for a channel for the start colour of
+our gradient `black` that is 0 for all channels. To that we are then adding $(x-x_{0})$, the difference between the _input_
+position and the _start_ position, for us this is the same as the _input_ position since the _start_ position is 0. This
+is then multiplied by the difference between the _end_ colour channel value and the _start_ colour channel value divided
+by the difference between the _end_ position and the _start_ position. As we know already the _start_ colour value is 0,
+this is also the case for the _start_ position, so this is just the ratio of the _end_ colour channel value to the _end_
+position. Furthermore if we are just trying to get the percentage value for the colour channel, then the ratio is 1:1,
+so for this specific case the formula collapses:
+
+$$
+{\displaystyle y=0+(x-0){\frac {100-0}{100-0}}}
+$$
+
+$$
+{\displaystyle y=x}
+$$
+
+To get the colour channel value instead is very similar:
+
+$$
+{\displaystyle y=0+(x-0){\frac {255-0}{100-0}}}
+$$
+
+$$
+{\displaystyle y={\frac {255}{100}}x}
+$$
+
+That was an implementation that was manufactured for convenience though. So lets have a look at using the formula with
+some arbitrary colours, `mediumspringgreen` (`#00fa9a`) and `mediumpurple` (`#9370db`) for example and find the midpoint
+colour.
+
+```css caption=Positioned_Color_Stop_Gradient
+background-image: linear-gradient(mediumspringgreen, mediumpurple);
+```
 
 <sup>1</sup> At the time of writing Lab and LCH colour spaces have been defined in the CSS `color` level 4 specification
 but are yet to be implemented in any widely used browsers.
