@@ -6,35 +6,34 @@ tags: ["visuals", "css", "gradients"]
 ---
 
 ## **Preamble**
-As this is my first post I thought that I would start with something relatively simple. Given that I am
-currently building this site and being an engineer I don't have much in the way of images, I have been using gradients
-in an effort to make the site more visually appealing (hopefully something that I have achieved). As such I thought that
-I would take this opportunity to look deeper into how they work and behave in CSS, thereby keeping a record of what I
-have learnt about them.
+As this is my first post I thought that I would start with something relatively simple. Given that I am currently
+building this site and being an engineer I don't have much in the way of images. In pursuit of visual appeal and
+interest, I have therefore made use of gradients throughout this site and as such, I take this opportunity to look
+deeper into how they work and behave in CSS, thereby keeping a record of what I have learnt about them.
 
 ## **Introduction**
 ### **Positives**
 Gradients are a transition from one colour to one or more other colours over a specified distance. So why are gradients
 interesting? For a start when used as backgrounds they can bring more visual depth and texture than their flat
 counterparts. Creating visual depth can help to break up content, making it more approachable and therefore consumable.
-Appropriate use of gradients can also be used to draw attention to key content by making it more stimulating as well as
-intelligent use of light.
+Appropriate use of gradients can also be used to draw attention to key content by making it more stimulating while
+intelligent use of light may subtly direct visual tracking of a page.
 
 ### **Negatives**
-Gradients do also have their downsides. As much as they can draw attention to key areas, as well as help to contextually
-separate content when used well, they can also be distracting and divert users away from key content. Another area
-gradients *can*, but do not necessarily need to, cause problems is accessibility. Much the same as with text over
-images, text over gradients can often cause readability issues. The readability issues often arise from a lack of
+Gradients do also have their downsides. As much as they can draw attention to key areas and help to contextually
+separate content when used well, they can also be distracting and divert users away from key content. In addition,
+gradients _can_, but do not necessarily need to, cause problems in terms of accessibility. Much the same as with text over
+images, text over gradients can often cause readability issues. These readability issues often arise from a lack of
 contrast between the text/foreground colour and the colour of the background over which it is presented. Unfortunately
-this is still a common issue on the web even when using flat colours, let alone when text is displayed ove a background that has
-multiple colours such as an image or gradient. With a little thought and a modicum of effort though there is usually
-ample opportunity to improve the situation for everyone!
+this is still a common issue on the web even when using flat colours, let alone when text is displayed over a background
+that has multiple colours such as an image or gradient. With a little thought and a modicum of effort though there is
+usually ample opportunity to improve the situation for everyone!
 
 ***
 
-_It has been fairly widely acknowledged that the web needs to more to be accessible to all users, as accessibility
+_It has been fairly widely acknowledged that the web needs to be more accessible to all users, as accessibility
 benefits everyone often in ways that are not immediately obvious. As a Frontend engineer and someone who spends most of
-their time working, creating user interfaces, I want to ensure that accessible practices are always considered. I am
+their time working to create user interfaces, I want to ensure that accessible practices are always considered. I am
 very much at the start of the journey towards incorporating accessible practices as a default as opposed to
 retrospectively, but hopefully with a little learning, a little feedback and some time I will get there._
 
@@ -56,8 +55,8 @@ divided into 3 categories:
  - **Conic**
    CSS `conic-gradient`s are a little more different from the other 2 varieties in that they do not transition along (a)
    straight line(s). Instead they transition from a start angle to an end angle about a specified point.
-   `conic-gradient`s are a newer addition to the CSS spec and therefore not implemented in some commonly used browsers,
-   consequently this post will focus more on the other two categories.
+   `conic-gradient`s are a newer addition to the CSS specification and therefore not implemented in some commonly used
+   browsers, consequently this post will focus more on the other two categories.
 
 Each of the above categories have a default and repeating variety. The total span of the gradients produced by each
 variety of a category will be the same, however, a repeating variety will likely contain multiple instances of the same
@@ -68,11 +67,11 @@ go from purple to yellow via orange, red and magenta. At this point it is probab
 ## **Linear Gradients**
 Below is probably the simplest declaration of a gradient in CSS. It declares a two colour gradient (the minimum
 required) without an `angle` or positions for the `color-stop`s. In the case where a direction is omitted, the
-[spec](https://www.w3.org/TR/css-images-3/#linear-gradient-syntax)
-states that it defaults to '`to bottom`'. Simarlarly if positions are not declared for the first and last
-`color-stops` the [spec](https://www.w3.org/TR/css-images-3/#color-stop-syntax) states that their positions should
-default to 0% and 100% respectively. It also states that when one or more `color-stop`s which are not the first or last and
-their positions are omitted, then they are spaced evenly between the surrounding positioned `color-stops`.
+[specification](https://www.w3.org/TR/css-images-3/#linear-gradient-syntax) states that it defaults to '`to
+bottom`'. Similarly if positions are not declared for the first and last `color-stops` the
+[specification](https://www.w3.org/TR/css-images-3/#color-stop-syntax) states that their positions should default to 0%
+and 100% respectively. It also states that when one or more `color-stop`s which are not the first or last and their
+positions are omitted, then they are spaced evenly between the surrounding positioned `color-stops`.
 
 To view and interact with the source declaration click the _"Open Editor"_ button.
 
@@ -103,39 +102,39 @@ in this post so far, and if not hopefully it has brought some clarity. With the 
 be easier to go over how the transition from one colour to the next is resolved.
 
 So we probably need to talk about colour representation in browsers. To make the web more accessible there are a number
-of `color` name `keyword`s these are more memorable shorthands that will resolve to a particular `color` value in `sRGB`
-`colorspace` <sup>1</sup>. This means that it is possible to set a `color` to be `red`, `coral`, `purple` etc. and the
-browser will know what to display, however, there are only a finite number of these (140 infact) and they are
-pre-defined which is quite limiting &mdash; the web would be rather homogenous if we could only use 140 colours! So what
-did that `sRGB` `colorspace` bit mean? Well there are lots of different ways of thinking about colour, but one that
+of `color` name `keyword`s these are more memorable shorthand forms that will resolve to a particular `color` value in
+`sRGB` `colorspace` <sup>1</sup>. This means that it is possible to set a `color` to be `red`, `coral`, `purple`
+etc. and the browser will know what to display, however, there are only a finite number of these (140 in fact) and they
+are pre-defined which is quite limiting &mdash; the web would be rather homogeneous if we could only use 140 colours! So
+what did that `sRGB` `colorspace` bit mean? Well there are lots of different ways of thinking about colour, but one that
 lends itself to being displayed on a screen is to think of a colour as being made up of different amounts of coloured
 light. For example if we start with scene with no light then the colour of the scene is black, if we were to shine a red
 light on the scene the colour of the scene would become red. If we were then to additionally shine a green light in
 equal amount to the red light on the scene it would result in a yellow colour. Finally if we were to shine a blue light
 on the scene as well, the scene would appear illuminated with white coloured light. By varying the amounts of these
 three coloured lights we can make the scene almost any colour required. This type of colour system is called "additive"
-in contrast to paint or ink based colour systems which are called "subtractive" &mdash; adding dye or pigment
-filters out light. So going back to `sRGB`, if we now expand the acronym to the full name `standard Red Green Blue`
-`colorspace` the reason for choosing red, green and blue light in the earlier thought experiment may become apparent. As
-a side note the reason for red, green and blue being used as the _primary colours_ is purportedly related to the types
-of cone cells there are in the human retina, and the colour of the light they are most sensitive to. The last thing to
-address is the `standard` part of `sRGB`, it is important not to skip over this as it reflects that `sRGB` is
-device-independent, so regardless of a devices capabilities provided that it is `sRGB` capable it will display the same
-colour. How does all this relate to gradients? We now know that we can represent colours as a list of amounts of red,
-blue and green light, amounts otherwise known as _'channels'_. For example `red: 50%, green: 60%, blue: 70%`.
+in contrast to paint or ink based colour systems which are called "subtractive" &mdash; adding dye or pigment filters
+out light. So going back to `sRGB`, if we now expand the acronym to the full name `standard Red Green Blue` `colorspace`
+the reason for choosing red, green and blue light in the earlier thought experiment may become apparent. As a side note
+the reason for red, green and blue being used as the _primary colours_ is purportedly related to the types of cone cells
+there are in the human retina, and the colour of the light they are most sensitive to. The last thing to address is the
+`standard` part of `sRGB`, it is important not to skip over this as it reflects that `sRGB` is device-independent, so
+regardless of a devices capabilities provided that it is `sRGB` capable it will display the same colour. How does all
+this relate to gradients? We now know that we can represent colours as a list of amounts of red, blue and green light,
+amounts otherwise known as _'channels'_. For example `red: 50%, green: 60%, blue: 70%`.
 
 Having discussed colour representation we should probably get back to `linear-gradient`. Since **fig. 1** is one of the
 most straightforward examples of a gradient lets take that as a starting point. The actual size of the preview gradient
 will vary depending on the device it is being viewed on but if we think of it as being 100 pixels in height it will
 help. To summarise the gradient we are considering has a direction of `to bottom` with a start colour of `black` at the
 default position of `0%` and an end colour of `white` at the default position of `100%`. Lets consider how this will get
-displayed on our screens, starting with the first row of pixels. Given that this is the first row of pixels in a
-gradient that is 100 pixels high the top of the the row is offset 0 pixels or 0% from the top and the bottom of the row
-is offset 1 pixel or 1% from the top as each pixel can only be painted one colour we need to find the average colour for
+displayed on our screens, starting with the first row of pixels. Given that this is the first row of pixels in
+a gradient that is 100 pixels high the top of the row is offset 0 pixels or 0% from the top and the bottom of the row is
+offset 1 pixel or 1% from the top as each pixel can only be painted one colour we need to find the average colour for
 this section of the gradient line. We also know that all the pixels in this row should be the same colour because the
 row is perpendicular to the `gradient-line` and therefore every pixel in this row is the same distance along the
-`gradient-line`, this holds true for subsequent rows as well. Since this is a `linear-gradient` we know that there is a
-linear relationship between the displacement along the gradient line in pixels and the percentage _colour shift_, in
+`gradient-line`, this holds true for subsequent rows as well. Since this is a `linear-gradient` we know that there is
+a linear relationship between the displacement along the gradient line in pixels and the percentage _colour shift_, in
 fact as we are considering a 100 pixel gradient they are directly proportional meaning for each pixel of displacement
 along the `gradient-line` the _colour shift_ increases by a percent. Therefore we know that average colour of a row will
 be the same as that of the theoretical `gradient-line` at the pixel row's vertical **midpoint**. For the first row of
@@ -146,13 +145,20 @@ gradient, can also be described as `rgb(0, 0, 0)` (0 red light, 0 green light an
 used, shorter way of describing `RGB` colours using a triplet of 2 digit hexadecimal numbers written in the form
 `#RRGGBB`, in the case of `black` this is: `#000000`. In our example a &frac12;% shift from `black` to `white` would be
 `rgb(0.5%, 0.5%, 0.5%)` which seems fairly straightforward. To make matters a little more complicated most devices will
-be display 24-bit or "true" colour, this means that the device can displa <abbr title="16,777,216">2<sup>24</sup></abbr>
-colours. These are made from 256 (0 - 255) values in each colour channel that can be blended together.
+be display 24-bit or "true" colour, this means that the device can display 256 increments (0 - 255) of colour in each of
+the three channels. The channels are then blended together to create the colour that is then displayed on the screen, so
+there are many more colours than the 256 available in each channel. If you are familiar with permutations in mathematics
+you will know that when repetition is permitted (which for this application it is) the formula to get total number of
+permutations is _k<sup>n</sup>_ where _k_ is the number of elements in a set of options and _n_ is the number of choices
+to be made from that set. Therefore the total permutations of colour is 256<sup>3</sup>. 256 can also be written as
+2<sup>8</sup>, so the number of permutations can be written as (2<sup>8</sup>)<sup>3</sup> and then simplified to <abbr
+title="16,777,216">2<sup>24</sup></abbr> &mdash; which is why it is called 24-bit colour. The reason for this tangent is
+that if we now go back to the colour of the first row of pixels which we worked out should be the colour `rgb(0.5%,
+0.5%, 0.5%)` and remember that there are 256 available increments in each channel starting with 0, we may realise that
+we have encountered a problem!
 
-<sup>1</sup>
-
-At the time of writing Lab and LCH colorspaces have been defined in the CSS color level 4 spec but are yet to be
-implemented in any widely used browsers.
+<sup>1</sup> At the time of writing Lab and LCH colour spaces have been defined in the CSS `color` level 4 specification
+but are yet to be implemented in any widely used browsers.
 
 ---
 ***
