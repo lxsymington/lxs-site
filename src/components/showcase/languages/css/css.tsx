@@ -48,7 +48,7 @@ const CSSShowcase: React.FC<CSSShowcaseProps> = ({ caption, children }) => {
         <style type="text/css">
           {`#preview-${scope},
             #live-${scope} {
-            ${styles}
+                ${styles.replace(/\/[*](?:.|\s)*?[*]\//g, ``)}
           }`}
         </style>
         <section className={cssShowcaseStyles.preview}>

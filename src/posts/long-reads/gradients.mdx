@@ -163,18 +163,22 @@ insurmountable one, that 0.5% of 255 is 1.275 and this is not one of the 256 inc
 be rounded to the nearest incerement. The good news is that we have finally established what colour the first row of
 pixels in our gradient should be painted: `rgb(1, 1, 1)` or `#010101` and not only that but also a methodology for doing
 the same for subsequent rows. For example, the second row, is offset 1px more than the first but in all other dimensions
-is the same. So the midpoint of the second row will also be offset 1px from the first row's midpoint, `1&frac12;` pixels
+is the same. So the midpoint of the second row will also be offset 1px from the first row's midpoint, 1&frac12; pixels
 along the gradient line. Applying the same process as last time we get 1.5% of 255 = 3.825 and rounded 4 giving a colour
 of `rgb(4, 4, 4)` or `#040404`. 
 
 ### **Let's get mathematical**
-The methodology we just discussed is actually quite common and known as linear interpolation. The formula for it is:
+The methodology we just discussed is actually quite common and known as linear interpolation. It is often used for
+curve-fitting to find an estimate for a value between two known points: $(x_{0},y_{0})$ and $(x_{1}, y_{1})$, these actually map
+to the `color-stop`s in gradients. The $x$ values relate to the `color-stop`'s position and the $y$ values to the
+`color-stop`'s colour.  Additionally as these are *linear* gradients, linear interpolation will give an exact value as
+opposed to an estimate.  The formula is as follows:
 
 $$
 {\displaystyle y=y_{0}+(x-x_{0}){\frac {y_{1}-y_{0}}{x_{1}-x_{0}}}}
 $$
 
-This will need to be applied for each channel.
+This will need to be applied per channel.
 
 Now at a glance that can seem quite daunting, so lets try to break it down a bit. Working from left to right, we have
 $y$ for us this is the colour that we are trying to find at a position on the `gradient-line`, which we will input into
@@ -207,11 +211,125 @@ $$
 
 That was an implementation that was manufactured for convenience though. So lets have a look at using the formula with
 some arbitrary colours, `mediumspringgreen` (`#00fa9a`) and `mediumpurple` (`#9370db`) for example and find the midpoint
-colour.
+colour.  To start with lets convert the hexadecimal values to decimal so that they're a bit more readable. Just as
+binary is base 2 (0 to 1), octal base 8 (0 to 7) and decimal base 10 (0 to 9), hexadecimal is base 16, however, given
+that there are only ten arabic numerals (0 to 9) different symbols are required to represent the numbers ten to fifteen,
+conventionally the letters "a" to "f" (case insensitive) are used for this purpose. For `mediumspringgreen` we have
+`00`, `fa` and `9a`. `00` is nice and straightforward it's still 0. `fa` written literally in decimal form would be 15
+10, given hexadecimal is base 16 that equates to 15 &times; 16 + 10 = 250 in decimal. Similarly `9a` is 9 &times; 16 +
+10 = 154.  Meaning we can use the rgb value of `rgb(0, 250, 154)` for `mediumspringgreen`. Applying the conversion to
+`mediumpurple`'s hexadecimal values `93`, `70` and `db` gives `rgb(147, 112, 219)`. Now that we have the decimal channel
+values we'll input them into the linear interpolation formula to find the midpoint colour:
 
-```css caption=Positioned_Color_Stop_Gradient
+$$
+{\displaystyle RedChannelMidpoint=0+(50-0){\frac {147-0}{100-0}}={\frac {147}{2}}=73.5\approx74}
+$$
+
+Calculating the midpoint is another case where the formula collapses:
+
+$$
+{\displaystyle y_{midpoint}=y_{0}+{\frac {1}{2}(y_{1}-y_{0})}={\frac {y_{0}+y_{1}}{2}}}
+$$
+
+Let's apply that for the remaining channels:
+
+$$
+{\displaystyle GreenChannelMidpoint={\frac {250+112}{2}}=181}
+$$
+
+$$
+{\displaystyle BlueChannelMidpoint={\frac {154+219}{2}}=186.5\approx187}
+$$
+
+For the red and blue channels the value has to be rounded as it lies between valid incerements. Consequently the closest
+valid colour to the midpoint is `rgb(74, 181, 187)`. An example of this gradient is shown below, make sure to open the
+editor and check out the comment.
+
+```css caption=Coloured_Gradient
+/*----------------------------------------------------------------------------*\
+ *
+ * We calculated the midpoint colour value to be `rgb(74, 181,187)` to check
+ * that we were correct try copying ` rgb(74, 181, 187),` an pasting it after
+ * `mediumspringgreen,` if we were correct there should be no visual change to
+ * the preview.
+ *
+\*----------------------------------------------------------------------------*/
 background-image: linear-gradient(mediumspringgreen, mediumpurple);
 ```
+
+The technique explained and then demonstrated above is rarely diectly useful while writing CSS, it is, however, very
+useful to understand what the browser is doing behind the scenes. One application of this knowledge is discerning from 2
+colour values how strongly coloured or _muddy_ the transition would be. One of many examples of this is if we look at 6
+colours `rgb(200, 125, 50)`, `rgb(50, 125, 200)`, `rgb(50, 200, 125)`, `rgb(200, 50, 125)`, `rgb(125, 200, 50)` and
+`rgb(125, 50, 200)` at a glance we can tell that the following combinations will produce _muddy_ gradients:
+
+ - `rgb(200, 125, 50)` &amp; `rgb(50, 125, 200)` &mdash; midpoint: rgb(125, 125, 125)
+ - `rgb(50, 200, 125)` &amp; `rgb(200, 50, 125)` &mdash; midpoint: rgb(125, 125, 125)
+ - `rgb(125, 200, 50)` &amp; `rgb(125, 50, 200)` &mdash; midpoint: rgb(125, 125, 125)
+
+While the remaining combinations will produce colourful gradients:
+
+ - `rgb(200, 125, 50)` &amp; `rgb(50, 200, 125)` &mdash; midpoint: rgb(125, 163, 88)
+ - `rgb(200, 125, 50)` &amp; `rgb(200, 50, 125)` &mdash; midpoint: rgb(200, 88, 88)
+ - `rgb(200, 125, 50)` &amp; `rgb(125, 200, 50)` &mdash; midpoint: rgb(163, 163, 50)
+ - `rgb(200, 125, 50)` &amp; `rgb(125, 50, 200)` &mdash; midpoint: rgb(163, 88, 125)
+ - `rgb(50, 125, 200)` &amp; `rgb(50, 200, 125)` &mdash; midpoint: rgb(50, 163, 163)
+ - `rgb(50, 125, 200)` &amp; `rgb(200, 50, 125)` &mdash; midpoint: rgb(125, 88, 163)
+ - `rgb(50, 125, 200)` &amp; `rgb(125, 200, 50)` &mdash; midpoint: rgb(88, 163, 125)
+ - `rgb(50, 125, 200)` &amp; `rgb(125, 50, 200)` &mdash; midpoint: rgb(88, 88, 200)
+ - `rgb(50, 200, 125)` &amp; `rgb(125, 200, 50)` &mdash; midpoint: rgb(88, 200, 88)
+ - `rgb(50, 200, 125)` &amp; `rgb(125, 50, 200)` &mdash; midpoint: rgb(88, 125, 163)
+ - `rgb(200, 50, 125)` &amp; `rgb(125, 200, 50)` &mdash; midpoint: rgb(163, 125, 88)
+ - `rgb(200, 50, 125)` &amp; `rgb(125, 50, 200)` &mdash; midpoint: rgb(163, 50, 163)
+
+It is possible to tell at a glance since as we worked out earlier the formula to get the midpoint for a channel is half
+the product of the 2 values. We also know that blending the channels is what gives us the colour that is displayed on
+screen, but when blending if there are no dominant channels it results in a grey or greyish colour. Accordingly if the
+midpoints for each channel are similar the transition between the 2 colours will be dull and lacking in colour.
+
+See the example below and feel free to try each of the above colour combinations.
+
+```css caption=Dull_Gradient
+/*----------------------------------------------------------------------------*\
+ *
+ * "Muddy" Gradients 
+ * linear-gradient(rgb(200, 125, 50), rgb(50, 125, 200))
+ * linear-gradient(rgb(50, 200, 125), rgb(200, 50, 125))
+ * linear-gradient(rgb(125, 200, 50), rgb(125, 50, 200))
+ *
+ * Colourful Gradients
+ * linear-gradient(rgb(200, 125, 50), rgb(50, 200, 125))
+ * linear-gradient(rgb(200, 125, 50), rgb(200, 50, 125))
+ * linear-gradient(rgb(200, 125, 50), rgb(125, 200, 50))
+ * linear-gradient(rgb(200, 125, 50), rgb(125, 50, 200))
+ * linear-gradient(rgb(50, 125, 200), rgb(50, 200, 125))
+ * linear-gradient(rgb(50, 125, 200), rgb(200, 50, 125))
+ * linear-gradient(rgb(50, 125, 200), rgb(125, 200, 50))
+ * linear-gradient(rgb(50, 125, 200), rgb(125, 50, 200))
+ * linear-gradient(rgb(50, 200, 125), rgb(125, 200, 50))
+ * linear-gradient(rgb(50, 200, 125), rgb(125, 50, 200))
+ * linear-gradient(rgb(200, 50, 125), rgb(125, 200, 50))
+ * linear-gradient(rgb(200, 50, 125), rgb(125, 50, 200))
+ *
+\*----------------------------------------------------------------------------*/
+background-image: linear-gradient(rgb(200, 125, 50), rgb(50, 125, 200));
+```
+
+Another potential use for this would be to shift the midpoint of a gradient. Going back to the `mediumspringgreen` and
+`mediumpurple` example, shifting the midpoint down 10% is simply a case of adding the midpoint colour we calculated as a
+`color-stop` and assigning it the position 60%.
+
+```css caption=Shifted_Midpoint_Gradient
+background-image: linear-gradient(mediumspringgreen, rgb(74, 181, 187) 60%, mediumpurple);
+```
+
+A similar effect can be achieved more concisely via another feature of CSS gradients.
+
+## **Colour hints**
+```css caption=Colour_Hinted_Gradient
+background-image: linear-gradient(mediumspringgreen, 60%, mediumpurple);
+```
+
 
 <sup>1</sup> At the time of writing Lab and LCH colour spaces have been defined in the CSS `color` level 4 specification
 but are yet to be implemented in any widely used browsers.
