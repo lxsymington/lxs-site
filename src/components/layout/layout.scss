@@ -264,8 +264,14 @@ a {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
   overflow: auto;
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    flex: 1 0 0;
+  }
 }
 
 .katex-display > .katex {

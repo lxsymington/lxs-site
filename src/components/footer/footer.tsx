@@ -9,10 +9,12 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
     <footer className={`${className} ${footerStyles.root}`}>
-      © {new Date().getFullYear()}, Built with
-      {` `}
-      <a href="https://www.gatsbyjs.org">Gatsby</a> by{` `}
-      <Initials className={footerStyles.initials} />
+      <small>
+        &copy;{new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.org">Gatsby</a> by{` `}
+        <Initials className={footerStyles.initials} />
+      </small>
     </footer>
   )
 }
