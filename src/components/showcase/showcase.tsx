@@ -8,14 +8,24 @@ import { CSSShowcase } from "./languages"
 type ShowcaseProps = {
   caption: string
   className?: string
+  showcase: boolean
 }
 
-const Showcase: React.FC<ShowcaseProps> = ({ caption, children, className }) => {
+const Showcase: React.FC<ShowcaseProps> = ({
+  showcase,
+  caption,
+  children,
+  className,
+}) => {
   const language = (className?.replace(/language-/, ``) ?? `diff`) as Language
 
   switch (language) {
     case `css`:
-      return <CSSShowcase caption={caption}>{children}</CSSShowcase>
+      return showcase ? (
+        <CSSShowcase caption={caption}>{children}</CSSShowcase>
+      ) : (
+        <CodeBlock language={language}>{children}</CodeBlock>
+      )
     /* case `javascript`: */
     /*   return <div></div> */
     default:
