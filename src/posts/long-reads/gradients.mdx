@@ -13,17 +13,20 @@ deeper into how they work and behave in CSS, thereby keeping a record of what I 
 
 ## **Introduction**
 ### **Positives**
-Gradients are a transition from one colour to one or more other colours over a specified distance. So why are gradients
+Gradients are a transition from one colour to one or more other colours over some distance. So why are gradients
 interesting? For a start when used as backgrounds they can bring more visual depth and texture than their flat
 counterparts. Creating visual depth can help to break up content, making it more approachable and therefore consumable.
 Appropriate use of gradients can also be used to draw attention to key content by making it more stimulating while
-intelligent use of light may subtly direct visual tracking of a page.
+intelligent use of light may subtly direct visual tracking of a page. Gradients can also be a great alternative to 
+images generally costing far less to produce or acquire yet still introducing a personal touch or branding elements as 
+applicable. Logos commonly make use of gradients this is probably because gradients imbue more personality than flat 
+colour while still being sufficiently simple that they can be recreated faithfully at small sizes.
 
 ### **Negatives**
 Gradients do also have their downsides. As much as they can draw attention to key areas and help to contextually
 separate content when used well, they can also be distracting and divert users away from key content. In addition,
-gradients _can_, but do not necessarily need to, cause problems in terms of accessibility. Much the same as with text over
-images, text over gradients can often cause readability issues. These readability issues often arise from a lack of
+gradients _can_, but do not necessarily need to, cause problems in terms of accessibility. Much the same as with text 
+over images, text over gradients can often cause readability issues. These readability issues often arise from a lack of
 contrast between the text/foreground colour and the colour of the background over which it is presented. Unfortunately
 this is still a common issue on the web even when using flat colours, let alone when text is displayed over a background
 that has multiple colours such as an image or gradient. With a little thought and a modicum of effort though there is
@@ -39,9 +42,9 @@ retrospectively, but hopefully with a little learning, a little feedback and som
 
 ## **Basic varieties**
 As touched upon earlier in this post in the context of CSS gradients, a gradient is a transition from a colour to one or
-more colours over a specified distance. What was not discussed at that point was the direction of that transition. In
-gradients generally that is not important however in CSS gradients there are currently 6 varieties of gradient which can be
-divided into 3 categories:
+more other colours over a specified distance. What was not discussed at that point was the direction of that 
+transition. In gradients generally that is not important however in CSS gradients there are currently 6 varieties of 
+gradient which can be divided into 3 categories:
 
  - **Linear**
    CSS `linear-gradient`s can be thought of as being unidirectional, as in they transition from a start point to an end
@@ -449,16 +452,104 @@ background-image: linear-gradient(
 
 If you looked at the source for the above example you may have noticed that both the first 2 `color-stop`s and the last 
 2 `color-stop`s share a single position. So I call it the _double stop technique_, not to be confused with _double 
-position syntax_ which also relates to gradients but is when two positions are applied to the same `color-stop`. 
-Unfortunately the _double position syntax_ along with _transition hints_ (`color-hint`s) are not supported in Internet 
-Explorer which is worth being aware of if you need support it. Again this single line is probably not of a huge amount 
-of use but it's more an indication of the power of gradients, especially once combined with other techniques and 
-features.
+position syntax_ which also relates to gradients but is when two positions are applied to the same 
+`color-stop`. Unfortunately the _double position syntax_ along with _transition hints_ (`color-hint`s) are not supported 
+in Internet Explorer which is worth being aware of if you need support it. Again this single line is probably not of 
+a huge amount of use but it's more an indication of the power of gradients, especially once combined with other 
+techniques and features. The following is a simple example of using _double stopping_ to make the background look like 
+ruled paper. With an appropriate combination of `font-size`, `line-height`, `padding` and `margin`, text could then be 
+readily fit into the lines.
+
+```css showcase caption=Overlap_Gradient
+background-clip: border-box, content-box;
+background-image:
+  linear-gradient(
+    90deg,
+    transparent 0 24mm,
+    crimson 24mm calc(24mm + 1px),
+    transparent calc(24mm + 1px)
+  ),
+  repeating-linear-gradient(
+    transparent 0 8mm,
+    cornflowerblue 8mm calc(8mm + 1px)
+  );
+background-position: center;
+padding: 12mm 0;
+```
+
+### **Layers**
+While we can do a lot with a single gradient, we are limited to a single _direction_ per gradient, however, multiple 
+`backgrounds` are widely supported and therefore it is possible to emulate more complex gradients, such as mesh 
+gradients by applying layers of either partly transparent gradients or using one of the `CSS` `blend-mode` properties (a 
+sort of filter) where supported to blend multiple layers together. Of course there is not the same level of control that 
+one would get from a true mesh gradient and it can be quite tricky to produce a good result, but multi-dimensional 
+gradients are more complex so there should be an expectation that they require more time to get right. Below is an 
+example of multiple semi-transparent gradients layered up.
+
+```css showcase caption=Layered_Gradients
+background-image:
+  radial-gradient(
+    circle at 75% 75%,
+    orange,
+    40%,
+    /* Using transparent here can produce unexpected results */
+    rgba(255, 165, 0, 0)
+  ),
+  radial-gradient(
+    circle at 25% 25%,
+    tomato,
+    50%,
+    rgba(255, 99, 71, 0)
+  ),
+  radial-gradient(
+    circle at 75% 25%,
+    mediumvioletred,
+    60%,
+    rgba(199, 21, 133, 0)
+  ),
+  radial-gradient(
+    circle at 25% 75%,
+    indigo,
+    70%,
+    rgba(75, 0, 130, 0)
+  ),
+  radial-gradient(
+    blueviolet
+    10%,
+    rgba(138, 43, 226, 0)
+    90%,
+    blueviolet
+  );
+```
+
+The following is an example that instead makes use of `blend-mode`s to layer gradients.
+
+```css showcase caption=Blended_Gradients
+background-blend-mode: lighten;
+background-image:
+  radial-gradient(
+    circle farthest-side at 0 100%,
+    mediumspringgreen,
+    60%,
+    dodgerblue
+  ),
+  radial-gradient(
+    circle farthest-side at 100% 50%,
+    turquoise,
+    80%,
+    forestgreen
+  ),
+  radial-gradient(
+    circle farthest-side,
+    indigo,
+    40%,
+    darkgreen
+  );
+```
 
 ## **Rough around the edges**
 
-If we continue to move the `color-stop` positions closer together, eventually we get to the point where they share the
-same position.
+
 
 For example:
 
