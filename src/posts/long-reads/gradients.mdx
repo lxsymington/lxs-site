@@ -52,14 +52,13 @@ gradient which can be divided into 3 categories:
 
  - **Radial**
    CSS `radial-gradient`s can be thought of as being omnidirectional, as in they transition from a start point in all
-   directions up to a specified distance from the start point. How this distance is specified is a little more
-   complicated than it is for linear gradients, therefore it is something that I will revisit later on in this post.
+   directions up to a specified distance from the start point.
 
  - **Conic**
-   CSS `conic-gradient`s are a little more different from the other 2 varieties in that they do not transition along (a)
+   CSS `conic-gradient`s vary from the other 2 varieties in that they do not transition along (a)
    straight line(s). Instead they transition from a start angle to an end angle about a specified point.
-   `conic-gradient`s are a newer addition to the CSS specification and therefore not implemented in some commonly used
-   browsers, consequently this post will focus more on the other two categories.
+   (`conic-gradient`s are a newer addition to the CSS specification and therefore not implemented in some commonly used
+   browsers. Consequently this post will focus more on the other two categories.)
 
 Each of the above categories have a default and repeating variety. The total span of the gradients produced by each
 variety of a category will be the same, however, a repeating variety will likely contain multiple instances of the same
@@ -71,7 +70,7 @@ go from purple to yellow via orange, red and magenta. At this point it is probab
 Below is probably the simplest declaration of a gradient in CSS. It declares a two colour gradient (the minimum
 required) without an `angle` or positions for the `color-stop`s. In the case where a direction is omitted, the
 [specification](https://www.w3.org/TR/css-images-3/#linear-gradient-syntax) states that it defaults to '`to
-bottom`'. Similarly if positions are not declared for the first and last `color-stops` the
+bottom`'. Similarly, if positions are not declared for the first and last `color-stops` the
 [specification](https://www.w3.org/TR/css-images-3/#color-stop-syntax) states that their positions should default to 0%
 and 100% respectively. It also states that when one or more `color-stop`s which are not the first or last and their
 positions are omitted, then they are spaced evenly between the surrounding positioned `color-stops`.
@@ -137,26 +136,32 @@ be easier to go over how the transition from one colour to the next is resolved.
 ## ** A deep dive**
 ### **All the colours of the rainbow&hellip; well almost!**
 So we probably need to talk about colour representation in browsers. To make the web more accessible there are a number
-of `color` name `keyword`s these are more memorable shorthand forms that will resolve to a particular `color` value in
+of `color` name `keyword`s. These are more memorable shorthand forms that will resolve to a particular `color` value in
 `sRGB` `colorspace` <sup>1</sup>. This means that it is possible to set a `color` to be `red`, `coral`, `purple`
-etc. and the browser will know what to display, however, there are only a finite number of these (140 in fact) and they
-are pre-defined which is quite limiting &mdash; the web would be rather homogeneous if we could only use 140 colours! So
-what did that `sRGB` `colorspace` bit mean? Well there are lots of different ways of thinking about colour, but one that
-lends itself to being displayed on a screen is to think of a colour as being made up of different amounts of coloured
-light. For example if we start with scene with no light then the colour of the scene is black, if we were to shine a red
-light on the scene the colour of the scene would become red. If we were then to additionally shine a green light in
-equal amount to the red light on the scene it would result in a yellow colour. Finally if we were to shine a blue light
-on the scene as well, the scene would appear illuminated with white coloured light. By varying the amounts of these
-three coloured lights we can make the scene almost any colour required. This type of colour system is called "additive"
-in contrast to paint or ink based colour systems which are called "subtractive" &mdash; adding dye or pigment filters
-out light. So going back to `sRGB`, if we now expand the acronym to the full name `standard Red Green Blue` `colorspace`
-the reason for choosing red, green and blue light in the earlier thought experiment may become apparent. As a side note
-the reason for red, green and blue being used as the _primary colours_ is purportedly related to the types of cone cells
-there are in the human retina, and the colour of the light they are most sensitive to. The last thing to address is the
-`standard` part of `sRGB`, it is important not to skip over this as it reflects that `sRGB` is device-independent, so
-regardless of a devices capabilities provided that it is `sRGB` capable it will display the same colour. How does all
-this relate to gradients? We now know that we can represent colours as a list of amounts of red, blue and green light,
-amounts otherwise known as _'channels'_. For example `red: 50%, green: 60%, blue: 70%`.
+etc. and the browser will know what to display, however, there are only a finite number of these (140 in fact and they
+are pre-defined which is quite limiting &mdash; the web would be rather homogeneous if we could only use 140 colours!) 
+
+So what did that `sRGB` `colorspace` bit mean? There are many ways of thinking about colour, but one that lends itself 
+to being displayed on a screen is to think of a colour as being made up of different amounts of coloured light. For 
+example if we start with a scene with no light then the colour of the scene is black, if we were to shine a red light on 
+the scene the colour of the scene would become red. If we additionally shine a green light in equal amount to the red 
+light on the scene it would result in a yellow colour. Finally if we were to shine a blue light on the scene as well, 
+the scene would appear illuminated with white coloured light. By varying the amounts of these three coloured lights we 
+can make the scene almost any colour required. This type of colour system is called "additive" in contrast to paint or 
+ink based colour systems which are called "subtractive" &mdash; adding dye or pigment filters out light. Returning to 
+`sRGB`, if we now expand the acronym to the full name `standard Red Green Blue` `colorspace` the reason for choosing 
+red, green and blue light in the earlier thought experiment may become apparent.
+
+<aside>
+
+As a side note the reason for red, green and blue being used as the _primary colours_ is purportedly related to the 
+types of cone cells there are in the human retina, and the colour of the light they are most sensitive to. The last 
+thing to address is the `standard` part of `sRGB`, it is important not to skip over this as it reflects that `sRGB` is 
+device-independent, so regardless of a devices capabilities provided that it is `sRGB` capable it will display the same 
+colour. How does all this relate to gradients? We now know that we can represent colours as a list of amounts of red, 
+blue and green light, amounts otherwise known as _'channels'_. For example `red: 50%, green: 60%, blue: 70%`.
+
+</aside>
 
 <small>
 
@@ -210,7 +215,8 @@ dimensions is the same. So the midpoint of the second row will also be offset 1 
 While we have covered this from the perspective of a linear gradient it is actually the same process for 
 `radial-gradient`, just rather than observing sequential line's of pixels (rows was a special case) we would observe 
 sequential concentric ellipses or circles from the central pixel outwards. Likewise for `conic-gradient`s it is the same 
-process from a different perspective. TODO
+process from a different perspective; this time we observe sequential _rays_ or _sectors_ (angular divisions) about 
+a central point. 
 
 ### **Let's get mathematical**
 The methodology we just discussed is actually quite common and known as linear interpolation. It is often used for
@@ -548,10 +554,42 @@ background-image:
 ```
 
 ## **Rough around the edges**
+We recently covered _double stopping_, a technique that creates hard edges in gradients. In the examples of the 
+technique displayed before all of the _hard edges_ were either horizontal or vertical. The orientation here was key to 
+creating a good resulting gradient. The reason behind that being that the pixels displaying them are arranged in a grid, 
+accordingly displaying a vertical or horizontal hard edge creates a smooth line, however, for angles in between the 
+edges of the pixels do not align so nicely. With high pixel density displays it is increasingly less noticeable, but 
+given the nature of the web we have no guarantee that a visitor will be accessing any site of ours with a high pixel 
+density display. Even with a high pixel density display it makes sense to optimise wherever convenient.
 
+Before moving on we should probably take a brief interlude to cover what a _pixel_ is in the context of `CSS`. With the 
+advent of high pixel density or _retina_ displays it became impractical for some displays to maintain a 1:1 ratio of 
+pixels to the smallest addressable element of a display. Bear in mind that pixels are often used as dimensions for user 
+interfaces (<abbr title="User Inteface">UI</abbr>), in this case if the 1:1 ratio were maintained then <abbr title="User 
+Inteface">UI</abbr>s displayed on a 4k screen would be half the physical size of those displayed on a same physical size 
+full HD screen. To address this issue displays are often run at a scale. In the case of 4k screens this is often 2:1, 
+device pixels to UI pixels making the physical size of the interfaces the same as those on a non-scaled full HD 
+screen. `CSS` follows the device pixel ratio (<abbr title="Device Pixel Ratio">DPR</abbr>) this is a unitless number 
+made available by browser APIs that represents the ratio between the **linear** physical and **linear** logical 
+resolution. For example if a device has a <abbr title="Device Pixel Ratio">DPR</abbr> of 2, that means there are 
+2 device pixels in each dimension for every `CSS` pixel for a total of 4.
 
+Given that when we are designing for the web we cannot rely on a viewer of a page having a specific device or browser we 
+need to work towards the lowest common denominator. For creating smooth edges that lowest common denominator case is 
+a device pixel ratio of 1. As such I have tried to recreate this case in a device agnostic way. Fortunately we are 
+provided with a mechanism to scope styles to when certain conditions are true. These are `CSS` media queries and are 
+most commonly used in responsive design to alter page layout at different screen sizes. There are, however, several 
+other media queries than just the ones for detecting screen size. Among them are the resolution media queries that even 
+work in Internet Explorer back to version 9, but has not been implemented in Safari. These enable one to scope styles 
+to: an exact resolution, a minimum resolution and above and a maximum resolution and below. For Safari there are the 
+non-standard webkit device pixel ratio queries which are more or less equivalent to the resolution queries. I have 
+created a `CSS` custom property (variable) called `--dpr` set to 1, which is then updated to the relevant values by
+making use of the minimum resolution and device pixel ratio media queries. This variable can then be used via the 
+`var()` function. By dividing a single `CSS` pixel by the device pixel ratio lets us specify a single device pixel 
+instead.
 
-For example:
+Below is an example of repeating, single device pixel wide, vertical and horizontal lines and makes use of the `--dpr` 
+custom property. The resulting lines are a single device/physical pixel thick.
 
 ```css showcase caption=Vertical_and_Horizontal_Gradient_Lines
 background-image:
@@ -568,6 +606,12 @@ background-image:
   );
 background-position: center;
 ```
+
+The above result is fairly smooth for the reasons discussed earlier, but let's rotate the grid slightly and see how that 
+compares!
+
+This is a very common problem and fortunately has been addressed many times before, one common solution for it is 
+anti-aliasing.
 
 As is shown in the above example this produces decent results for horizontal and vertical lines.
 
