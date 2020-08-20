@@ -579,14 +579,15 @@ need to work towards the lowest common denominator. For creating smooth edges th
 a device pixel ratio of 1. As such I have tried to recreate this case in a device agnostic way. Fortunately we are 
 provided with a mechanism to scope styles to when certain conditions are true. These are `CSS` media queries and are 
 most commonly used in responsive design to alter page layout at different screen sizes. There are, however, several 
-other media queries than just the ones for detecting screen size. Among them are the resolution media queries that even 
-work in Internet Explorer back to version 9, but has not been implemented in Safari. These enable one to scope styles 
-to: an exact resolution, a minimum resolution and above and a maximum resolution and below. For Safari there are the 
-non-standard webkit device pixel ratio queries which are more or less equivalent to the resolution queries. I have 
-created a `CSS` custom property (variable) called `--dpr` set to 1, which is then updated to the relevant values by
-making use of the minimum resolution and device pixel ratio media queries. This variable can then be used via the 
-`var()` function. By dividing a single `CSS` pixel by the device pixel ratio lets us specify a single device pixel 
-instead.
+other media queries than just the ones for detecting screen size. Among them are the [resolution media 
+queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/resolution) that even work in Internet Explorer back to 
+version 9, but has not been implemented in Safari.  These enable one to scope styles to: an exact resolution, a minimum 
+resolution and above and a maximum resolution and below.  For Safari there are the non-standard [webkit device pixel 
+ratio media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/-webkit-device-pixel-ratio) which are more 
+or less equivalent to the resolution queries.  I have created a `CSS` custom property (variable) called `--dpr` set to 
+1, which is then updated to the relevant values by making use of the minimum resolution and device pixel ratio media 
+queries.  This variable can then be used via the `var()` function.  By dividing a single `CSS` pixel by the device pixel 
+ratio lets us specify a single device pixel instead.
 
 Below is an example of repeating, single device pixel wide, vertical and horizontal lines and makes use of the `--dpr` 
 custom property. The resulting lines are a single device/physical pixel thick.
@@ -607,13 +608,89 @@ background-image:
 background-position: center;
 ```
 
-The above result is fairly smooth for the reasons discussed earlier, but let's rotate the grid slightly and see how that 
-compares!
+The above result is fairly smooth for the reasons discussed earlier, but let's look at rotating the grid slightly and 
+see how that compares!
+
+```css showcase caption=5_degree_Gradient_Lines
+background-image:
+  repeating-linear-gradient(
+    5deg,
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
+  ),
+  repeating-linear-gradient(
+    95deg,
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
+  );
+background-position: center;
+```
+
+Not the best result! This will look different on different devices despite my best efforts, just bear in mind that if 
+you are viewing this on a high pixel density device you are not seeing the worst case scenario; the pixel level 
+rendering should be the same, but because the pixels are that much smaller it is much less noticeable. To provide 
+context I am including a screenshot of the worst case scenario; a device pixel ratio of 1. This is shown at its original 
+size.
+
+![5 degree Gradient Lines &mdash; device pixel ratio 1](../../images/5_Degree_Gradient_Lines.png)
 
 This is a very common problem and fortunately has been addressed many times before, one common solution for it is 
-anti-aliasing.
+anti-aliasing. Anti-aliasing is a big and complicated topic that I do not want to go into detail on as part of this 
+post.  There are various different methods that will be employed depending on requirements; there is always a trade-off 
+between speed and quality. But they all predominantly affect boundary pixels &mdash; those at the edge of a shape. One 
+of the simplest methods is to colour a pixel based on what percentage of it exists within the shape being drawn. Again 
+making use of interpolation to find the appropriate mix of the foreground and background colour. The image below 
+presents a magnified pixel grid, the red triangle is an outline of the shape to be rendered. Try looking at it with your 
+eyes half closed and you should get quite a different impression.
 
-As is shown in the above example this produces decent results for horizontal and vertical lines.
+![Rasterisation Triangle](../../images/Rasterisation_Triangle.svg)
+
+Anti-aliasing or similar techniques are often used to improve the appearance and legibility of text, here is 
+a screenshot of text on this page which is being rendered using ClearType. This is a simulated representation of what is 
+actually being displayed by the monitor as ClearType makes use of subpixel rendering, each physical pixel on LCD and 
+OLED displays is made up of an arrangement of single coloured subpixels. The arrangements can vary but this 
+representation is based upon an arrangement of subpixels in a row (the most common arrangement), coloured from left to 
+right red, green and blue. On the left side of the characters the boundary pixels a reddish in hue as the red subpixel 
+has the greatest percentage of its area outside the shape of the character and in this case the background is white and 
+the foreground grey so the red subpixel needs to brighter than the green and blue subpixel. The same thing occurs in 
+reverse on the right side of the characters leading to bluish hue occurring in those boundary pixels.
+
+![ClearType](../../images/Anti_Aliased.png)
+
+## **Filling in the gaps**
+Unfortunately we can't just switch on anti-aliasing for our lines after all they are meant to be gradients! Nevertheless 
+we can apply some of the same thinking behind anti-aliasing to produce a better result. For a 45 degree grid we know 
+that the closest result, without partially coloured pixels, to a single pixel thick line would be to have only pixels 
+with shared corners and not faces coloured. But that means that the line thickness varies between $0$ and <abbr 
+title="1.4142135623 (10 decimal places)">${\sqrt {2}}$</abbr> and the area of that line is less than an equivalent 
+length row or column of pixels. So let's try and make the pixels surrounding the 0 thickness sections a shade of the 
+line colour, much like boundary pixels in anti aliasing.
+
+```css showcase caption=Graded_45_degree_Gradient_Lines
+background-image:
+  repeating-linear-gradient(
+    45deg,
+    transparent 0 11px,
+    calc(11px + 1px / var(--dpr)),
+    black,
+    calc(11px + 2px / var(--dpr)),
+    transparent calc(11px + 3px / var(--dpr)) 25px
+  ),
+  repeating-linear-gradient(
+    135deg,
+    transparent 0px 11px,
+    calc(11px + 1px / var(--dpr)),
+    black,
+    calc(11px + 2px / var(--dpr)),
+    transparent calc(11px + 3px / var(--dpr)) 25px
+  );
+background-position: center;
+```
+
+Contrast the example above with the example below which does not make use of the shaded pixels. The example above should 
+be noticeably smoother than the one below.
 
 ```css showcase caption=45_degree_Gradient_Lines
 background-image:
@@ -632,47 +709,13 @@ background-image:
 background-position: center;
 ```
 
-Unfortunately I found this experimentation mostly produced poor results. Not one to be put off when things don't work
-first time, I decided to have a go at improving the results.
+In case you wanted to see how this technique affects the 5 degree grid lines that caused such problems before I have 
+provided an example below.
 
-```css showcase caption=30_degree_Gradient_Lines
+```css showcase caption=Graded_5_degree_Gradient_Lines
 background-image:
   repeating-linear-gradient(
-    30deg,
-    transparent 0 12px,
-    black 12px calc(12px + 1px / var(--dpr)),
-    transparent calc(12px + 1px / var(--dpr)) 25px
-  ),
-  repeating-linear-gradient(
-    120deg,
-    transparent 0 12px,
-    black 12px calc(12px + 1px / var(--dpr)),
-    transparent calc(12px + 1px / var(--dpr)) 25px
-  );
-background-position: center;
-```
-
-```css showcase caption=60_degree_Gradient_Lines
-background-image:
-  repeating-linear-gradient(
-    60deg,
-    transparent 0 12px,
-    black 12px calc(12px + 1px / var(--dpr)),
-    transparent calc(12px + 1px / var(--dpr)) 25px
-  ),
-  repeating-linear-gradient(
-    150deg,
-    transparent 0 12px,
-    black 12px calc(12px + 1px / var(--dpr)),
-    transparent calc(12px + 1px / var(--dpr)) 25px
-  );
-background-position: center;
-```
-
-```css showcase caption=Graded_60_degree_Gradient_Lines
-background-image:
-  repeating-linear-gradient(
-    60deg,
+    5deg,
     transparent 0 11px,
     calc(11px + 1px / var(--dpr)),
     black,
@@ -680,7 +723,7 @@ background-image:
     transparent calc(11px + 3px / var(--dpr)) 25px
   ),
   repeating-linear-gradient(
-    150deg,
+    95deg,
     transparent 0px 11px,
     calc(11px + 1px / var(--dpr)),
     black,
@@ -689,6 +732,10 @@ background-image:
   );
 background-position: center;
 ```
+
+Circles and ellipses produce poor results as well when trying to draw thin lines due to the angle continually changing.  
+But by making use of shading the edges we can drastically improve the appearance. The next 2 examples are without 
+boundary shading.
 
 ```css showcase caption=Circular_Radial_Gradient
 background-image:
@@ -701,6 +748,19 @@ background-image:
 background-position: center;
 ```
 
+```css showcase caption=Elliptical_Radial_Gradient
+background-image:
+  repeating-radial-gradient(
+    ellipse at 50% 50%,
+    transparent 0 12px,
+    black 12px calc(12px + 1px / var(--dpr)),
+    transparent calc(12px + 1px / var(--dpr)) 25px
+  );
+background-position: center;
+```
+
+The following 2 examples are repeats of the 2 above with shaded boundaries.
+
 ```css showcase caption=Graded_Circular_Radial_Gradient
 background-image:
   repeating-radial-gradient(
@@ -710,17 +770,6 @@ background-image:
     black,
     calc(11px + 2px / var(--dpr)),
     transparent calc(11px + 3px / var(--dpr)) 25px
-  );
-background-position: center;
-```
-
-```css showcase caption=Elliptical_Radial_Gradient
-background-image:
-  repeating-radial-gradient(
-    ellipse at 50% 50%,
-    transparent 0 12px,
-    black 12px calc(12px + 1px / var(--dpr)),
-    transparent calc(12px + 1px / var(--dpr)) 25px
   );
 background-position: center;
 ```
@@ -738,3 +787,22 @@ background-image:
 background-position: center;
 ```
 
+To create this effect I have expanded the total width of the transition, but rather than applying the _double stop_ 
+technique exactly as describe previously, I have put a single device pixel between them. Because these are gradients 
+there is now a single device pixel transition from one colour to the next, which would result in that device pixel 
+painted the midpoint colour, but I have also added `color-hints` and removed the position from the _line_ `color-stop`.  
+The `color-hint`s have then been placed where the _edges_ of the line were previously, by doing so the gradient uses 
+non-linear easing and the `color-hint`s being &frac23; towards the line `color-stop` give a more subtle shading that in 
+my opinion produces a better result. I haven't experimented extensively with these values so there may well be a better 
+arrangement, but for the time being at least I content with the results.
+
+## **Wha&hellip What year is it??**
+Hopefully this has covered the topic of `CSS` gradients pretty comprehensively, possibly covered something you had not 
+come across before and been at least mildly interesting. The original intention I had for this post was to be to note 
+down a few tips and tricks, but then I got reading and learnt a whole lot about all the thing that go in to producing 
+the images we perceive on our screens.
+
+There is actually a lot more that one can do with gradients on the web that we haven't covered here, for example 
+combining them with the `CSS` `mask-image` property to fade out content as I have done on this site or using the `CSS` 
+`background-clip` property to create gradient coloured text. Then there are `SVG` gradients which can span multiple 
+separate elements and `canvas` where gradients can even be animated, but let's not go there in this post!

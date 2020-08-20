@@ -31,6 +31,7 @@ module.exports = {
         path: `${__dirname}/src/posts/`,
       },
     },
+    `gatsby-remark-images`,
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
@@ -41,6 +42,16 @@ module.exports = {
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-katex`,
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+              tracedSVG: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
           },
         ],
       },

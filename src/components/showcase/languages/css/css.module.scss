@@ -99,8 +99,9 @@
 .preview {
   background-color: colour($group: "base", $variant: "white");
   border: medium inset colour($group: "base", $variant: "grey_4");
-  position: relative;
   flex: 1 1 auto;
+  overflow: hidden;
+  position: relative;
 
   &:after {
     content: "";
@@ -250,5 +251,6 @@
 .editor__preview {
   background-color: colour($group: "base", $variant: "white");
   grid-area: preview;
+  overflow: hidden;
   position: relative;
 }
