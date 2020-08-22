@@ -664,10 +664,10 @@ on the right side of the characters leading to bluish hue occurring in those bou
 Unfortunately we can't just switch on anti-aliasing for our lines&hellip; after all they are meant to be gradients!
 Nevertheless we can apply some of the same thinking behind anti-aliasing to produce a better result. For a 45 degree
 grid we know that the closest result, without partially coloured pixels, to a single pixel thick line would be to have
-only pixels with shared corners and not faces coloured. But that means that the line thickness varies between $0$ and
-${\sqrt{2}}$ (1.4142135623 to 10 decimal places) and the area of that line is less than an equivalent length row or
-column of pixels.  So let's try and make the pixels surrounding the 0 thickness sections a shade of the line colour,
-much like boundary pixels in anti aliasing.
+only pixels with shared corners and not faces coloured. Therefore the thickness of the line varies between $0$ at its
+narrowest and <abbr title="1.4142135623 to 10 decimal places">${\sqrt{2}}$</abbr> at it's broadest. The area of that
+line is in fact less than an equivalent length row or column of pixels. So let's try and make the pixels surrounding the
+0 thickness sections a shade of the line colour, much like boundary pixels in anti aliasing.
 
 ```css showcase caption=Graded_45_degree_Gradient_Lines
 background-image:

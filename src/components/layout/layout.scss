@@ -257,6 +257,7 @@ a {
   border: 1px solid colour($group: "base", $variant: "grey_4");
   border-radius: 0.25ch;
   color: colour($group: "colours", $variant: "very_dark_violet");
+  display: inline-block;
   padding: 0 0.25ch;
 }
 
